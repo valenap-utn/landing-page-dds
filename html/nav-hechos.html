@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hechos</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link href="../css/mis-estilos/styles-hechos.css" rel="stylesheet">
+</head>
+<body>
+<!--    <div class="d-flex justify-content-center flex-column align-items-center vh-100">-->
+    <div class="container py-5">
+        <!-- Modo de Navegación -->
+        <h3 class="sub-title text-center mb-4">Modo de Navegación</h3>
+        <div class="d-flex justify-content-center gap-4 mb-4">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modo" id="modoIrrestricto" value="irrestricto" checked />
+                <label class="form-check-label">Irrestricto</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modo" id="modoCurado" value="curado"/>
+                <label class="form-check-label">Curado</label>
+            </div>
+        </div>
+
+        <!-- Aplicar Filtros -->
+        <h2 class="title-main text-center mb-3">Aplicar Filtros</h2>
+
+        <div class="d-flex justify-content-center flex-wrap control-row mb-3">
+            <select id="fCategoria" class="form-select chip select-categoria">
+                <option value="">Categoría</option>
+                <option value="EventoSanitario">Evento sanitario</option>
+                <option value="Contaminación">Contaminación</option>
+                <option value="Derrame">Derrame</option>
+            </select>
+
+            <input id="fDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde"/>
+            <input id="fHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta"/>
+            <input id="fLat" type="number" step="any" class="form-control chip style-ap-filtros" placeholder="Latitud" />
+            <input id="fLong" type="number" step="any" class="form-control chip style-ap-filtros" placeholder="Longitud" />
+            <input id="fId" type="text" class="form-control chip style-ap-filtros" placeholder="Id Hecho">
+        </div>
+
+        <!-- Aplicar || Limpiar filtros -->
+        <div class="d-flex justify-content-center gap-2 mb-4">
+            <button id="btnAplicar" class="btn btn-ap-filter">Aplicar filtros</button>
+            <button id="btnLimpiar" class="btn btn-clear-filter">Limpiar</button>
+        </div>
+
+        <!-- Imple. Mapa -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div id="map"></div>
+                <div id="resultInfo" class="mt-2 text-muted small"></div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="main-gral.html"><button class="btn btn-ap-filter">Volver atrás</button></a>
+        </div>
+    </div>
+
+    <!-- Mockeo de datos para prueba -->
+<!--    <script>-->
+<!--        const hechos = [-->
+<!--            { id: '1', categoria: 'EventoSanitario', fecha: '2013-11-11', lat:-23.574039, long:-65.36991, titulo:'Crisis sanitaria afecta a Tilcara, Jujuy'},-->
+<!--            { id: '2', categoria: 'Contaminación', fecha: '2019-05-12', lat:-34.647167, long:-58.343773, titulo: 'Impacto de Contaminación ambiental severa en comunidad de Avellaneda'},-->
+<!--            { id: '3', categoria: 'Contaminación', fecha: '2022-03-08', lat:-50.316173, long:-72.249337, titulo: 'Polución industrial afecta a El Calafate, Santa Cruz'},-->
+<!--            { id: '4', categoria: 'EventoSanitario', fecha: '2018-11-21', lat:-28.094528, long:-67.538624, titulo: 'Casos agrupados de enfermedad genera crisis en Tinogasta, Catamarca'},-->
+<!--            { id: '5', categoria: 'Derrame', fecha: '2015-09-14', lat:-37.327652, long:-59.120179, titulo: 'Autoridades responden a Contaminación por derrame en Tandil, Buenos Aires'}-->
+<!--        ]-->
+
+<!--        // Inicializar mapa-->
+<!--        const map = L.map('map',{-->
+<!--            center: [-34.6083, -58.3712],-->
+<!--            zoom: 12,-->
+<!--            scrollWheelZoom: true-->
+<!--        });-->
+
+<!--        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {-->
+<!--            attribution: '© OpenStreetMap'-->
+<!--        }).addTo(map);-->
+
+<!--        const markersLayer = L.layerGroup().addTo(map);-->
+<!--        // let circleLayer = null; //para zona de búsqueda-->
+
+<!--        const parseDate = (str) => str ? new Date(str + 'T00:00:00') : null;-->
+
+<!--        function render(hechosFiltrados){-->
+<!--            markersLayer.clearLayers();-->
+<!--            hechosFiltrados.forEach(h => {-->
+<!--                L.marker([h.lat, h.long], {-->
+<!--                    title: `${h.id} - ${h.titulo}`-->
+<!--                }).bindPopup(`-->
+<!--                    <strong>${h.titulo}</strong><br/>-->
+<!--                    Id: ${h.id} <br/>-->
+<!--                    Categoría: ${h.categoria} <br/>-->
+<!--                    Fecha: ${h.fecha}-->
+<!--                `).addTo(markersLayer);-->
+<!--            });-->
+<!--        }-->
+
+<!--        function aplicarFiltros(){-->
+<!--            const cat = document.getElementById('fCategoria').value;-->
+<!--            const d1 = parseDate(document.getElementById('fDesde').value);-->
+<!--            const d2 = parseDate(document.getElementById('fHasta').value);-->
+<!--            const lat = parseFloat(document.getElementById('fLat').value);-->
+<!--            const long = parseFloat(document.getElementById('fLong').value);-->
+<!--            const id = document.getElementById('fId').value.trim();-->
+<!--            const modo = document.querySelector('input[name="modo"]:checked').value;-->
+
+<!--            //Filtrado-->
+<!--            let res = hechos.filter(h => {-->
+<!--                if(cat && h.categoria != cat) return false;-->
+<!--                if(id && h.id != id) return false;-->
+<!--                if (d1 && new Date(h.fecha) < d1) return false;-->
+<!--                if (d2 && new Date(h.fecha) > d2) return false;-->
+<!--                return true;-->
+<!--            });-->
+
+<!--            render(res);-->
+<!--        }-->
+
+<!--        function limpiar(){-->
+<!--            document.getElementById('fCategoria').value = '';-->
+<!--            document.getElementById('fDesde').value = '';-->
+<!--            document.getElementById('fHasta').value = '';-->
+<!--            document.getElementById('fLat').value = '';-->
+<!--            document.getElementById('fLong').value = '';-->
+<!--            document.getElementById('fId').value = '';-->
+<!--            render(hechos);-->
+<!--            map.setView([-34.6083, -58.3712], 12);-->
+<!--        }-->
+
+<!--        // Inicial-->
+<!--        render(hechos);-->
+
+<!--        // Eventos-->
+<!--        document.getElementById('btnAplicar').addEventListener('click', aplicarFiltros);-->
+<!--        document.getElementById('btnLimpiar').addEventListener('click', limpiar);-->
+
+<!--        // UX: aplicar con Enter en cualquier filtro-->
+<!--        document.querySelectorAll('#fCategoria,#fDesde,#fHasta,#fLat,#fLng,#fRadio,#fId')-->
+<!--            .forEach(el => el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); aplicarFiltros(); }}));-->
+
+<!--    </script>-->
+
+    <script>
+        // Mock normalizado (ISO fechas)
+        const hechos = [
+            { id:'1', categoria:'EventoSanitario', fecha:'2013-11-11', lat:-23.574039, long:-65.36991,  titulo:'Crisis sanitaria – Tilcara, Jujuy' },
+            { id:'2', categoria:'Contaminación',   fecha:'2019-12-05', lat:-34.647167, long:-58.343773, titulo:'Contaminación severa – Avellaneda' },
+            { id:'3', categoria:'Contaminación',   fecha:'2022-08-03', lat:-50.316173, long:-72.249337, titulo:'Polución industrial – El Calafate' },
+            { id:'4', categoria:'EventoSanitario', fecha:'2018-11-21', lat:-28.094528, long:-67.538624, titulo:'Casos agrupados – Tinogasta' },
+            { id:'5', categoria:'Derrame',         fecha:'2015-09-14', lat:-37.327652, long:-59.120179, titulo:'Derrame – Tandil' }
+        ];
+
+        // Mapa + capa de marcadores
+        const map = L.map('map', { center: [-38.4, -63.6], zoom: 5, scrollWheelZoom: true });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+        const markersLayer = L.layerGroup().addTo(map);
+
+        // Render de pins y ajuste de vista
+        function render(lista) {
+            markersLayer.clearLayers();
+            const latlngs = [];
+
+            lista.forEach(h => {
+                latlngs.push([h.lat, h.long]);
+                L.marker([h.lat, h.long], { title: `${h.id} - ${h.titulo}` })
+                    .bindPopup(`<strong>${h.titulo}</strong><br/>Id: ${h.id}<br/>Categoría: ${h.categoria}<br/>Fecha: ${h.fecha}`)
+                    .addTo(markersLayer);
+            });
+
+            const info = document.getElementById('resultInfo');
+            info.textContent = `${lista.length} resultado${lista.length!==1?'s':''}`;
+
+            if (latlngs.length) {
+                map.fitBounds(latlngs, { padding: [20, 20] });
+            } else {
+                map.setView([-38.4, -63.6], 5); // vista por defecto
+            }
+        }
+
+        // Aplica filtros del formulario
+        function aplicarFiltros() {
+            const cat   = document.getElementById('fCategoria').value;
+            const d1Str = document.getElementById('fDesde').value;
+            const d2Str = document.getElementById('fHasta').value;
+            const lat   = parseFloat(document.getElementById('fLat').value);
+            const long  = parseFloat(document.getElementById('fLong').value);
+            const id    = document.getElementById('fId').value.trim();
+
+            const d1 = d1Str ? new Date(d1Str) : null;
+            const d2 = d2Str ? new Date(d2Str) : null;
+
+            let res = hechos.filter(h => {
+                if (cat && h.categoria !== cat) return false;
+                if (id  && h.id !== id) return false;
+                const fh = new Date(h.fecha);
+                if (d1 && fh < d1) return false;
+                if (d2 && fh > d2) return false;
+                return true;
+            });
+
+            render(res);
+
+            // Si completaste lat/long, centramos ahí (solo para validar rápido)
+            if (!Number.isNaN(lat) && !Number.isNaN(long)) {
+                map.setView([lat, long], Math.max(map.getZoom(), 8));
+            }
+        }
+
+        // Limpia filtros y vuelve a todo
+        function limpiar() {
+            document.getElementById('fCategoria').value = '';
+            document.getElementById('fDesde').value = '';
+            document.getElementById('fHasta').value = '';
+            document.getElementById('fLat').value = '';
+            document.getElementById('fLong').value = '';
+            document.getElementById('fId').value = '';
+            render(hechos);
+        }
+
+        // Inicial
+        render(hechos);
+
+        // Eventos
+        document.getElementById('btnAplicar').addEventListener('click', aplicarFiltros);
+        document.getElementById('btnLimpiar').addEventListener('click', limpiar);
+        document.querySelectorAll('#fCategoria,#fDesde,#fHasta,#fLat,#fLong,#fId')
+            .forEach(el => el.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); aplicarFiltros(); }
+            }));
+    </script>
+
+</body>
+</html>

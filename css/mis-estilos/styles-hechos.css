@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body{
+    font-family: 'OpenSans', sans-serif;
+    color: #3B4F61;
+    background-color: #F2F7FA;
+}
+
+/* Estilos para títulos */
+.title-main{
+    font-weight: bold;
+    padding: 0 0 15px 0;
+}
+
+.sub-title{
+    font-weight: bold;
+}
+
+/* Estilos para boxes en ap. filtros */
+.select-categoria{
+    max-width: 180px;
+    margin: 2px;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+.style-ap-filtros {
+    max-width: 140px;
+    margin: 2px;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+/* Estilos para botones */
+/* Botón: Aplicar filtros */
+.btn-ap-filter{
+    font-size: small;
+    color: #F2F7FA;
+    background-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+    width: 110px;
+}
+
+.btn-ap-filter:hover {
+    color: #F2F7FA;
+    background-color: #3B4F61;
+}
+
+/* Botón: Limpiar filtros */
+.btn-clear-filter{
+    font-size: small;
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+    width: 110px;
+}
+
+.btn-clear-filter:hover{
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+/* Mapita */
+#map { height: 420px; border-radius: 8px; }
+
