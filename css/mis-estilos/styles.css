@@ -1,0 +1,102 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body{
+    font-family: 'OpenSans', sans-serif;
+    color: #3B4F61;
+    background-color: #F2F7FA;
+}
+
+.bg-holder{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Estilos para inputs */
+.input-group {
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+/* ícono */
+.input-group-text {
+    border: none;
+    background-color: white;
+    padding-left: 16px;
+    padding-right: 14px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* input */
+.input-group .form-control {
+    border: none;
+    border-radius: 0;
+    background-color: white;
+    box-shadow: none;
+}
+
+
+/* Estilos para botones */
+.btn-access{
+    font-size: medium;
+    color: #F2F7FA;
+    background-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+.btn-access:hover {
+    color: #F2F7FA;
+    background-color: #3B4F61;
+}
+
+.btn-sin-login{
+    font-size: small;
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+.btn-sin-login:hover{
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+/* Estilos para vista de página */
+.divider-content-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #F2F7FA;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #3B4F61;
+}
+
+.divider{
+    margin: 2rem;
+}
+
+
+/* Estilos para links */
+a{
+    text-decoration: none;
+    color: #4591d1;
+}
+
+a:hover{
+    color: #265f93;
+}
