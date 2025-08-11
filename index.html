@@ -30,7 +30,10 @@
             <div class="row align-items-center justify-content-center h-100 g-0 px-4 px-sm-0">
                 <div class="col col-sm-6 col-lg-7 col-xl-6">
                     <!-- Logo --> <!-- que no tenemos xd -->
-                    <h2 style="font-weight: bold; text-align: center">MetaMapa</h2>
+<!--                    <h2 style="font-weight: bold; text-align: center">MetaMapa</h2>-->
+                    <div class="d-flex justify-content-center mb-4" style="margin: 30px 0 0 0">
+                        <img src="components/logo-mm.png" alt="Logo - MetaMapa" style="width: 150px">
+                    </div>
 
                     <div class="text-center mb-5" style="margin: 30px 0 0 0">
                         <h3 class="fw-bold" style="color: #3B4F61">Inicio de Sesión</h3>
@@ -39,19 +42,19 @@
                     </div>
 
                     <!-- Ingreso con email/usuario y contrasenia (onda form) -->
-                    <form action="#">
+                    <form id="login-form" action="#" novalidate>
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fa-solid fa-user"></i>
                             </span>
-                            <input type="email" class="form-control form-control-lg fs-6 border-start-0" placeholder="Email">
+                            <input type="email" class="form-control form-control-lg fs-6 border-start-0" placeholder="Email" id="email" required>
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fa-solid fa-lock"></i>
                             </span>
-                            <input type="password" class="form-control form-control-lg fs-6 border-start-0" placeholder="Contraseña" id="password">
+                            <input type="password" class="form-control form-control-lg fs-6 border-start-0" placeholder="Contraseña" id="password" minlength="8" required>
                         </div>
 
                         <div class="mb-3 d-flex justify-content-between">
@@ -65,7 +68,7 @@
                                 </small>
                             </div>
                         </div>
-                        <a href="html/main-gral.html"><button class="btn btn-access btn-lg w-100 mb-3">Ingresar</button></a>
+                        <button class="btn btn-access btn-lg w-100 mb-3" type="submit">Ingresar</button>
                     </form>
 
                     <a href="html/main-gral.html"><button class="btn btn-sin-login btn-lg w-100 mb-3">Ingresar mas tarde</button></a>
@@ -82,8 +85,45 @@
 <!--                    </div>-->
 
                     <!-- Ingreso con cuenta de Google u otra cosa -->
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Script mockeado para probar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mockUsers = [
+                { email: 'valucha@gmail.com', password: 'valuchaa' },
+                { email: 'valen@example.com', password: 'metamapa' }
+            ];
+
+            const form = document.getElementById('login-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById('email');
+                const pass  = document.getElementById('password');
+                const remember = document.getElementById('form-check');
+
+                if (!email.value.trim() || !email.checkValidity()) { email.classList.add('is-invalid'); email.focus(); return; }
+                email.classList.remove('is-invalid');
+
+                if (!pass.value.trim()) { pass.classList.add('is-invalid'); pass.focus(); return; }
+                pass.classList.remove('is-invalid');
+
+                const ok = mockUsers.some(u => u.email === email.value.trim() && u.password === pass.value);
+                if (!ok) { alert('Email o contraseña inválidos'); return; }
+
+                const payload = { email: email.value.trim(), time: Date.now() };
+                const storage = remember.checked ? localStorage : sessionStorage;
+                storage.setItem('mm_auth', JSON.stringify(payload));
+
+                window.location.href = 'html/main-gral.html';
+            });
+        });
+    </script>
+
+
 </body>
 </html>
