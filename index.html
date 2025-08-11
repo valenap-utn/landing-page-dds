@@ -47,19 +47,19 @@
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fa-solid fa-user"></i>
                             </span>
-                            <input type="email" class="form-control form-control-lg fs-6 border-start-0" placeholder="Email" id="email" required>
+                            <input type="email" id="email" class="form-control form-control-lg fs-6 border-start-0" placeholder="Email" required aria-label="Ingresar correo electrónico">
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fa-solid fa-lock"></i>
                             </span>
-                            <input type="password" class="form-control form-control-lg fs-6 border-start-0" placeholder="Contraseña" id="password" minlength="8" required>
+                            <input type="password" id="password" class="form-control form-control-lg fs-6 border-start-0" placeholder="Contraseña" minlength="8" required aria-label="Ingresar contraseña">
                         </div>
 
                         <div class="mb-3 d-flex justify-content-between">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="form-check">
+                                <input type="checkbox" class="form-check-input" id="form-check" aria-label="Recordar datos de inicio de sesión">
                                 <label for="form-check" class="form-check-label text-secondary"><small>Recuérdamelo</small></label>
                             </div>
                             <div>
@@ -68,13 +68,13 @@
                                 </small>
                             </div>
                         </div>
-                        <button class="btn btn-access btn-lg w-100 mb-3" type="submit">Ingresar</button>
+                        <button class="btn btn-access btn-lg w-100 mb-3" type="submit" aria-label="Ingresar a MetaMapa con credenciales">Ingresar</button>
                     </form>
 
-                    <a href="html/main-gral.html"><button class="btn btn-sin-login btn-lg w-100 mb-3">Ingresar mas tarde</button></a>
+                    <a href="html/main-gral.html"><button class="btn btn-sin-login btn-lg w-100 mb-3" aria-label="Ingresar a MetaMapa sin iniciar sesión">Ingresar mas tarde</button></a>
 
                     <div class="text-center">
-                        <small>No tenés una cuenta?<a href="#"> Crear cuenta</a></small><br>
+                        <small>No tenés una cuenta?<a href="#" aria-label="Crear una cuenta en MetaMapa"> Crear cuenta</a></small><br>
 <!--                        <small><a href="#" class="fw-bold">Are you an Admin?</a></small>-->
                     </div>
 
