@@ -34,12 +34,12 @@ body{
 /* Estilos para botones */
 /* Botón: Aplicar filtros */
 .btn-ap-filter{
-    font-size: small;
+    font-size: medium;
     color: #F2F7FA;
     background-color: #86a8c2;
     border-radius: 25px;
     box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
-    width: 110px;
+    width: 120px;
 }
 
 .btn-ap-filter:hover {
@@ -49,12 +49,12 @@ body{
 
 /* Botón: Limpiar filtros */
 .btn-clear-filter{
-    font-size: small;
+    font-size: medium;
     color: #86a8c2;
     border-color: #86a8c2;
     border-radius: 25px;
     box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
-    width: 110px;
+    width: 120px;
 }
 
 .btn-clear-filter:hover{
