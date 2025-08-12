@@ -1,8 +1,141 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-body{
-    font-family: 'OpenSans', sans-serif;
-    color: #3B4F61;
-    background-color: #F2F7FA;
+:root{
+    /* Paleta MetaMapa */
+    --bg: #F2F7FA;
+    --card: #E3EEF5;
+    --muted: #C9DEEC;
+    --accent: #AFCBE3;
+    --brand-500: #86A8C2;
+    --brand-800: #3B4F61;
+
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 6px rgba(0,0,0,.08);
+    --shadow-md: 0 8px 22px rgba(0,0,0,.12);
 }
 
+html, body{ height:100%; }
+body{
+    margin:0;
+    /*background: var(--bg);*/
+    background:
+            linear-gradient(rgba(59,79,97,0.55), rgba(59,79,97,0.55)),
+            url("../../components/mapa-login-azulado.png") center/cover no-repeat;
+    font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    color: #2d3a44;
+}
+
+/* Wrapper centrado */
+.mm-form-wrap{
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+/* Card */
+.mm-card{
+    width: min(880px, 94%);
+    background: #fff;
+    border: 1px solid var(--muted);
+    border-radius: 22px;
+    box-shadow: var(--shadow-md);
+    padding: clamp(20px, 4vw, 36px);
+}
+
+/* Títulos */
+.mm-form-title{
+    font-family: "Raleway", "Open Sans", Arial, sans-serif;
+    font-weight: 800;
+    color: var(--brand-800);
+    margin: 0 0 6px;
+    font-size: clamp(22px, 3.2vw, 32px);
+}
+.mm-form-sub{
+    margin: 0 0 18px;
+    color: #4b5c69;
+}
+
+/* Layout de campos */
+.mm-grid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 14px;
+}
+@media (max-width: 720px){
+    .mm-grid{ grid-template-columns: 1fr; }
+}
+
+/* Campos */
+.mm-field{ display:flex; flex-direction:column; gap:6px; }
+.mm-label{
+    font-weight: 600;
+    color: #3b4f61;
+}
+.mm-input{
+    appearance: none;
+    width: 100%;
+    border: 1px solid var(--accent);
+    background: #fff;
+    border-radius: 999px;
+    padding: 12px 16px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+}
+.mm-input::placeholder{ color:#8aa2b4; }
+.mm-input:focus{
+    border-color: var(--brand-500);
+    box-shadow: 0 0 0 4px rgba(134,168,194,.25);
+}
+.mm-input:invalid:focus{
+    border-color: #d66;
+    box-shadow: 0 0 0 4px rgba(214,102,102,.18);
+}
+
+/* Acciones */
+.mm-actions{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+.mm-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.mm-btn:active{ transform: translateY(1px); }
+
+.mm-btn-primary{
+    color: #F2F7FA;
+    background-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-btn-primary:hover{ background:#2f3f50; }
+
+.mm-btn-ghost{
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-btn-ghost:hover{
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+/* Select y date con estilo consistente */
+.mm-input[type="date"]::-webkit-calendar-picker-indicator{
+    filter: opacity(.7);
+}
+.mm-input:disabled{ background:#f3f7fb; color:#7d95a7; }
