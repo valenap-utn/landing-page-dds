@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Hecho</title>
+
+    <link rel="icon" href="../components/logo-mm.png" >
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="../css/mis-estilos/styles-subir-hecho.css" rel="stylesheet">
+
+    <!-- Iconos -->
+    <script src="https://kit.fontawesome.com/d4dda767ac.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="mm-form-wrap">
+        <div class="mm-card">
+            <h1 class="mm-form-title">Subir Hecho</h1>
+            <p class="mm-form-sub">Cargá la información del hecho para que quede disponible en MetaMapa</p>
+
+            <form id="form-hecho" class="mm-form" novalidate>
+                <div class="mm-grid">
+                    <!-- Título -->
+                    <div class="mm-field" style="grid-column: 1 / -1;">
+                        <label for="titulo" class="mm-label">Título</label>
+                        <input id="titulo" name="titulo" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div class="mm-field">
+                        <label for="categoria" class="mm-label">Categoría</label>
+                        <select id="categoria" name="categoria" class="mm-input" required>
+                            <option value="" disabled selected>Seleccioná una categoría…</option>
+                            <option value="EVENTO_SANITARIO">Evento sanitario</option>
+                            <option value="CONTAMINACION">Contaminación</option>
+                            <option value="DERRAME">Derrame</option>
+                            <!-- agregá más si aplica -->
+                        </select>
+                    </div>
+
+                    <!-- Fecha acontecimiento -->
+                    <div class="mm-field">
+                        <label for="fechaAcontecimiento" class="mm-label">Fecha del acontecimiento</label>
+                        <input id="fechaAcontecimiento" name="fechaAcontecimiento" type="date" class="mm-input" required>
+                    </div>
+
+<!--                    &lt;!&ndash; Origen &ndash;&gt;-->
+<!--                    <div class="mm-field">-->
+<!--                        <label for="origen" class="mm-label">Origen</label>-->
+<!--                        <select id="origen" name="origen" class="mm-input" required>-->
+<!--                            <option value="" disabled selected>Seleccioná el origen…</option>-->
+<!--                            <option value="USUARIO">Usuario</option>-->
+<!--                            <option value="ADMIN">Administrador</option>-->
+<!--                            <option value="IMPORTADO">Importado</option>-->
+<!--                            <option value="API">API</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+                    <!-- Ubicación (Lat/Long) -->
+                    <div class="mm-field">
+                        <label for="lat" class="mm-label">Latitud</label>
+                        <input id="lat" name="lat" type="number" step="any" class="mm-input" placeholder="-34.6037" required>
+                    </div>
+                    <div class="mm-field">
+                        <label for="lng" class="mm-label">Longitud</label>
+                        <input id="lng" name="lng" type="number" step="any" class="mm-input" placeholder="-58.3816" required>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="mm-field" style="grid-column: 1 / -1;">
+                        <label for="descripcion" class="mm-label">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" class="mm-input mm-input--textarea" placeholder="Contá brevemente qué ocurrió… (min. 500 caracteres)" minlength="500" required></textarea>
+                    </div>
+                </div>
+
+                <div class="mm-actions">
+                    <a href="main-gral.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
+                    <button type="submit" class="mm-btn mm-btn-primary">Subir hecho</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

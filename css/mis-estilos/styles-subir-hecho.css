@@ -135,7 +135,10 @@ body{
 }
 
 /* Select y date */
-.mm-input[type="date"]::-webkit-calendar-picker-indicator{
-    filter: opacity(.7);
+.mm-input--textarea{
+    border-radius: 16px;
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
 }
 .mm-input:disabled{ background:#f3f7fb; color:#7d95a7; }
