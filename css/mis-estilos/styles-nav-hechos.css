@@ -65,3 +65,26 @@ body{
 /* Mapita */
 #map { height: 420px; border-radius: 8px; }
 
+/* Estilos para inputs con labels */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.control-row .form-group {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
