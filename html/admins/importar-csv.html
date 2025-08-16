@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importar CSV</title>
+
+    <link rel="icon" href="../../components/logo-ico.png" >
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="../../css/mis-estilos/estilos-admin/styles-importar-csv.css" rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Iconos -->
+    <script src="https://kit.fontawesome.com/d4dda767ac.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="mm-form-wrap">
+        <div class="mm-card">
+            <h1 class="mm-form-title">Importar CSV</h1>
+            <p class="mm-form-sub">Importar hechos desde archivo CSV</p>
+
+            <!-- FORM -->
+            <form id="csvForm" class="needs-validation" novalidate>
+                <!-- Dropzone -->
+                <div id="dropzone" class="dropzone mb-3">
+                    <div class="dz-icon mb-2"><i class="fa-solid fa-file-csv"></i></div>
+                    <p class="mb-1">Arrastrá tu archivo <strong>.csv</strong> aquí</p>
+                    <p class="text-muted mb-2">o</p>
+                    <label class="btn btn-outline-mm btn-pill px-3"><input id="fileInput" type="file" accept=".csv" hidden> Elegir archivo </label>
+
+                    <div class="mt-2 small">
+                        <span id="fileName" class="file-name d-none"></span>
+                    </div>
+                </div>
+
+<!--                <div class="d-flex gap-2">-->
+<!--                    <button id="btnImportar" type="submit" class="btn btn-primary-mm btn-pill px-4" disabled>-->
+<!--                      <span class="me-2" id="btnSpinner" style="display:none;">-->
+<!--                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
+<!--                      </span>-->
+<!--                        Importar archivo-->
+<!--                    </button>-->
+<!--                    <a href="../main-gral.html" class="btn btn-outline-mm btn-pill px-4">Volver a inicio</a>-->
+<!--                </div>-->
+
+                <div class="mm-actions">
+                    <a href="../main-gral.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
+
+                    <button id="btnImportar" type="submit" class="mm-btn mm-btn-primary" disabled>
+                        <span id="btnSpinner" class="me-2 d-none">
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        </span>
+                        Importar Archivo
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal resultado -->
+        <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-success" id="modalVariant">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">¡Tu archivo se ha importado con éxito!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+<!--                        Se procesaron N hechos.-->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <a href="../main-gral.html" class="btn btn-back btn-pill">Volver a inicio</a>
+                        <button type="button" class="btn btn-cerrar btn-pill px-4" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --------- Helpers UI ----------
+        const dropzone   = document.getElementById('dropzone');
+        const fileInput  = document.getElementById('fileInput');
+        const fileNameEl = document.getElementById('fileName');
+        const btnImport  = document.getElementById('btnImportar');
+        const btnSpin    = document.getElementById('btnSpinner');
+
+        dropzone.addEventListener('dragover', (e)=>{
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+        });
+        dropzone.addEventListener('dragleave', ()=>{
+            dropzone.classList.remove('dragover');
+        });
+        dropzone.addEventListener('drop', (e)=>{
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if(e.dataTransfer.files && e.dataTransfer.files[0]){
+                fileInput.files = e.dataTransfer.files;
+                showFileName();
+            }
+        });
+        dropzone.addEventListener('click', ()=> fileInput.click());
+        fileInput.addEventListener('change', showFileName);
+
+        function showFileName(){
+            const f = fileInput.files && fileInput.files[0];
+            if(!f){
+                fileNameEl.classList.add('d-none');
+                btnImport.disabled = true;
+                return;
+            }
+            if(!f.name.toLowerCase().endsWith('.csv')){
+                alert('El archivo debe ser .csv');
+                fileInput.value = '';
+                btnImport.disabled = true;
+                return;
+            }
+            fileNameEl.textContent = f.name;
+            fileNameEl.classList.remove('d-none');
+            btnImport.disabled = false;
+        }
+
+        // --------- POST a la API ----------
+        const form = document.getElementById('csvForm');
+
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if(!file) return;
+
+            const fd = new FormData();
+            // Debe coincidir con @RequestParam("archivo")
+            fd.append('archivo', file);
+
+            btnImport.disabled = true;
+            btnSpin.classList.remove('d-none');
+
+            try{
+                // ⚠️ Si el back corre en otro puerto/host, usá la URL completa:
+                // const resp = await fetch('http://localhost:8080/api/hechos/importar', { method: 'POST', body: fd });
+                const resp = await fetch('/api/hechos/importar', { method: 'POST', body: fd });
+
+                const text = await resp.text(); // tu controller devuelve String
+                showResultModal(resp.ok, text);
+
+            }catch(err){
+                showResultModal(false, 'No se pudo conectar con el servidor.');
+            }finally{
+                btnImport.disabled = false;
+                btnSpin.classList.add('d-none');
+            }
+        });
+
+        // --------- Modal resultado ----------
+        const resultModal = new bootstrap.Modal(document.getElementById('resultModal')); // <-- así
+        const modalTitle  = document.getElementById('modalTitle');
+        const modalBody   = document.getElementById('modalBody');
+        const modalVariant= document.getElementById('modalVariant');
+
+        function showResultModal(ok, message){
+            modalTitle.textContent = ok ? '¡Tu archivo se ha importado con éxito!' : 'No se pudo importar el archivo';
+            modalBody.textContent  = message || (ok ? 'Hechos importados correctamente.' : 'Revisá el formato del CSV.');
+            modalVariant.classList.toggle('modal-success', ok);
+            modalVariant.classList.toggle('modal-error', !ok);
+            resultModal.show();
+        }
+
+        // Utilidad: limpiamos HTML si el servidor devolvió una página de error
+        function plainTextFromResponseBody(text) {
+            // Si tiene tags HTML, los sacamos (simple, suficiente para páginas de error)
+            const stripped = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+            return stripped || 'Error desconocido';
+        }
+
+        async function readBodySmart(resp) {
+            const ct = resp.headers.get('content-type') || '';
+            const raw = await resp.text(); // tu endpoint devuelve String
+            if (ct.includes('application/json')) {
+                try {
+                    const data = JSON.parse(raw);
+                    return typeof data === 'string' ? data : (data.mensaje || JSON.stringify(data));
+                } catch { /* cae a texto plano abajo */ }
+            }
+            return plainTextFromResponseBody(raw);
+        }
+
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if(!file) return;
+
+            const fd = new FormData();
+            fd.append('archivo', file);   // debe coincidir con @RequestParam("archivo")
+
+            btnImport.disabled = true;
+            btnSpin.classList.remove('d-none');
+
+            try {
+                // Usa URL ABSOLUTA si back y front van en puertos distintos
+                const resp = await fetch('/api/hechos/importar', { method:'POST', body: fd });
+
+                const message = await readBodySmart(resp);
+
+                // Mensajes más claros por status
+                if (resp.ok) {
+                    showResultModal(true, message || 'Importación exitosa.');
+                } else {
+                    let friendly = message;
+                    if (resp.status === 404) friendly = 'No se encontró la ruta /api/hechos/importar (404). Verificá la URL y que el back esté corriendo.';
+                    if (resp.status === 400) friendly = 'El servidor rechazó el archivo (400). ¿Es un CSV válido?';
+                    if (resp.status === 415) friendly = 'Tipo de archivo no soportado (415). Subí un .csv.';
+                    if (resp.status >= 500) friendly = 'Error del servidor (5xx). Revisá logs del backend.';
+                    showResultModal(false, friendly);
+                }
+            } catch (err) {
+                showResultModal(false, 'No se pudo conectar con el servidor. ¿Está levantado el backend? ¿CORS habilitado?');
+            } finally {
+                btnImport.disabled = false;
+                btnSpin.classList.add('d-none');
+            }
+        });
+
+    </script>
+
+</body>
+</html>
