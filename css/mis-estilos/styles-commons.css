@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root{
+    --bg: #F2F7FA;
+    --accent:#AFCBE3;
+    --brand-500:#86A8C2;
+    --brand-800:#3B4F61;
+}
+
+body.body-metamapa{
+    font-family: 'OpenSans', sans-serif;
+    color: #3B4F61;
+    background-color: #F2F7FA;
+}
+
+#map { height: 420px; border-radius: 8px; }

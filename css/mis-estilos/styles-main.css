@@ -47,7 +47,7 @@ main {
 .btn-back{
     font-size: 18px;
     color: #F2F7FA;
-    background-color: #86a8c2;
+    background-color: var(--brand-500);
     border-radius: 25px;
     box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
     width: 170px;
@@ -60,8 +60,8 @@ main {
 
 .btn-sin-login{
     font-size: 18px;
-    color: #86a8c2;
-    border-color: #86a8c2;
+    color: var(--brand-500);
+    border-color: var(--brand-500);
     border-radius: 25px;
     box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
     width: 225px;
