@@ -1,4 +1,30 @@
 .icon-coleccion {
-    height: 48px;
-    width: 48px;
+    height: 30px;
+    width: 30px;
+}
+
+.titulo-imagen {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+    h5 {
+        padding-left: 10px;
+    }
+}
+
+.tarjeta-coleccion {
+    width: 20rem;
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.list-criterios{
+    list-style-type: none;
+    li {
+        padding-bottom: 10px;
+    }
+
+
 }

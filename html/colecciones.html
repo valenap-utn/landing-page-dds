@@ -4,51 +4,82 @@
     <meta charset="UTF-8">
     <title>Colecciones</title>
     <link rel="stylesheet" href="../css/mis-estilos/styles-colecciones.css">
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <body>
     <main>
-        <div class="card">
-            <div class="card-header">
+        <div class="card tarjeta-coleccion">
+            <div class="card-header titulo-imagen">
                 <img src="../components/coleccion.png" alt="icono de coleccion" class="icon-coleccion"/>
-                <h5 class="card-title">Titulo Coleccion</h5>
+                <h5 class="card-title">Desastres Naturales</h5>
             </div>
             <div class="card-body">
-                <p>Descripcion</p>
-                <p>Criterios</p>
-                <ul>
-                    <li>unCriterio</li>
-                    <li>OtroCriterio</li>
-                </ul>
+                <p>Este es un recuento de los desastres naturales más importantes de los últimos meses de Argentina</p>
+                <div class="accordion" id="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                                Criterios de pertenencia
+                            </button>
+                        </h2>
+                        <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <ul class="list-criterios">
+                                    <li>Desastre Natural <span class="badge text-bg-secondary">Categoria</span></li>
+                                    <li>Desde el 24/06/2025 hasta el 15/07/2025 <span class="badge text-bg-secondary">Fechas de acontecimientos</span></li>
+                                    <li>Desde el 24/06/2025 hasta el 15/07/2025 <span class="badge text-bg-secondary">Fechas de carga al sistema</span></li>
+                                    <li><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver Ubicacion</button>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h2 class="modal-title fs-5" id="exampleModalLabel">Ubicación de los hechos</h2>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        h
+                                                        <div id="map" class="map"></div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                Fuentes
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <ul class="list-criterios">
+                                    <li>Fuente Proxy :<p>una url</p></li>
+                                    <li>Fuente Dinámica: <p>otra url</p> </li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <img src="../components/coleccion.png" alt="icono de coleccion" class="icon-coleccion"/>
-                <h5 class="card-title">Titulo Coleccion</h5>
-            </div>
-            <div class="card-body">
-                <p>Descripcion</p>
-                <p>Criterios</p>
-                <ul>
-                    <li>unCriterio</li>
-                    <li>OtroCriterio</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <img src="../components/coleccion.png" alt="icono de coleccion" class="icon-coleccion"/>
-                <h5 class="card-title">Titulo Coleccion</h5>
-            </div>
-            <div class="card-body">
-                <p>Descripcion</p>
-                <p>Criterios</p>
-                <ul>
-                    <li>unCriterio</li>
-                    <li>OtroCriterio</li>
-                </ul>
-            </div>
-        </div>
+
+
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
