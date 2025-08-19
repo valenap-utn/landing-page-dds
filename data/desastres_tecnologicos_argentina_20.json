@@ -1,0 +1,183 @@
+[
+  {
+    "Id": 0,
+    "Título":"Chivilcoy en alerta por Emanación de gas tóxico",
+    "Descripción":"Grave emanación de gas tóxico ocurrió en las inmediaciones de Chivilcoy, Buenos Aires. El incidente generando caos en el transporte público y privado. Defensa Civil coordina las tareas de asistencia y reconstrucción.",
+    "Categoría":"Emanación de gas tóxico",
+    "Latitud":-34.914536,
+    "Longitud":-60.035774,
+    "Fecha del hecho":"07\/06\/2022",
+    "Imagen": "https://elcomercio.pe/resizer/v2/MZM6UIA3INDJ7BJTMROGUWPDCU.jpg?auth=db31177e1c7e493ebc94662cd57e36cf8bfe66efac7048d5c855713e93bf3bfb&width=1200&height=800&quality=75&smart=true"
+  },
+  {
+    "Id": 1,
+    "Título":"Descarrilamiento de tren causa estragos en Puerto Iguazú",
+    "Descripción":"Grave descarrilamiento de tren ocurrió en las inmediaciones de Puerto Iguazú, Misiones. El incidente provocando cortes de energía y problemas en el suministro de agua. Las autoridades locales han desplegado equipos de emergencia para atender a los afectados.",
+    "Categoría":"Descarrilamiento de tren",
+    "Latitud":-25.575639,
+    "Longitud":-54.543917,
+    "Fecha del hecho":"21\/04\/2013"
+  },
+  {
+    "Id": 2,
+    "Título":"Fallo en vuelo deja múltiples daños en Belén",
+    "Descripción":"Grave fallo en vuelo ocurrió en las inmediaciones de Belén, Catamarca. El incidente con un saldo inicial de varias personas heridas. Las fuerzas de seguridad mantienen un perímetro para evitar incidentes adicionales.",
+    "Categoría":"Fallo en vuelo",
+    "Latitud":-27.691883,
+    "Longitud":-67.052886,
+    "Fecha del hecho":"15\/05\/2010"
+  },
+  {
+    "Id": 3,
+    "Título":"Apagón por tormenta deja múltiples daños en Mar del Plata, Buenos Aires",
+    "Descripción":"Autoridades confirmaron un apagón por tormenta en Mar del Plata, Buenos Aires. El incidente generando preocupación entre autoridades provinciales. Defensa Civil coordina las tareas de asistencia y reconstrucción.",
+    "Categoría":"Apagón por tormenta",
+    "Latitud":-37.988737,
+    "Longitud":-57.545168,
+    "Fecha del hecho":"16\/09\/2024"
+  },
+  {
+    "Id": 4,
+    "Título":"Evacuaciones por Escape de gas en Godoy Cruz, Mendoza",
+    "Descripción":"Grave escape de gas ocurrió en las inmediaciones de Godoy Cruz, Mendoza. El incidente obligando a evacuar a residentes de la zona. Las autoridades locales han desplegado equipos de emergencia para atender a los afectados.",
+    "Categoría":"Escape de gas",
+    "Latitud":-32.906132,
+    "Longitud":-68.874518,
+    "Fecha del hecho":"17\/11\/2016"
+  },
+  {
+    "Id": 5,
+    "Título":"Se reporta Pérdida de gas con evacuación en zona de Villa Dolores",
+    "Descripción":"Autoridades confirmaron un pérdida de gas con evacuación en Villa Dolores, Córdoba. El incidente obligando a evacuar a residentes de la zona. Se ha iniciado una investigación para determinar las causas exactas del incidente.",
+    "Categoría":"Pérdida de gas con evacuación",
+    "Latitud":-31.940322,
+    "Longitud":-65.18937,
+    "Fecha del hecho":"08\/04\/2019"
+  },
+  {
+    "Id": 6,
+    "Título":"Colisión frontal genera crisis en Chivilcoy",
+    "Descripción":"Grave colisión frontal ocurrió en las inmediaciones de Chivilcoy, Buenos Aires. El incidente generando preocupación entre autoridades provinciales. Se ha iniciado una investigación para determinar las causas exactas del incidente.",
+    "Categoría":"Colisión frontal",
+    "Latitud":-34.944636,
+    "Longitud":-59.982504,
+    "Fecha del hecho":"24\/05\/2004"
+  },
+  {
+    "Id": 7,
+    "Título":"Autoridades responden a Incidente en fábrica en Pico Truncado, Santa Cruz",
+    "Descripción":"Grave incidente en fábrica ocurrió en las inmediaciones de Pico Truncado, Santa Cruz. El incidente generando serios daños ambientales en la región. Las autoridades locales han desplegado equipos de emergencia para atender a los afectados.",
+    "Categoría":"Incidente en fábrica",
+    "Latitud":-46.83602,
+    "Longitud":-67.93958,
+    "Fecha del hecho":"04\/07\/2008"
+  },
+  {
+    "Id": 8,
+    "Título":"Evacuaciones por Accidente con transporte público en Gualeguay, Entre Ríos",
+    "Descripción":"Autoridades confirmaron un accidente con transporte público en Gualeguay, Entre Ríos. El incidente dejando un rastro de destrucción importante. Equipos de rescate continúan buscando posibles víctimas.",
+    "Categoría":"Accidente con transporte público",
+    "Latitud":-33.164954,
+    "Longitud":-59.274578,
+    "Fecha del hecho":"09\/08\/2007"
+  },
+  {
+    "Id": 9,
+    "Título":"San Francisco sufre las consecuencias de Siniestro vial fatal",
+    "Descripción":"Un grave siniestro vial fatal se registró en San Francisco, Córdoba. El incidente dejando a la población incomunicada por varias horas. Se ha declarado estado de emergencia en la región para facilitar la asistencia.",
+    "Categoría":"Siniestro vial fatal",
+    "Latitud":-31.385636,
+    "Longitud":-62.09374,
+    "Fecha del hecho":"02\/04\/2010"
+  },
+  {
+    "Id": 10,
+    "Título":"Atropello masivo deja múltiples daños en Villa Krause, San Juan",
+    "Descripción":"Un grave atropello masivo se registró en Villa Krause, San Juan. El incidente generando preocupación entre autoridades provinciales. El gobierno provincial ha enviado ayuda humanitaria a los damnificados.",
+    "Categoría":"Atropello masivo",
+    "Latitud":-31.573212,
+    "Longitud":-68.562543,
+    "Fecha del hecho":"18\/01\/2018"
+  },
+  {
+    "Id": 11,
+    "Título":"Fuga masiva de gas natural provoca emergencia en Caucete",
+    "Descripción":"Un grave fuga masiva de gas natural se registró en Caucete, San Juan. El incidente destruyendo viviendas y dejando a familias evacuadas. Las autoridades locales han desplegado equipos de emergencia para atender a los afectados.",
+    "Categoría":"Fuga masiva de gas natural",
+    "Latitud":-31.646612,
+    "Longitud":-68.230844,
+    "Fecha del hecho":"03\/08\/2014"
+  },
+  {
+    "Id": 12,
+    "Título":"Incendio en fábrica genera crisis en Quilmes",
+    "Descripción":"Grave incendio en fábrica ocurrió en las inmediaciones de Quilmes, Buenos Aires. El incidente afectando gravemente la infraestructura local. Se ha declarado estado de emergencia en la región para facilitar la asistencia.",
+    "Categoría":"Incendio en fábrica",
+    "Latitud":-34.675776,
+    "Longitud":-58.238241,
+    "Fecha del hecho":"17\/04\/2003"
+  },
+  {
+    "Id": 13,
+    "Título":"Detonación en fábrica sorprende a habitantes de Goya, Corrientes",
+    "Descripción":"Un grave detonación en fábrica se registró en Goya, Corrientes. El incidente destruyendo viviendas y dejando a familias evacuadas. Autoridades nacionales se han puesto a disposición para brindar asistencia.",
+    "Categoría":"Detonación en fábrica",
+    "Latitud":-29.101055,
+    "Longitud":-59.252038,
+    "Fecha del hecho":"21\/02\/2020"
+  },
+  {
+    "Id": 14,
+    "Título":"Explosión seguida de incendio impacta en Gualeguay, Entre Ríos",
+    "Descripción":"Un grave explosión seguida de incendio se registró en Gualeguay, Entre Ríos. El incidente generando caos en el transporte público y privado. Se ha iniciado una investigación para determinar las causas exactas del incidente.",
+    "Categoría":"Explosión seguida de incendio",
+    "Latitud":-33.120037,
+    "Longitud":-59.293536,
+    "Fecha del hecho":"07\/08\/2018"
+  },
+  {
+    "Id": 15,
+    "Título":"Situación crítica por Descarrilamiento con derrame en Esquel, Chubut",
+    "Descripción":"Un grave descarrilamiento con derrame se registró en Esquel, Chubut. El incidente dejando un rastro de destrucción importante. El Ministerio de Desarrollo Social está brindando apoyo a los damnificados.",
+    "Categoría":"Descarrilamiento con derrame",
+    "Latitud":-42.861513,
+    "Longitud":-71.341078,
+    "Fecha del hecho":"24\/08\/2004"
+  },
+  {
+    "Id": 16,
+    "Título":"Emergencia por Fuego en centro comercial en Mercedes, Corrientes",
+    "Descripción":"Autoridades confirmaron un fuego en centro comercial en Mercedes, Corrientes. El incidente obligando a evacuar a residentes de la zona. Voluntarios de diversas organizaciones se han sumado a las tareas de auxilio.",
+    "Categoría":"Fuego en centro comercial",
+    "Latitud":-29.191787,
+    "Longitud":-58.06526,
+    "Fecha del hecho":"26\/10\/2014"
+  },
+  {
+    "Id": 17,
+    "Título":"Emanación de gas tóxico provoca emergencia en Aimogasta",
+    "Descripción":"Un grave emanación de gas tóxico se registró en Aimogasta, La Rioja. El incidente dejando a varios sectores sin comunicación. El gobierno provincial ha enviado ayuda humanitaria a los damnificados.",
+    "Categoría":"Emanación de gas tóxico",
+    "Latitud":-28.545702,
+    "Longitud":-66.832969,
+    "Fecha del hecho":"07\/07\/2015"
+  },
+  {
+    "Id": 18,
+    "Título":"Equipos de emergencia atienden Fuga masiva de gas natural en La Quiaca",
+    "Descripción":"Grave fuga masiva de gas natural ocurrió en las inmediaciones de La Quiaca, Jujuy. El incidente causando daños en cultivos y producción agrícola. Se han habilitado refugios temporales para las familias afectadas.",
+    "Categoría":"Fuga masiva de gas natural",
+    "Latitud":-22.091859,
+    "Longitud":-65.555883,
+    "Fecha del hecho":"03\/11\/2021"
+  },
+  {
+    "Id": 19,
+    "Título":"Declaran emergencia tras Derrumbe en obra en construcción en Mercedes, Corrientes",
+    "Descripción":"Grave derrumbe en obra en construcción ocurrió en las inmediaciones de Mercedes, Corrientes. El incidente obligando a evacuar a residentes de la zona. Se ha establecido un centro de operaciones para coordinar las ayudas.",
+    "Categoría":"Derrumbe en obra en construcción",
+    "Latitud":-29.178974,
+    "Longitud":-58.088447,
+    "Fecha del hecho":"12\/09\/2009"
+  }
+]
