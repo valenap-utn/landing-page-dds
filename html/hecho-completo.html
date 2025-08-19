@@ -1,46 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Metamapa</title>
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Hecho</title>
 
-    <link rel="icon" href="../components/logo-ico.png" >
+    <link rel="icon" href="../components/logo-ico.png">
 
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link href="../css/mis-estilos/styles-subir-hecho.css" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <a>< </a>
-        <h3>Desastre en Tandil</h3> <!-- Titulo-->
-        <div class="carrousel"> <!-- Acá iría un carrusel -->
-            <img src="" alt="Una imagen">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/_An9EsKPhp0?si=9_PSPtAhYMl36pyc" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <span class="badge text-bg-secondary">unaCategoria</span>
-        <p>Aconteció el 24/06/2025</p>
-        <p>Fue cargado el 27/06/2025</p>
-        <p>Fuente Dinamica</p>
-        <p>Creado por unUsuario <span class="badge text-bg-secondary">Contribuyente/Administrador</span> </p>
 
-        <p>Etiquetas relacionadas</p>
-        <ul>
-            <li><span class="badge text-bg-secondary">Desastre</span></li>
-            <li><span class="badge text-bg-secondary">Terremoto</span></li>
-            <li><span class="badge text-bg-secondary">Heridos</span></li>
-        </ul>
-        <div id="map"></div>
-    </main>
-    <footer>
-        <a>Reportar hecho</a>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <section class="mm-form-wrap">
+        <div class="mm-card">
+            <h1 id="hTitulo" class="mm-form-title">Hecho</h1>
+            <p id="hBajada" class="mm-form-sub">Descripción breve del hecho</p>
+
+            <!-- Detalles del Hecho -->
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-md-6">
+                    <small class="mm-label d-block">Categoría</small>
+                    <span id="hCategoria">-</span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small class="mm-label d-block">Aconteció</small>
+                    <span id="hFecha">-</span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small class="mm-label d-block">Fecha de carga</small>
+                    <span id="hFechaCarga">-</span>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <small class="mm-label d-block">Origen</small>
+                    <span id="hOrigen">—</span>
+                </div>
+            </div>
+
+            <!-- Contenido multimedia del Hecho -->
+            <div id="mediaWrap" class="mm-media mb-4" aria-label="Contenido multimedia del hecho"></div>
+
+            <!-- Ubicación -->
+            <div class="row g-3 mb-3">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <small class="mm-label d-block">Latitud</small>
+                    <span id="hLat">-</span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <small class="mm-label d-block">Longitud</small>
+                    <span id="hLong">-</span>
+                </div>
+            </div>
+
+            <div id="mapDetalle" class="mb-3" aria-label="Mapa ubicación del hecho"></div>
+
+            <div class="mb-4">
+                <h2 class="h5 mm-label mb-2">Descripción</h2>
+                <p id="hDescripcion" class="mb-0">-</p>
+            </div>
+
+            <!-- Creador -->
+            <div class="mb-4">
+                <h2 class="h6 mm-label mb-1">Creado por</h2>
+                <div id="hCreador">-</div>
+                <div id="hRoles" class="mt-1 d-flex flex-wrap gap-2"></div>
+            </div>
+
+            <!-- Etiquetas -->
+            <div class="mb-4">
+                <h2 class="h6 mm-label mb-1">Etiquetas relacionadas</h2>
+                <ul id="hTags" class="mm-tags list-unstyled d-flex flex-wrap gap-2 mb-0"></ul>
+            </div>
+
+            <div class="mm-actions">
+                <a href="nav-hechos.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
+                <a href="#" type="submit" class="mm-btn mm-btn-primary">Solicitar Eliminación</a>
+            </div>
+
+        </div>
+    </section>
+
+<!--    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>-->
+    <script type="module" src="../js/hecho-completo.js"></script>
 </body>
 </html>
