@@ -134,6 +134,14 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         const markersLayer = L.layerGroup().addTo(map);
 
+        function redirigirPaginaWeb(event) {
+
+        }
+
+        function abrirPopUp(event) {
+
+        }
+
         // Render de pins y ajuste de vista
         function render(lista) {
             markersLayer.clearLayers();
@@ -142,6 +150,8 @@
             lista.forEach(h => {
                 latlngs.push([h.lat, h.long]);
                 L.marker([h.lat, h.long], { title: `${h.id} - ${h.titulo}` })
+                    .on('dblclick', redirigirPaginaWeb)
+                    .on('mouseover', abrirPopUp)
                     .bindPopup(`<strong>${h.titulo}</strong><br/>Id: ${h.id}<br/>Categoría: ${h.categoria}<br/>Fecha: ${h.fecha}`)
                     .addTo(markersLayer);
             });
