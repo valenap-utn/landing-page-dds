@@ -1,4 +1,40 @@
 .icon-coleccion {
-    height: 48px;
-    width: 48px;
+    height: 30px;
+    width: 30px;
+}
+
+.card-header.titulo-imagen {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+
+
+    h5 {
+        margin: 0;
+        padding-left: 10px;
+    }
+}
+
+.card.tarjeta-coleccion {
+    font-family: 'Open Sans', sans-serif;
+    width: 20rem;
+    margin-top: 2em;
+    margin-left: 2em;
+    color: var(--brand-800);
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+.list-criterios{
+    list-style-type: none;
+    li {
+        padding-bottom: 10px;
+    }
+
+}
+
+.btn.btn-ubicacion {
+    border-radius: 15px;
+    border: 0.1em solid;
+    border-color: var(--brand-800);
 }
