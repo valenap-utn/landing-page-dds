@@ -101,3 +101,12 @@ a{
 a:hover{
     color: #265f93;
 }
+
+@media (max-width: 340px) {
+    #login-form .mb-3.d-flex.justify-content-between {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: self-start;
+    }
+}
+

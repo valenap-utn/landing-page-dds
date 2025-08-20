@@ -51,11 +51,11 @@
     <div class="d-flex justify-content-center gap-4 mb-4" role="radiogroup" aria-labelledby="titulo-modo">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="modo" id="modoIrrestricto" value="irrestricto" checked aria-label="Modo de navegación irrestricto" />
-            <label class="form-check-label">Irrestricto</label>
+            <label class="form-check-label" for="modoIrrestricto">Irrestricto</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="modo" id="modoCurado" value="curado" aria-label="Modo de navegación curado" />
-            <label class="form-check-label">Curado</label>
+            <label class="form-check-label" for="modoCurado">Curado</label>
         </div>
     </div>
 
@@ -74,13 +74,22 @@
         </div>
 
         <div class="form-group">
-            <label for="fDesde" class="form-label">Fecha desde</label>
-            <input id="fDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
+            <label for="fAcontDesde" class="form-label">Fecha Del Acontecimiento desde</label>
+            <input id="fAcontDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
         </div>
 
         <div class="form-group">
-            <label for="fHasta" class="form-label">Fecha hasta</label>
-            <input id="fHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
+            <label for="fAcontHasta" class="form-label">Fecha Del Acontecimiento hasta</label>
+            <input id="fAcontHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
+        </div>
+        <div class="form-group">
+            <label for="fCreacionDesde" class="form-label">Fecha De Creación desde</label>
+            <input id="fCreacionDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
+        </div>
+
+        <div class="form-group">
+            <label for="fCreacionHasta" class="form-label">Fecha De Creación hasta</label>
+            <input id="fCreacionHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
         </div>
 
         <!--            <div class="form-group">-->

@@ -22,13 +22,25 @@
     <script src="https://kit.fontawesome.com/d4dda767ac.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <section class="mm-form-wrap">
         <div class="mm-card">
             <h1 class="mm-form-title">Crear cuenta</h1>
             <p class="mm-form-sub">Completá tus datos para empezar a utilizar MetaMapa</p>
 
             <form id="form-usuario" class="mm-form" novalidate>
-                <div class="mm-grid">
+                <div id="seccionDeRoles" class="mm-grid">
+                    <h5>Elegí tu rol</h5>
+                    <div class="mm-field">
+                        <label for="rolAdministrador" class="mm-label">Administrador</label>
+                        <input id="rolAdministrador" type="radio" name="rolAdministrador" value="administrador" onclick="activarSeccionDatosCrearCuentaAdministrador()"/>
+                    </div>
+                    <div class="mm-field">
+                        <label for="rolContribuyente" class="mm-label">Contribuyente</label>
+                        <input id="rolContribuyente" type="radio" name="rolAdministrador" value="contribuyente" onclick="activarSeccionDatosCrearCuentaContribuyente()"/>
+                    </div>
+                </div>
+                <div id="seccionDatosCrearCuenta" class="mm-grid">
                     <div class="mm-field">
                         <label for="nombre" class="mm-label">Nombre</label>
                         <input id="nombre" name="nombre" type="text" class="mm-input" placeholder="Tu nombre" required aria-label="Ingresar nombre">
@@ -36,17 +48,17 @@
 
                     <div class="mm-field">
                         <label for="apellido" class="mm-label">Apellido</label>
-                        <input id="apellido" name="apellido" type="text" class="mm-input" placeholder="Tu apellido" required aria-label="Ingresar apellido">
+                        <input id="apellido" name="apellido" type="text" class="mm-input" placeholder="Tu apellido"  aria-label="Ingresar apellido">
                     </div>
 
                     <div class="mm-field">
                         <label for="fechaDeNacimiento" class="mm-label">Fecha de nacimiento</label>
-                        <input id="fechaDeNacimiento" name="fechaDeNacimiento" type="date" class="mm-input" required>
+                        <input id="fechaDeNacimiento" name="fechaDeNacimiento" type="date" class="mm-input"  placeholder="Ejemplo: 19/11/2024">
                     </div>
 
                     <div class="mm-field">
                         <label for="rolId" class="mm-label">Rol</label>
-                        <select id="rolId" name="rolId" class="mm-input" required aria-label="Seleccionar rol">
+                        <select id="rolId" name="rolId" class="mm-input"  aria-label="Seleccionar rol">
                             <option value="" disabled selected>Seleccioná un rol…</option>
                             <option value="1">USUARIO</option>
                             <option value="2">ADMIN</option>
@@ -62,7 +74,7 @@
         </div>
     </section>
 
-    <script>
+    <script >
         // // límites de fecha (opcional): impedir fechas futuras y menores de 13 años
         // (function setDateLimits() {
         //     const input = document.getElementById('fechaDeNacimiento');
@@ -79,6 +91,28 @@
         // })();
 
         // envío
+        //import {setearInputFecha} from "../js/fechas";
+
+        window.addEventListener("load", function(){
+            document.getElementById('seccionDatosCrearCuenta').style.display="none";
+        })
+
+        function activarSeccionDatosCrearCuenta(){
+            document.getElementById('seccionDatosCrearCuenta').style.display="grid";
+            document.getElementById('seccionDeRoles').style.display="none";
+        }
+
+        function activarSeccionDatosCrearCuentaContribuyente(){
+            activarSeccionDatosCrearCuenta()
+
+        }
+
+        function activarSeccionDatosCrearCuentaAdministrador(){
+            activarSeccionDatosCrearCuenta()
+            document.getElementById('apellido').required= true;
+            document.getElementById('fechaDeNacimiento').required= true;
+        }
+        //setearInputFecha('fechaDeNacimiento');
         document.getElementById('form-usuario').addEventListener('submit', async (e) => {
             e.preventDefault();
 
