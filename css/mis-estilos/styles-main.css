@@ -51,7 +51,7 @@ main {
     background-color: var(--brand-500);
     border-radius: 25px;
     box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
-    width: 170px;
+    width: 225px;
 }
 
 .btn-back:hover {
@@ -224,3 +224,60 @@ main {
 .footer-metamapa .footer-text {
     color: #7c90a0;
 }
+
+
+/* ESTILOS PARA HEADER AL ESTILO AIRBNB */
+.mm-navbar{
+    background:#fff;
+    /*box-shadow:0 2px 8px rgba(0,0,0,.06);*/
+    min-height:72px;
+}
+.mm-logo{ width:64px; object-fit:contain; }
+.mm-navbar .nav-link{ color:var(--brand-800); border-radius:999px; }
+.mm-navbar .nav-link:hover{ background:#f1f6fa; }
+
+.btn-mm{
+    color:#F2F7FA; background:var(--brand-500); border-radius:999px;
+    box-shadow:0 2px 6px rgba(59,79,97,.25);
+}
+.btn-mm:hover{ background:var(--brand-800); color:#fff; }
+.btn-mm-ghost{
+    color:var(--brand-500); border:1px solid var(--brand-500); border-radius:999px;
+}
+.btn-mm-ghost:hover{ color:var(--brand-800); border-color:var(--brand-800); }
+
+/* super-buscador */
+.mm-supersearch-wrap{
+    background:linear-gradient(#fff, #fff);
+    padding:12px 0 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.mm-supersearch{
+    display:grid; grid-template-columns: 1fr 1fr 1fr auto; align-items:center;
+    gap:0; background:#fff; border:1px solid var(--accent);
+    border-radius:999px; padding:8px; box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+.ss-item{ padding:8px 14px; min-width:0; }
+.ss-item.ss-divider{ border-left:1px solid rgba(0,0,0,.06); }
+.ss-label{ display:block; font-size:.8rem; color:#6c8192; margin-bottom:2px; }
+.ss-input{
+    width:100%; border:0; outline:0; padding:6px 0; background:transparent;
+    color:var(--brand-800);
+}
+.ss-input::placeholder{ color:#8aa2b4; }
+.ss-input:focus{ outline:none; }
+
+.ss-go{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--brand-500); color:#fff; border:0;
+    display:inline-grid; place-items:center; box-shadow:0 3px 10px rgba(59,79,97,.25);
+}
+.ss-go:hover{ background:var(--brand-800); }
+
+/* bloque de botón en mobile (bajo la barra) */
+.mm-search-mobile{ background:#fff; padding:10px 0; box-shadow:0 1px 6px rgba(0,0,0,.06) inset; }
+
+/* offcanvas mobile: usamos componentes de bootstrap; solo espacio */
+.mm-supersearch-mobile .form-control,
+.mm-supersearch-mobile .form-select{ border-radius:14px; }
+
