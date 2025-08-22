@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colecciones</title>
+
     <link rel="icon" href="../components/logo-ico.png" >
-    <link rel="stylesheet" href="../css/mis-estilos/styles-commons.css">
+
+<!--    <link rel="stylesheet" href="../css/mis-estilos/styles-commons.css">-->
     <link rel="stylesheet" href="../css/mis-estilos/styles-colecciones.css">
 
     <!-- Fuentes -->
@@ -23,40 +27,53 @@
 
 </head>
     <body class="body-metamapa">
-    <main >
-        <div class="card tarjeta-coleccion">
-            <div class="card-header titulo-imagen">
-                <img src="../components/coleccion.png" alt="icono de coleccion" class="icon-coleccion"/>
-                <h5 class="card-title">Desastres Naturales</h5>
-            </div>
-            <div class="card-body">
-                <p>Este es un recuento de los desastres naturales más importantes de los últimos meses de Argentina</p>
-                <div class="accordion" id="accordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                Fuentes
-                            </button>
-                        </h2>
-                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                            <div class="accordion-body">
-                                <ul class="list-criterios">
-                                    <li>Fuente Proxy :<p>una url</p></li>
-                                    <li>Fuente Dinámica: <p>otra url</p> </li>
-                                    <li></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--    <main >-->
+<!--        <div class="card tarjeta-coleccion">-->
+<!--            <div class="card-header titulo-imagen">-->
+<!--                <img src="../components/coleccion.png" alt="icono de coleccion" class="icon-coleccion"/>-->
+<!--                <h5 class="card-title">Desastres Naturales</h5>-->
+<!--            </div>-->
+<!--            <div class="card-body">-->
+<!--                <p>Este es un recuento de los desastres naturales más importantes de los últimos meses de Argentina</p>-->
+<!--                <div class="accordion" id="accordion">-->
+<!--                    <div class="accordion-item">-->
+<!--                        <h2 class="accordion-header">-->
+<!--                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">-->
+<!--                                Fuentes-->
+<!--                            </button>-->
+<!--                        </h2>-->
+<!--                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordion">-->
+<!--                            <div class="accordion-body">-->
+<!--                                <ul class="list-criterios">-->
+<!--                                    <li>Fuente Proxy :<p>una url</p></li>-->
+<!--                                    <li>Fuente Dinámica: <p>otra url</p> </li>-->
+<!--                                    <li></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </main>-->
 
+    <main class="mm-collections-wrap container py-5">
+        <header class="mb-4 text-center">
+            <h1 class="title-main">Colecciones</h1>
+        </header>
+
+        <!-- GRID de colecciones -->
+        <section id="coleccionesList" class="mm-collections-grid"></section>
+<!--        <section id="coleccionesGrid" class="mm-collections-grid"></section>-->
 
     </main>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <script src="../js/colecciones.js"></script>
 
     </body>
 </html>

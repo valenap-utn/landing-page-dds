@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root{
+    /* Paleta MetaMapa */
     --bg: #F2F7FA;
-    --accent:#AFCBE3;
-    --brand-500:#86A8C2;
-    --brand-800:#3B4F61;
+    --card: #E3EEF5;
+    --muted: #C9DEEC;
+    --accent: #AFCBE3;
+    --brand-500: #86A8C2;
+    --brand-800: #3B4F61;
+
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 6px rgba(0,0,0,.08);
+    --shadow-md: 0 8px 22px rgba(0,0,0,.12);
 }
 
 body.body-metamapa{

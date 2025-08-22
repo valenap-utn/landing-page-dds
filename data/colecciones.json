@@ -1,0 +1,10 @@
+[
+  {
+    "id": "desastres-tecnologicos",
+    "titulo": "Desastres Tecnológicos en Argentina",
+    "descripcion": "Hechos provenientes de archivos JSON importados",
+    "fuentes": [
+      { "tipo": "archivo", "url": "../data/desastres_tecnologicos_argentina_20.json", "etiqueta": "JSON de prueba" }
+    ]
+  }
+]
