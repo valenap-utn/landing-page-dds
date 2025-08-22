@@ -2,20 +2,52 @@
 const qs  = (sel, root = document) => root.querySelector(sel);
 const set = (sel, value) => { const el = qs(sel); if (el) el.textContent = value; };
 
-/* ---------- Fechas & normalización ---------- */
-function parseDateSmart(v){
-    if(!v) return null; const s=String(v).trim();
-    if(/^\d{4}-\d{2}-\d{2}$/.test(s)){const d=new Date(s); return isNaN(d)?null:d;}
-    const m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
-    if(m){const [_,d,mo,y]=m; const iso=`${y}-${mo.padStart(2,'0')}-${d.padStart(2,'0')}`; const dt=new Date(iso); return isNaN(dt)?null:dt;}
-    const d=new Date(s); return isNaN(d)?null:d;
+/* ---------- Fechas sin desfasajes por zona horaria ---------- */
+
+// Crea un Date a medianoche LOCAL (no UTC)
+function dateFromYMDLocal(iso /* 'YYYY-MM-DD' */) {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d); // local midnight
 }
 
-function toISO(d){ return d ? new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10) : null; }
+// Devuelve 'YYYY-MM-DD' leyendo componentes LOCALES
+function toISO(d) {
+    if (!d) return null;
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+}
 
-function formatDmy(iso){
-    if(!iso) return '-';
-    const [y,m,d] = iso.split('-');
+// Acepta ISO o dd/mm/aaaa y devuelve Date (local)
+function parseDateSmart(v) {
+    if (!v) return null;
+    if (v instanceof Date && !isNaN(v)) return v;
+
+    const s = String(v).trim();
+
+    // ISO estricta: YYYY-MM-DD => crear LOCAL (no new Date(s) que es UTC)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+        return dateFromYMDLocal(s);
+    }
+
+    // dd/mm/yyyy o dd-mm-yyyy
+    const m = s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+    if (m) {
+        const [_, d, mo, y] = m;
+        const iso = `${y}-${mo.padStart(2, '0')}-${d.padStart(2, '0')}`;
+        return dateFromYMDLocal(iso);
+    }
+
+    // Último intento: que lo resuelva JS. (puede traer hora → igual NO usamos toISOString)
+    const d = new Date(s);
+    return isNaN(d) ? null : d;
+}
+
+// Para mostrar en UI
+function formatDmy(iso /* 'YYYY-MM-DD' */) {
+    if (!iso) return '-';
+    const [y, m, d] = iso.split('-');
     return `${d}/${m}/${y}`;
 }
 
