@@ -36,15 +36,17 @@
             <p class="mm-form-sub">Completá tus datos para empezar a utilizar MetaMapa</p>
 
             <form id="form-usuario" class="mm-form" novalidate>
+                <h5>Elegí tu rol</h5>
                 <div id="seccionDeRoles" class="mm-grid">
-                    <h5>Elegí tu rol</h5>
-                    <div class="mm-field">
-                        <label for="rolAdministrador" class="mm-label">Administrador</label>
-                        <input id="rolAdministrador" type="radio" name="rolAdministrador" value="administrador" onclick="activarSeccionDatosCrearCuentaAdministrador()"/>
+                    <div class="mm-field" style="padding: 10px 10px">
+                        <label for="rolAdministrador" class="mm-label">Administrador
+                            <input id="rolAdministrador" type="radio" name="rolAdministrador" value="administrador" onclick="activarSeccionDatosCrearCuentaAdministrador()" style="margin: 0 0 0 10px; padding: 10px 10px ">
+                        </label>
                     </div>
-                    <div class="mm-field">
-                        <label for="rolContribuyente" class="mm-label">Contribuyente</label>
-                        <input id="rolContribuyente" type="radio" name="rolAdministrador" value="contribuyente" onclick="activarSeccionDatosCrearCuentaContribuyente()"/>
+                    <div class="mm-field" style="padding: 10px 10px">
+                        <label for="rolContribuyente" class="mm-label">Contribuyente
+                            <input id="rolContribuyente" type="radio" name="rolAdministrador" value="contribuyente" onclick="activarSeccionDatosCrearCuentaContribuyente()" style="margin: 0 0 0 10px; padding: 10px 10px "/>
+                        </label>
                     </div>
                 </div>
                 <div id="seccionDatosCrearCuenta" class="mm-grid">
