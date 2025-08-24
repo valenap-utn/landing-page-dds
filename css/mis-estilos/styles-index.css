@@ -144,3 +144,19 @@
 .btn-cta:hover .arrow{
     transform: translateX(2px);
 }
+
+.seccion-funciones {
+    background-color: var(--bg);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .card.opcion-landing-page {
+        text-decoration: none;
+        margin-top: 10px;
+        padding-left: 10px;
+        width: 17em;
+        color: var(--brand-800);
+    }
+}
+

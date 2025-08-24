@@ -21,3 +21,41 @@ body.body-metamapa{
 }
 
 #map { height: 420px; border-radius: 8px; }
+
+/* FOOTER */
+.footer-metamapa {
+    background: #f8fafc;
+    /*padding: 10px 40px;*/
+    border-top: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, .06);
+}
+
+.footer-metamapa .footer-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-metamapa .footer-align-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.footer-metamapa .footer-logo {
+    width: 65px;
+    object-fit: contain;
+}
+
+.footer-metamapa .footer-link {
+    color: var(--brand-800);
+    text-decoration: none;
+}
+
+.footer-metamapa .footer-link:hover {
+    text-decoration: underline;
+}
+
+.footer-metamapa .footer-text {
+    color: #7c90a0;
+}

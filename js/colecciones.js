@@ -124,7 +124,7 @@ function cardHTML(c){
     return `
     <article class="mm-collection-card">
       <div class="mm-card-header">
-        <img class="mm-card-icon" src="../components/coleccion.png" alt="">
+        <img class="mm-card-icon" src="../components/sachet_7909215.png" alt="">
         <div>
           <h3 class="mm-card-title">${c.titulo}</h3>
           <p class="mm-card-sub">${c.descripcion || 'Colección sin descripción.'}</p>
