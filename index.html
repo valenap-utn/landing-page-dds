@@ -35,37 +35,36 @@
     <link rel="stylesheet" href="css/mis-estilos/styles-commons.css">
 </head>
 <body>
+    <!-- Header responsive -->
+    <header class="mm-header" role="banner">
+        <div class="mm-header__container">
+            <a href="./" class="mm-header__logo-link">
+                <img src="components/logo-mm.png" alt="MetaMapa" class="mm-header__logo">
+            </a>
+
+            <!--                &lt;!&ndash; Botón hamburguesa &ndash;&gt;-->
+            <!--                <button class="mm-header__toggle"-->
+            <!--                        aria-expanded="false"-->
+            <!--                        aria-controls="mm-nav"-->
+            <!--                        aria-label="Abrir menú de navegación">-->
+            <!--                    <span class="mm-toggle__bar"></span>-->
+            <!--                    <span class="mm-toggle__bar"></span>-->
+            <!--                    <span class="mm-toggle__bar"></span>-->
+            <!--                </button>-->
+
+            <!--                &lt;!&ndash; Navegación &ndash;&gt;-->
+            <!--                <nav id="mm-nav" class="mm-nav" role="navigation" aria-label="Principal">-->
+            <!--                    <a href="index.html" class="mm-nav__link">Inicio</a>-->
+            <!--                    <a href="about.html" class="mm-nav__link">Acerca de</a>-->
+            <!--                    <a href="contact.html" class="mm-nav__link">Contacto</a>-->
+            <!--                    <a href="index-login.html" class="mm-nav__cta">Comenzar</a>-->
+            <!--                </nav>-->
+            <!--  -->
+        </div>
+    </header>
 
 
     <section class="mm-hero" role="banner" aria-label="MetaMapa - Inteligencia colectiva georreferenciada">
-        <!-- Header responsive -->
-        <header class="mm-header" role="banner">
-            <div class="mm-header__container">
-                <a href="./" class="mm-header__logo-link">
-                    <img src="components/logo-mm.png" alt="MetaMapa" class="mm-header__logo">
-                </a>
-
-<!--                &lt;!&ndash; Botón hamburguesa &ndash;&gt;-->
-<!--                <button class="mm-header__toggle"-->
-<!--                        aria-expanded="false"-->
-<!--                        aria-controls="mm-nav"-->
-<!--                        aria-label="Abrir menú de navegación">-->
-<!--                    <span class="mm-toggle__bar"></span>-->
-<!--                    <span class="mm-toggle__bar"></span>-->
-<!--                    <span class="mm-toggle__bar"></span>-->
-<!--                </button>-->
-
-<!--                &lt;!&ndash; Navegación &ndash;&gt;-->
-<!--                <nav id="mm-nav" class="mm-nav" role="navigation" aria-label="Principal">-->
-<!--                    <a href="index.html" class="mm-nav__link">Inicio</a>-->
-<!--                    <a href="about.html" class="mm-nav__link">Acerca de</a>-->
-<!--                    <a href="contact.html" class="mm-nav__link">Contacto</a>-->
-<!--                    <a href="index-login.html" class="mm-nav__cta">Comenzar</a>-->
-<!--                </nav>-->
-            </div>
-        </header>
-
-
         <div class="mm-hero__overlay"></div>
 
         <div class="mm-hero__container">
@@ -80,8 +79,17 @@
             <div class="mm-hero__actions d-flex justify-content-end">
                 <a class="mm-btn mm-btn--primary btn-cta" href="html/iniciar-sesion.html">Iniciar sesión <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span></a>
             </div>
+
+            <div class="mm-hero__scroll">
+                <button id="btnScrollDown" class="scroll-icon" aria-label="Ver más">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
         </div>
-        <section class="seccion-funciones">
+    </section>
+
+    <section class="seccion-funciones">
+        <div class="div-funciones">
             <a class="card opcion-landing-page" href="./html/nav-hechos.html">
                 <h5 class="card-header">Navegar Hechos</h5>
                 <p>Enterate de lo que pasa en el mundo al instante viendo todos los hechos que hay en nuestra comunidad</p>
@@ -94,24 +102,26 @@
                 <h5 class="card-header">Subir un hecho</h5>
                 <p>Contale a la comunidad lo que está pasando minuto a minuto en el mundo</p>
             </a>
-        </section>
-        <footer class="footer-metamapa mt-auto py-4">
-            <div class="container-fluid px-4">
-                <!--        <div class="footer-content row justify-content-between">-->
-                <div class="footer-content row justify-content-end">
-                    <!-- Logo -->
-                    <!--                <div class="footer-align-logo col-md-4 text-center text-md-start mb-3 mb-md-0">-->
-                    <!--                    <img src="../components/logo-mm.png" alt="MetaMapa" class="footer-logo">-->
-                    <!--                </div>-->
+        </div>
+    </section>
 
-                    <!-- Derechos -->
-                    <div class="col-md-4 text-md-end justify-content-center">
-                        <small class="footer-text">&copy; 2025 MetaMapa - Todos los derechos reservados</small>
-                    </div>
+    <footer class="footer-metamapa mt-auto py-4">
+        <div class="container-fluid px-4">
+            <!--        <div class="footer-content row justify-content-between">-->
+            <div class="footer-content row justify-content-end">
+                <!-- Logo -->
+                <!--                <div class="footer-align-logo col-md-4 text-center text-md-start mb-3 mb-md-0">-->
+                <!--                    <img src="../components/logo-mm.png" alt="MetaMapa" class="footer-logo">-->
+                <!--                </div>-->
+
+                <!-- Derechos -->
+                <div class="col-md-4 text-md-end justify-content-center">
+                    <small class="footer-text">&copy; 2025 MetaMapa - Todos los derechos reservados</small>
                 </div>
             </div>
-        </footer>
-    </section>
+        </div>
+    </footer>
+
 
 
     <script>
@@ -144,5 +154,23 @@
             });
         })();
     </script>
+
+    <!-- Script para btn-scrollDown -->
+    <script>
+        document.getElementById('btnScrollDown').addEventListener('click', () => {
+            document.querySelector('.seccion-funciones')
+                .scrollIntoView({ behavior: 'smooth' });
+        });
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                document.body.classList.add("scrolled");
+            } else {
+                document.body.classList.remove("scrolled");
+            }
+        });
+
+    </script>
+
 </body>
 </html>
