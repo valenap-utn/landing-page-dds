@@ -19,7 +19,3 @@ Queremos que cualquier persona pueda **reportar, explorar y analizar hechos** (a
 
 Vivimos en un mundo donde los datos están fragmentados. MetaMapa busca ser el punto de encuentro para **integrar información, darle contexto y potenciar su valor social**.
 No es solo un mapa: es una herramienta para **colaborar, prevenir y actuar colectivamente**.
-
----
-
-👉 ¿Querés que te arme también una **versión corta**, de 3–4 líneas, para que vaya en la parte superior del README como tagline?
