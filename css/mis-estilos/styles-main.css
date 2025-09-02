@@ -218,3 +218,14 @@ main {
 .footer-metamapa .footer-text {
     color: #7c90a0;
 }
+
+.blue-link {
+  color: #86a8c2; 
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.blue-link:hover,
+.blue-link:focus {
+  color: #5c7a93; 
+}
