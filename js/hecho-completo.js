@@ -247,3 +247,98 @@ function initMap(h){
     const btnEliminar = qs('#btnEliminar');
     if (btnEliminar) btnEliminar.addEventListener('click', ()=> alert('Solicitud enviada. Un moderador la evaluará.'));
 })();
+
+// Solicitud de eliminacion
+(() => {
+  const MIN = 500;
+  const txt       = document.getElementById('justificacion');
+  const counter   = document.getElementById('just-counter');
+  const btnEnviar = document.getElementById('btn-enviar');
+  const modalEl   = document.getElementById('modalSolicitud');
+
+  if (!txt || !counter || !btnEnviar || !modalEl) return;
+
+  // Contador + habilitar/deshabilitar botón
+  txt.addEventListener('input', () => {
+    const len = txt.value.trim().length;
+    counter.textContent = `${len} / ${MIN}`;
+    btnEnviar.disabled  = (len < MIN);
+    txt.classList.toggle('is-invalid', len < MIN); // opcional visual
+  });
+
+  // Enviar solicitud
+  btnEnviar.addEventListener('click', async () => {
+    const justificacion = txt.value.trim();
+    if (justificacion.length < MIN) return;
+
+    // obtener id del hecho y del usuario (ajustar)
+    const params    = new URLSearchParams(location.search);
+    const hechoId   = window.hechoId || Number(params.get('id'));
+    const usuarioId = window.currentUserId || 1;
+
+    btnEnviar.disabled = true;
+
+    try {
+      const resp = await fetch('/api/solicitudes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          idHecho: Number(hechoId),
+          idusuario: Number(usuarioId),
+          justificacion
+        })
+      });
+
+      if (!resp.ok) {
+        const text = await resp.text();
+        showToast(`Error al enviar la solicitud: ${text || resp.status}`, 'bg-danger');
+        btnEnviar.disabled = false;
+        return;
+      }
+
+      showToast('Solicitud enviada exitosamente. Un administrador la revisará.', 'bg-success');
+
+      // Cerrar el modal y resetear
+      const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+      modal.hide();
+      txt.value = '';
+      counter.textContent = `0 / ${MIN}`;
+      btnEnviar.disabled = true;
+      txt.classList.remove('is-invalid');
+
+    } catch (err) {
+      showToast('Error de red. Intentá nuevamente.', 'bg-danger');
+      btnEnviar.disabled = false;
+    }
+  });
+
+  // Toasts básicos con Bootstrap
+  function showToast(message, cls = 'bg-dark') {
+    // contenedor si no existe
+    let area = document.getElementById('toastArea');
+    if (!area) {
+      area = document.createElement('div');
+      area.id = 'toastArea';
+      area.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+      area.setAttribute('aria-live', 'polite');
+      area.setAttribute('aria-atomic', 'true');
+      document.body.appendChild(area);
+    }
+
+    // toast
+    const toast = document.createElement('div');
+    toast.className = `toast text-white ${cls}`;
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+      <div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+    `;
+    area.appendChild(toast);
+
+    const t = new bootstrap.Toast(toast, { delay: 3500 });
+    t.show();
+  }
+})();

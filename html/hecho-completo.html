@@ -88,13 +88,48 @@
 
             <div class="mm-actions">
                 <a href="nav-hechos.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
-                <a href="#" type="submit" class="mm-btn mm-btn-primary">Solicitar Eliminación</a>
+                <button class="mm-btn mm-btn-primary" data-bs-toggle="modal" data-bs-target="#modalSolicitud">
+                Solicitar Eliminación
+                </button>
+
+
+                <!--<a href="#" type="submit" class="mm-btn mm-btn-primary">Solicitar Eliminación</a>-->
             </div>
 
         </div>
     </section>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalSolicitud" tabindex="-1" aria-labelledby="modalSolicitudLabel" aria-describedby="modalSolicitudDesc" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content mm-modal" role="dialog" aria-modal="true">
+
+            <!-- Encabezado -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSolicitudLabel">Solicitud de eliminacion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button> 
+                </div>
+
+                <!-- Cuerpo -->
+                 <div class="modal-body">
+                    <p id="modalSolicitudDesc" class="mb-2">Explicanos por qué crees que este hecho debe eliminarse de MetaMapa.</p>
+                    <label for="justificacion" class="form-label">Justificación</label>
+                    <textarea id="justificacion" class="form-control" rows="6" aria-describedby="just-counter" placeholder="Minimo 500 caracteres..."></textarea>
+                    
+                    <div id="just-counter" class="form-text">0 / 500 </div>                 
+                </div>
+
+                <!-- Pie -->
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary mm-btn-primary" id="btn-enviar" disabled> Enviar solicitud</button>
+                 </div>
+
+            </div>
+        </div> 
+    </div>
 <!--    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>-->
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/hecho-completo.js"></script>
 </body>
 </html>

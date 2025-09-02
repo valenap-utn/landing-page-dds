@@ -163,3 +163,103 @@ body{
         text-align: center;
     }
 }
+
+/* ====== MetaMapa: estilizado del modal de Solicitud ====== */
+.mm-modal {
+    border: 1px solid #e6e8ef;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.12);
+    overflow: hidden;
+    font-family: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+}
+
+.mm-modal .modal-header {
+    border: 0;
+    padding: 16px 20px 8px 20px;
+}
+
+.mm-modal .modal-title {
+    font-family: 'Archivo', ui-sans-serif, system-ui;
+    font-weight: 800;
+    letter-spacing: .2px;
+    margin: 0;
+}
+
+.mm-modal .btn-close {
+    filter: grayscale(100%);
+    opacity: .6;
+}
+.mm-modal .btn-close:hover { opacity: 1; }
+
+.mm-modal .modal-body {
+    padding: 8px 20px 4px 20px;
+}
+
+.mm-modal .form-label {
+    font-weight: 600;
+    color: #374151; /* gris 700 */
+    margin-top: 8px;
+}
+
+.mm-modal .form-control {
+    border-radius: 10px;
+    border: 1px solid #dfe3ea;
+    background: #fbfcfe;
+    padding: 10px 12px;
+    line-height: 1.4;
+}
+.mm-modal .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(42,102,242,.15); /* halo brand */
+    border-color: #2a66f2; /* brand */
+    background: #fff;
+}
+.mm-modal .form-control.is-invalid {
+    border-color: #dc2626;
+    background: #fff5f5;
+}
+
+.mm-modal #just-counter {
+    color: #6b7280; /* gris 500 */
+    margin-top: 6px;
+}
+
+.mm-modal .modal-footer {
+    border: 0;
+    padding: 12px 20px 16px 20px;
+    gap: 8px;
+}
+
+/* Botones: alinearlos a tus mm-btn */
+.mm-modal .btn.btn-primary {
+    background: #2a66f2;      /* tu primario */
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 600;
+}
+.mm-modal .btn.btn-primary:hover { background: #1f4ec0; }  /* tono oscuro */
+
+.mm-modal .btn.btn-outline-secondary {
+    border: 1px solid #e6e8ef;
+    background: #fff;
+    color: #111827;
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+.mm-modal .btn.btn-outline-secondary:hover {
+    background: #f7f8fb;
+}
+
+/* Backdrop con leve blur para “pro” */
+.modal-backdrop.show {
+    opacity: .35;
+    backdrop-filter: blur(2px);
+}
+
+/* Tamaño en móvil: que use casi todo el ancho */
+@media (max-width: 576px) {
+    .modal-dialog { margin: 12px; }
+    .mm-modal { border-radius: 12px; }
+}
