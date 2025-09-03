@@ -166,7 +166,7 @@ body{
 
 /* ====== MetaMapa: estilizado del modal de Solicitud ====== */
 .mm-modal {
-    border: 1px solid #e6e8ef;
+    border: 0;
     border-radius: 14px;
     box-shadow: 0 8px 28px rgba(0,0,0,.12);
     overflow: hidden;
@@ -176,24 +176,32 @@ body{
 
 .mm-modal .modal-header {
     border: 0;
-    padding: 16px 20px 8px 20px;
+    padding: 18px 22px 0 22px;
+    align-items: center;
 }
 
 .mm-modal .modal-title {
     font-family: 'Archivo', ui-sans-serif, system-ui;
     font-weight: 800;
-    letter-spacing: .2px;
+    font-size: 1.5rem;
+    color: var(--brand-800, #3B4F61);
+    /*letter-spacing: .2px;*/
     margin: 0;
 }
 
 .mm-modal .btn-close {
     filter: grayscale(100%);
     opacity: .6;
+    border-radius: 999px;
+    transition: opacity .2s ease;
 }
-.mm-modal .btn-close:hover { opacity: 1; }
+.mm-modal .btn-close:hover {
+    border-radius: 999px;
+    opacity: 1;
+}
 
 .mm-modal .modal-body {
-    padding: 8px 20px 4px 20px;
+    padding: 5px 22px 12px 22px;
 }
 
 .mm-modal .form-label {
@@ -203,17 +211,18 @@ body{
 }
 
 .mm-modal .form-control {
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid #dfe3ea;
     background: #fbfcfe;
-    padding: 10px 12px;
+    padding: 12px 14px;
     line-height: 1.4;
+    font-size: .95rem;
 }
 .mm-modal .form-control:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(42,102,242,.15); /* halo brand */
-    border-color: #2a66f2; /* brand */
-    background: #fff;
+    box-shadow: 0 0 0 3px rgba(134,168,194,.25); /* halo brand */
+    border-color: var(--brand-500, #86A8C2); /* brand */
+    background: var(--card);
 }
 .mm-modal .form-control.is-invalid {
     border-color: #dc2626;
@@ -222,35 +231,68 @@ body{
 
 .mm-modal #just-counter {
     color: #6b7280; /* gris 500 */
+    font-size: .85rem;
     margin-top: 6px;
+    text-align: right;
 }
 
 .mm-modal .modal-footer {
     border: 0;
-    padding: 12px 20px 16px 20px;
+    padding: 14px 22px 18px;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Botones del modal */
+.btn{
+    display:inline-flex; align-items:center; justify-content:center;
     gap: 8px;
-}
-
-/* Botones: alinearlos a tus mm-btn */
-.mm-modal .btn.btn-primary {
-    background: #2a66f2;      /* tu primario */
-    border: 0;
-    border-radius: 10px;
-    padding: 10px 14px;
+    border-radius: 999px;
+    padding: 12px 18px;
     font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.mm-modal .btn.btn-primary:hover { background: #1f4ec0; }  /* tono oscuro */
+.btn:active{ transform: translateY(1px); }
 
-.mm-modal .btn.btn-outline-secondary {
-    border: 1px solid #e6e8ef;
-    background: #fff;
-    color: #111827;
-    border-radius: 10px;
-    padding: 10px 14px;
+.mm-modal .btn-primary {
+    color: #F2F7FA;
+    background-color: var(--brand-500);
+    border: 0;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
 }
-.mm-modal .btn.btn-outline-secondary:hover {
-    background: #f7f8fb;
+.mm-modal .btn-primary:hover {
+    background: #2f3f50;
+    box-shadow: 0 4px 12px rgba(0,0,0,.18);
 }
+
+.mm-modal .btn-outline-secondary {
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-modal .btn-outline-secondary:hover {
+    background: none;
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+
+.mm-btn-ghost{
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-btn-ghost:hover{
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
 
 /* Backdrop con leve blur para “pro” */
 .modal-backdrop.show {
@@ -262,4 +304,14 @@ body{
 @media (max-width: 576px) {
     .modal-dialog { margin: 12px; }
     .mm-modal { border-radius: 12px; }
+    .mm-modal .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .mm-modal .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
