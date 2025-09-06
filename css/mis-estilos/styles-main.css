@@ -229,3 +229,13 @@ main {
 .blue-link:focus {
   color: #5c7a93; 
 }
+
+.badge-brand {
+  background-color: var(--brand-500, #86a8c2); /* mismo color que tus botones */
+  color: #fff; /* blanco para que se vea la letra */
+  font-weight: 200;
+  border-radius: 18px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 6px rgba(59, 79, 97, 0.15);
+}
