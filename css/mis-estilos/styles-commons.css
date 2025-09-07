@@ -14,10 +14,18 @@
     --shadow-md: 0 8px 22px rgba(0,0,0,.12);
 }
 
+
+.body-metamapa {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 body.body-metamapa{
     font-family: 'OpenSans', sans-serif;
     color: #3B4F61;
     background-color: #F2F7FA;
+
 }
 
 #map { height: 420px; border-radius: 8px; }
