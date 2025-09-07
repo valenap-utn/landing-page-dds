@@ -103,8 +103,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const mockUsers = [
-                { email: 'valucha@gmail.com', password: 'valuchaa' },
-                { email: 'valen@example.com', password: 'metamapa' }
+                { email: 'valucha@gmail.com', password: 'valuchaa', role: 'contribuyente' },
+                { email: 'contrib@example.com', password: 'metamapa', role: 'contribuyente' },
+                { email: 'admin@example.com', password: 'metamapa', role: 'administrador' }
             ];
 
             const form = document.getElementById('login-form');
@@ -121,14 +122,18 @@
                 if (!pass.value.trim()) { pass.classList.add('is-invalid'); pass.focus(); return; }
                 pass.classList.remove('is-invalid');
 
-                const ok = mockUsers.some(u => u.email === email.value.trim() && u.password === pass.value);
-                if (!ok) { alert('Email o contraseña inválidos'); return; }
+                const user = mockUsers.find(u => u.email === email.value.trim() && u.password === pass.value);
+                if (!user) { alert('Email o contraseña inválidos'); return; }
 
-                const payload = { email: email.value.trim(), time: Date.now() };
+                const payload = { email: email.value.trim(), role: user.role, time: Date.now() };
                 const storage = remember.checked ? localStorage : sessionStorage;
                 storage.setItem('mm_auth', JSON.stringify(payload));
 
-                window.location.href = 'main-gral.html';
+                if (user.role === 'administrador') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'contribuyente.html';
+                }
             });
         });
     </script>
