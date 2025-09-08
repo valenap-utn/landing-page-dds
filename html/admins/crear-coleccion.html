@@ -17,10 +17,119 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-</head>
-<body>
-    <main>
 
+    <link href="../../css/mis-estilos/estilos-admin/styles-crear-coleccion.css" rel="stylesheet">
+</head>
+<body class="bg-map-hero">
+    <main>
+        <section class="mm-form-wrap">
+            <div class="mm-card">
+                <h1 class="mm-form-title">Crear Coleccion</h1>
+                <p class="mm-form-sub">Cargá la información del hecho para que quede disponible en MetaMapa</p>
+
+                <form id="form-hecho" class="mm-form" novalidate>
+                    <div class="mm-grid">
+                        <!-- Título -->
+                        <div class="mm-field mm-col-span-all">
+                            <label for="titulo" class="mm-label">Título</label>
+                            <input id="titulo" name="titulo" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
+                        </div>
+
+                        <!-- Descripcion -->
+                        <div class="mm-field mm-col-span-all">
+                            <label for="descripcion" class="mm-label">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="mm-input mm-input--textarea" placeholder="Dejá una breve descripción..." required></textarea>
+                        </div>
+
+                        <!-- Tipos de Fuente y URLs -->
+                        <div class="mm-criteria mm-col-span-all" id="fuentesWrap">
+                            <div class="mm-criteria__grid fuenteInput">
+                                <!-- Tipo de fuente -->
+                                <div class="mm-field fi-tipo">
+                                    <label for="tipoFuente" class="mm-label">Tipo</label>
+                                    <select id="tipoFuente" name="tipoFuente" class="mm-input" required>
+                                        <option value="" disabled selected>Seleccioná la fuente necesitada</option>
+                                        <option value="DINAMICA">Dinámica</option>
+                                        <option value="ESTATICA">Estática</option>
+                                        <option value="PROXY">Proxy</option>
+                                    </select>
+                                </div>
+
+                                <!-- URL -->
+                                <div class="mm-field fi-url">
+                                    <label for="url" class="mm-label">URL</label>
+                                    <input id="url" name="url" type="url" class="mm-input"
+                                           placeholder="Ej: https://www.google.com"
+                                           inputmode="url" autocomplete="url" spellcheck="false"
+                                           aria-describedby="url-help" required>
+                                    <small id="url-help" class="mm-help">Debe empezar con http(s)://</small>
+                                </div>
+
+                                <!-- Acción -->
+                                <div class="mm-field mm-criteria__actions">
+                                    <label class="mm-label" style="visibility:hidden">Agregar</label>
+                                    <button type="button" id="addFuente" class="mm-btn mm-btn-primary mm-btn--sm">
+                                        Agregar fuente
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Se van mostrando las fuentes que se quieren agregar a la colección -->
+                            <div class="mm-chips" id="fuentesContainer" aria-live="polite"></div>
+                            <input type="hidden" name="fuentes" id="fuentesHidden">
+                        </div>
+
+                        <!-- Criterios de Pertenencia -->
+                        <div class="mm-field mm-col-span-all">
+                            <label class="mm-label">Criterios de Pertenencia</label>
+
+                            <div class="mm-criteria">
+                                <div class="mm-criteria__grid">
+                                    <!-- Tipo -->
+                                    <div class="mm-field">
+                                        <label for="critTipo" class="mm-label">Tipo</label>
+                                        <select id="critTipo" class="mm-input">
+                                            <option value="" disabled selected>Seleccioná un tipo…</option>
+                                            <option value="CATEGORIA">Categoría</option>
+                                            <option value="FECHAACONTECIMIENTO">Fecha de acontecimiento</option>
+                                            <option value="FECHACARGA">Fecha de carga</option>
+                                            <option value="UBICACION">Ubicación</option>
+                                            <option value="TITULO">Título contiene</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Valor dinámico -->
+                                    <div class="mm-field" id="critValorWrap">
+                                        <label class="mm-label" for="critValorText">Valor</label>
+                                        <input id="critValorText" class="mm-input" placeholder="Ingresá un valor…">
+                                    </div>
+
+                                    <!-- Acción -->
+                                    <div class="mm-field mm-criteria__actions">
+                                        <label class="mm-label" style="visibility:hidden">Agregar</label>
+                                        <button type="button" id="addCriterio" class="mm-btn mm-btn-primary mm-btn--sm">
+                                            Agregar criterio
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Chips / Resultado -->
+                                <div id="criteriosChips" class="mm-chips" aria-live="polite"></div>
+                                <input type="hidden" id="criteriosHidden" name="criterios">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mm-actions">
+                        <a href="../../html/admin.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
+                        <button type="submit" class="mm-btn mm-btn-primary">Subir Coleccion</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <script type="module" src="../../js/admins/crear-coleccion.js"></script>
+
 </body>
 </html>

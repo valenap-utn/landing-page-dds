@@ -30,28 +30,28 @@
             <p class="mm-form-sub text-center mb-5">Resumen y gestión de actividad</p>
 
             <!-- Resumen de actividad -->
-            <div class="row mb-4">
-                <div class="col-md-4 mb-3">
-                    <div class="card text-center shadow-sm">
+            <div class="row metrics-row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 mb-4 align-items-stretch">
+                <div class="col d-flex">
+                    <div class="card mm-card mm-metric w-100 h-100">
                         <div class="card-body">
                             <h5 class="card-title">Hechos</h5>
-                            <p class="display-6 fw-bold">124</p>
+                            <p class="mm-metric__number">124</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card text-center shadow-sm">
+                <div class="col d-flex">
+                    <div class="card mm-card mm-metric w-100 h-100">
                         <div class="card-body">
                             <h5 class="card-title">Fuentes</h5>
-                            <p class="display-6 fw-bold">8</p>
+                            <p class="mm-metric__number">8</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card text-center shadow-sm">
+                <div class="col d-flex">
+                    <div class="card mm-card mm-metric w-100 h-100">
                         <div class="card-body">
                             <h5 class="card-title">Solicitudes de eliminación</h5>
-                            <p class="display-6 fw-bold">3</p>
+                            <p class="mm-metric__number">3</p>
                         </div>
                     </div>
                 </div>
@@ -59,11 +59,11 @@
 
             <!-- Gestión de colecciones -->
             <h2 class="h5 mt-4 mb-3">Gestión de Colecciones</h2>
-            <div class="d-flex gap-2 mb-3 flex-nowrap">
-                <button class="btn btn-back btn-lg mb-3" aria-label="Crear coleccion">Crear colección</button>
+            <div class="mm-actions">
+                <a class="btn btn-back btn-lg mb-3" aria-label="Crear coleccion" href="admins/crear-coleccion.html">Crear colección</a>
+<!--                <button class="btn btn-back btn-lg mb-3" aria-label="Crear coleccion">Crear colección</button>-->
                 <button class="btn btn-back btn-lg mb-3" aria-label="Editar colección">Editar colección</button>
                 <button class="btn btn-back btn-lg mb-3" aria-label="Eliminar colección">Eliminar colección</button>
-               
             </div>
 
             <!-- Gestión de fuentes -->
@@ -82,7 +82,8 @@
 
             <!-- Acciones sobre hechos y solicitudes -->
             <h2 class="h5 mt-4 mb-3">Acciones sobre hechos y solicitudes</h2>
-            <div class="d-flex gap-2 flex-wrap mb-3">
+<!--            <div class="d-flex gap-2 flex-wrap mb-3">-->
+            <div class="mm-actions">
                 <button class="btn btn-back btn-lg mb-3" aria-label="Aprobar hecho">Aprobar hecho</button>
                 <button class="btn btn-back btn-lg mb-3" aria-label="Rechazar hecho">Rechazar hecho</button>
                 <button class="btn btn-back btn-lg mb-3" aria-label="Aceptar con modificaciones">Aceptar con modificaciones</button>

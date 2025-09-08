@@ -249,32 +249,33 @@ function initMap(h){
 })();
 
 // Solicitud de eliminacion
-(() => {
+(() => { // IIFE (Immediately Invoked Function Expression) o sea, funcion que se define y se ejecuta automaticamente. Sirve para: aislar el scope (lo que declare dentro no queda global), ejecuta el setup una sola vez (corre apenas se carga el archivo y deja listo los listeners, contadores, etc).
   const MIN = 500;
   const txt       = document.getElementById('justificacion');
   const counter   = document.getElementById('just-counter');
   const btnEnviar = document.getElementById('btn-enviar');
   const modalEl   = document.getElementById('modalSolicitud');
 
-  if (!txt || !counter || !btnEnviar || !modalEl) return;
+  if (!txt || !counter || !btnEnviar || !modalEl) return;   // antes de empezar, si falta cualquiera de esos elementos, termina con la ejecucion.
 
   // Contador + habilitar/deshabilitar botón
   txt.addEventListener('input', () => {
     const len = txt.value.trim().length;
     counter.textContent = `${len} / ${MIN}`;
     btnEnviar.disabled  = (len < MIN);
-    txt.classList.toggle('is-invalid', len < MIN); // opcional visual
+    txt.classList.toggle('is-invalid', len < MIN); // "prende/apaga" una clase CSS en un nodo.
   });
 
   // Enviar solicitud
   btnEnviar.addEventListener('click', async () => {
-    const justificacion = txt.value.trim();
-    if (justificacion.length < MIN) return;
+    const justificacion = txt.value.trim(); // lee el texto y le saca espacios y saltos de linea al inicio y al final asi 500 espacios no cuentan
+    if (justificacion.length < MIN) return; // doble verificacion (front y back)
 
     // obtener id del hecho y del usuario (ajustar)
-    const params    = new URLSearchParams(location.search);
-    const hechoId   = window.hechoId || Number(params.get('id'));
-    const usuarioId = window.currentUserId || 1;
+    const params    = new URLSearchParams(location.search); // location.search es lo que esta despues del '?', es decir, el id. new URLSearchParams(...) lo parsea en un objeto para leer parametros por nombre
+    const hechoId   = window.hechoId || Number(params.get('id')); // primero intenta usar window.hechoId (una variable global que podria haber sido definida antes) si eso no existe, cae el plan B: toma el id de la URL y lo convierte a Number.
+    const usuarioId = window.currentUserId || 1; // de la misma manera, intenta usar userId global, si no esta, pone 1 como default
+    // en produccion el id del hecho y el usuario se toman de la sesion del backend y nos permitiran hacer cosas dependiendo el tipo de usuario, ej: 500 caracteres como minimo. Mostrar/ocultar un boton.
 
     btnEnviar.disabled = true;
 
