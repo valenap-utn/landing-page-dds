@@ -73,6 +73,8 @@
         <a href="nav-hechos.html"><button class="btn btn-sin-login btn-lg mb-3" aria-label="Ir a la sección de Navegar Hechos">Navegar Hechos</button></a>
         <a href="colecciones.html"><button class="btn btn-sin-login btn-lg mb-3" aria-label="Ver las Colecciones">Ver Colecciones</button></a>
         <a href="subir-hecho.html"><button class="btn btn-sin-login btn-lg mb-3" aria-label="Subir un Nuevo Hecho al sistema">Subir un Hecho</button></a>
+        <a href="hecho-completo.html"><button id="btn-solicitar-eliminacion" class="btn btn-sin-login btn-lg mb-3" aria-label="Solicitar eliminacion de un hecho">Solicitar Eliminación</button></a>
+       
         <a href="iniciar-sesion.html"><button class="btn btn-back btn-lg mb-3" aria-label="Volver a la página anterior">Volver atrás</button></a>
     </div>
 
@@ -97,5 +99,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const auth = JSON.parse(localStorage.getItem("mm_auth") || sessionStorage.getItem("mm_auth"));
+  const btn = document.getElementById("btn-solicitar-eliminacion");
+  console.log("auth:", auth); //para ver q es lo q toma de datos auth 
+  if (btn) {
+    console.log("btn encontrado");
+    if (!auth || auth.role !== "contribuyente") {
+      btn.style.display = "none";
+      console.log("Botón ocultado");
+    }
+  } else {
+    console.log("btn NO encontrado");
+  }
+});
+</script>
+
 </body>
 </html>
