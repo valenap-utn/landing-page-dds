@@ -1,0 +1,49 @@
+h1 {
+    font-size: 2rem;
+    padding-left: 1em;
+}
+
+
+.solicitudes-eliminacion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    .solicitud-eliminacion {
+        border-radius: 10px;
+        background-color: var(--bg);
+        padding-left: 1em;
+        width:80%;
+        padding-top: 1em;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+        h3 {
+            font-size: 1rem;
+            color: rgba(0,0,0,0.6);
+        }
+    }
+}
+.botones-solicitud{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-end;
+}
+
+.boton-solicitud{
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border: 0 solid #fff;
+    font-size: 1.5rem;
+    color: white;
+
+
+}
+
+.boton-solicitud.aceptar{
+    background-color: forestgreen;
+}
+
+.boton-solicitud.rechazar{
+    background-color: red;
+}
