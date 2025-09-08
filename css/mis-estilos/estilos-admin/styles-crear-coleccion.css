@@ -1,0 +1,281 @@
+@import "css/mis-estilos/styles-commons.css";
+
+body.bg-map-hero{
+    min-height: 100svh;
+    margin: 0;
+    color: #2d3a44;
+    font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    background:
+            linear-gradient(rgba(59,79,97,0.55), rgba(59,79,97,0.55)),
+            url("../../../components/mapa-login-azulado.png") center/cover no-repeat;
+}
+
+/* Centrado vertical y padding como subir-hecho */
+.mm-form-wrap{
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+/* Card con el mismo ancho, borde y sombra */
+.mm-card{
+    width: min(880px, 94%);
+    background: #fff;
+    border: 1px solid var(--muted);
+    border-radius: 22px;
+    box-shadow: var(--shadow-md);
+    padding: clamp(20px, 4vw, 36px);
+}
+
+.mm-form-title{
+    font-family:"Raleway","Open Sans",Arial,sans-serif;
+    font-weight:800;
+    color: var(--brand-800);
+    margin: 0 0 6px;
+    font-size: clamp(22px, 3.2vw, 32px);
+}
+.mm-form-sub{
+    margin: 0 0 18px;
+    color: #4b5c69;
+}
+
+.mm-grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 14px;
+}
+@media (max-width: 720px){
+    .mm-grid{ grid-template-columns: 1fr; }
+}
+.mm-field{ display:flex; flex-direction:column; gap:6px; }
+/* helper para campos a lo ancho */
+.mm-col-span-all{ grid-column: 1 / -1; }
+
+/* INPUTS */
+
+.mm-label{ font-weight:600; color:#3b4f61; }
+
+.mm-input {
+    border-radius: 999px;
+    border: 1px solid #dfe3ea;
+    background: #fbfcfe;
+    padding: 12px 14px;
+    line-height: 1.4;
+    font-size: .95rem;
+}
+.mm-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(134,168,194,.25); /* halo brand */
+    border-color: var(--brand-500, #86A8C2); /* brand */
+    background: var(--card);
+}
+
+.mm-input.is-invalid{
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220,38,38,.18), 0 1px 0 rgba(0,0,0,.02) inset;
+    background:#fff;
+}
+
+/* Bloque Tipo/URL en dos columnas cuando entra */
+.fuenteInput{
+    grid-column: 1 / -1;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+
+/* SELECCION  DE FUENTES y URLs */
+/* CHIPS */
+.chip{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--card);
+    color: var(--brand-800);
+    border:1px solid var(--muted);
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:.9rem;
+    box-shadow: 0 1px 0 rgba(0,0,0,.02);
+}
+
+/* Botón de cerrar */
+.chip__remove{
+    appearance:none;
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    display: inline-grid; place-items: center;
+    background: rgba(0,0,0,.04);
+    border: 1px solid var(--muted);
+    color: var(--brand-800);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .06s;
+}
+.chip__remove:hover, .chip__remove:focus{
+    background: var(--brand-500);
+    border-color: var(--brand-500);
+    /*color: #fff;*/
+    box-shadow: 0 2px 6px rgba(59,79,97,.25);
+}
+.chip__remove:active{ transform: translateY(1px); }
+
+.mm-help{ color:#6b7f90; font-size:.85rem; margin-top:4px; padding-left:10px; }
+.mm-input.is-invalid{ border-color:#dc2626;
+    box-shadow:0 0 0 3px rgba(220,38,38,.18), 0 1px 0 rgba(0,0,0,.02) inset;
+}
+
+
+/* BOTONES */
+
+.mm-actions{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+.mm-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.mm-btn:active{ transform: translateY(1px); }
+
+.mm-btn-primary{
+    color: #F2F7FA;
+    background-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-btn-primary:hover{ background:#2f3f50; }
+
+.mm-btn-ghost{
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-btn-ghost:hover{
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+/* Mobile: botones apilados */
+@media (max-width: 576px){
+    .mm-actions{ flex-direction: column; }
+    .mm-actions .mm-btn{ width:100%; justify-content:center; }
+}
+
+/* Helper para ocupar todo el ancho en el grid */
+.mm-col-span-all{ grid-column: 1 / -1; }
+
+/* Tipo / URL en 2 columnas (y 1 en mobile) */
+.fuenteInput{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+}
+.fuenteInput .mm-field{ display:flex; flex-direction:column; gap:6px; }
+@media (max-width: 720px){
+    .fuenteInput{ grid-template-columns: 1fr; }
+}
+
+/* Chips de fuentes agregadas (estético) */
+.fuentes-container{
+    grid-column: 1 / -1; display:flex; flex-wrap:wrap; gap:8px; padding-top:4px;
+}
+.fuentes-container .fuente{
+    background: var(--card); color: var(--brand-800);
+    border:1px solid var(--muted); border-radius:999px;
+    padding:6px 12px; font-size:.9rem;
+}
+
+/* Textarea estilo pill-suave */
+.mm-input--textarea{ border-radius:16px; min-height:120px; resize:vertical; line-height:1.5; }
+
+/* date input un poco más cómodo */
+input[type="date"].mm-input{ padding-inline: 12px; }
+
+
+/* ESTILOS PARA CRITERIOS DE PERTENENCIA */
+
+.mm-criteria{
+    /*background: var(--card);*/
+    /*border: 1px solid var(--muted);*/
+    /*border-radius: var(--radius-lg, 18px);*/
+    /*padding: 12px;*/
+    /*box-shadow: 0 1px 6px rgba(0,0,0,.04);*/
+}
+
+/* Grid: tipo | valor | botón */
+.mm-criteria__grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    align-items: start;
+}
+.mm-criteria__actions .mm-btn{ height: 46px; padding: 0 16px; }
+
+@media (max-width: 720px){
+    .mm-criteria__grid{
+        grid-template-columns: 1fr;
+    }
+    .mm-criteria__actions .mm-btn{ width:100%; }
+}
+
+/* Contenedor de chips */
+.mm-chips{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top: 10px;
+}
+
+/* Chip (reusa tu estilo de fuentes pero con leves marcas) */
+.mm-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fff;
+    color:var(--brand-800);
+    border:1px solid var(--muted);
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:.9rem;
+    box-shadow: var(--shadow-sm);
+}
+.mm-chip b{ font-weight:800; }
+
+/* Botón X del chip */
+.mm-chip__remove{
+    appearance:none;
+    width:22px; height:22px;
+    border-radius:999px;
+    display:inline-grid; place-items:center;
+    background: rgba(0,0,0,.04);
+    border:1px solid var(--muted);
+    color:inherit;
+    cursor:pointer; padding:0; line-height:1;
+    transition: background .2s, border-color .2s, color .2s, transform .06s;
+}
+.mm-chip__remove:hover{
+    background: var(--brand-500); border-color: var(--brand-500); color:#fff;
+}
+.mm-chip__remove:active{ transform: translateY(1px); }
+
+/* Ayudín debajo del valor cuando se necesite */
+.mm-help{ color:#6b7f90; font-size:.85rem; margin-top:4px; }
+
+/* Estado inválido compartido */
+.mm-input.is-invalid{
+    border-color:#dc2626;
+    box-shadow:0 0 0 3px rgba(220,38,38,.18), 0 1px 0 rgba(0,0,0,.02) inset;
+    background:#fff;
+}
+
+
