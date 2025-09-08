@@ -20,7 +20,82 @@
 </head>
 <body>
     <main>
+        <section class="mm-form-wrap">
+            <div class="mm-card">
+                <h1 class="mm-form-title">Crear Coleccion</h1>
+                <p class="mm-form-sub">Cargá la información del hecho para que quede disponible en MetaMapa</p>
 
+                <form id="form-hecho" class="mm-form" novalidate>
+                    <div class="mm-grid">
+                        <!-- Título -->
+                        <div class="mm-field" style="grid-column: 1 / -1;">
+                            <label for="titulo" class="mm-label">Título</label>
+                            <input id="titulo" name="titulo" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
+                        </div>
+
+                        <!-- Descripcion -->
+                        <div class="mm-field" style="grid-column: 1 / -1;">
+                            <label for="descripcion" class="mm-label">Título</label>
+                            <input id="descripcion" name="descripcion" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
+                        </div>
+
+                        <div class="fuenteInput">
+                            <label for="tipoFuente" class="mm-label">Tipo</label>
+                            <select id="tipoFuente" name="tipoFuente" class="mm-input" >
+                                <option value="" disabled selected>Seleccioná la fuente necesitada</option>
+                                <option value="DINAMICA">Dinamica</option>
+                                <option value="ESTATICA">Estatica</option>
+                                <option value="Proxy">Proxy</option>
+                            </select>
+                            <label for="url" class="mm-label">URL</label>
+                            <input id="url" name="url" type="text" class="mm-input" placeholder="Ej: https://www.google.com">
+                        </div>
+
+                        <div class="fuentes-container">
+                            <!-- Aca mostraría las fuentes que se van agregando-->
+                            <div class="fuente">
+                                <p>Fuente Proxy</p>
+                            </div>
+                        </div>
+
+                        <!-- Criterio de pertenencia -->
+                        <div class="mm-field">
+                            <label for="criterio" class="mm-label">Criterios De Pertenencia</label>
+                            <select id="criterio" name="criterio" class="mm-input" >
+                                <option value="" disabled selected>Seleccioná un criterio</option>
+                                <option value="CATEGORIA">Por Categoria</option>
+                                <option value="FECHAACONTECIMIENTO">Por Fecha de acontecimiento</option>
+                                <option value="FECHACARGA"> Por Fecha de carga</option>
+                                <option value="UBICACION">Por Ubicacion</option>
+                                <option value="TITULO">Por Titulo</option>
+                                <!-- agregá más si aplica -->
+                            </select>
+                        </div>
+
+                        <div class="criterio-container">
+                            <!-- Acá irían los criterios-->
+                            <div class="criterio">
+
+                            </div>
+                        </div>
+
+                        <!-- Fecha acontecimiento -->
+                        <div class="mm-field">
+                            <label for="fechaAcontecimiento" class="mm-label">Fecha del acontecimiento</label>
+                            <input id="fechaAcontecimiento" name="fechaAcontecimiento" type="date" class="mm-input" required>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="mm-actions">
+                        <a href="main-gral.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
+                        <button type="submit" class="mm-btn mm-btn-primary">Subir hecho</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 </body>
 </html>
