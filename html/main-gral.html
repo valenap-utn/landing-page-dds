@@ -34,34 +34,34 @@
                 <img src="../components/logo-mm.png" alt="MetaMapa">
             </a>
 
-            <!-- Buscador alineado a la derecha -->
-            <form class="search d-none d-sm-flex ms-auto" role="search" onsubmit="return false;">
-                <div class="search-form-control">
-                    <input class="form-control" type="search" placeholder="Buscar hechos por título…" id="search_query">
-                    <button type="button" class="btn btn-search">
-                        <i class="fas fa-search me-1"></i> Buscar
-                    </button>
-                </div>
-            </form>
+<!--            &lt;!&ndash; Buscador alineado a la derecha &ndash;&gt;-->
+<!--            <form class="search d-none d-sm-flex ms-auto" role="search" onsubmit="return false;">-->
+<!--                <div class="search-form-control">-->
+<!--                    <input class="form-control" type="search" placeholder="Buscar hechos por título…" id="search_query">-->
+<!--                    <button type="button" class="btn btn-search">-->
+<!--                        <i class="fas fa-search me-1"></i> Buscar-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
 
-            <!-- Hamburguesa -->
-            <button class="navbar-toggler ms-2" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir menú">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<!--            &lt;!&ndash; Hamburguesa &ndash;&gt;-->
+<!--            <button class="navbar-toggler ms-2" type="button"-->
+<!--                    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir menú">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
 
-            <!-- Menú colapsable -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="search d-sm-none my-2 w-100" role="search" onsubmit="return false;">
-                    <div class="search-form-control">
-                        <input class="form-control" type="search" placeholder="Buscar hechos por título…">
-                        <button type="button" class="btn btn-search">
-                            <i class="fas fa-search me-1"></i> Buscar
-                        </button>
-                    </div>
-                </form>
-            </div>
+<!--            &lt;!&ndash; Menú colapsable &ndash;&gt;-->
+<!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--                <form class="search d-sm-none my-2 w-100" role="search" onsubmit="return false;">-->
+<!--                    <div class="search-form-control">-->
+<!--                        <input class="form-control" type="search" placeholder="Buscar hechos por título…">-->
+<!--                        <button type="button" class="btn btn-search">-->
+<!--                            <i class="fas fa-search me-1"></i> Buscar-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
         </div>
     </nav>
 
@@ -79,8 +79,6 @@
     </div>
 
     <!-- FOOTER -->
-
-
     <footer class="footer-metamapa mt-auto py-4">
         <div class="container-fluid px-4">
             <div class="footer-content row justify-content-end">
@@ -100,23 +98,22 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
 
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const auth = JSON.parse(localStorage.getItem("mm_auth") || sessionStorage.getItem("mm_auth"));
-  const btn = document.getElementById("btn-solicitar-eliminacion");
-  console.log("auth:", auth); //para ver q es lo q toma de datos auth 
-  if (btn) {
-    console.log("btn encontrado");
-    if (!auth || auth.role !== "contribuyente") {
-      btn.style.display = "none";
-      console.log("Botón ocultado");
-    }
-  } else {
-    console.log("btn NO encontrado");
-  }
-});
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const auth = JSON.parse(localStorage.getItem("mm_auth") || sessionStorage.getItem("mm_auth"));
+          const btn = document.getElementById("btn-solicitar-eliminacion");
+          console.log("auth:", auth); //para ver q es lo q toma de datos auth
+          if (btn) {
+            console.log("btn encontrado");
+            if (!auth || auth.role !== "contribuyente") {
+              btn.style.display = "none";
+              console.log("Botón ocultado");
+            }
+          } else {
+            console.log("btn NO encontrado");
+          }
+        });
+    </script>
 
 </body>
 </html>

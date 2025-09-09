@@ -20,12 +20,13 @@
   <!-- ...otros links... -->
     <link href="../css/mis-estilos/styles-commons.css" rel="stylesheet">
     <link href="../css/mis-estilos/styles-main.css" rel="stylesheet">
+    <link href="../css/mis-estilos/styles-layout.css" rel="stylesheet">
 
 
 </head>
 <body>
 
-<header class="mm-header" role="banner">
+<header class="mm-header-2" role="banner">
         <div class="mm-header__container text-center py-3">
             <a href="../index.html" class="mm-header__logo-link">
                 <img src="../components/logo-mm.png" alt="MetaMapa" class="mm-header__logo" style="max-width: 180px;">
@@ -36,7 +37,7 @@
 
     <main class="container py-5" id="main-content">
         <section class="mm-card mx-auto" style="max-width: 800px;">
-            <h1 class="mm-form-title mb-4 text-center">Términos y Condiciones</h1>
+            <h1 class="mm-form-title mb-4 text-center" style="padding-top: 60px">Términos y Condiciones</h1>
             <p class="mm-form-sub text-center mb-5">Última actualización: 2 de septiembre de 2025</p>
 
             <h2 class="h5 mt-4">1. Aceptación de los términos</h2>
@@ -84,5 +85,25 @@
             </div>
         </div>
     </footer>
+
+    <!-- Script para Header -->
+    <script>
+        (function(){
+            const body = document.body;
+            let lastY = window.scrollY;
+            const delta  = 6;   // ignora micro scroll
+            const showAt = 10;  // no ocultar muy arriba
+
+            window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                if (Math.abs(y - lastY) < delta) return;
+                if (y > lastY && y > showAt) body.classList.add('scrolled');   // bajando
+                else                          body.classList.remove('scrolled'); // subiendo / arriba
+                lastY = y;
+            }, { passive:true });
+
+            if (window.scrollY > showAt) body.classList.add('scrolled');
+        })();
+    </script>
 </body>
 </html>
