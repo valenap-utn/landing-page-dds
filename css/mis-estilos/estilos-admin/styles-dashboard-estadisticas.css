@@ -1,38 +1,129 @@
-.mm-estadisticas-container{
+/*.mm-estadisticas-container{*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));*/
+/*    gap: 18px;*/
+/*    margin-top: 24px;*/
+/*}*/
+
+/*.titulo-dashboard {*/
+/*    margin-top: 1em;*/
+/*    margin-left: 0.5em;*/
+/*    font-size: 40px;*/
+/*}*/
+
+/*.mm-card.estadistica{*/
+/*    margin-left: 5px;*/
+/*    margin-right: 5px;*/
+/*    background: var(--card);*/
+/*    border-radius: 22px;*/
+/*    box-shadow: 2px 2px 5px var(--shadow-md);*/
+/*    padding: clamp(16px, 2.6vw, 22px);*/
+/*    display:flex;*/
+/*    flex-direction: column;*/
+/*    gap: 12px;*/
+/*    transition: transform .08s ease, box-shadow .2s ease;*/
+/*    font-weight: bolder;*/
+/*    .mm-card-header {*/
+/*        font-weight: bold;*/
+/*        margin: 0;*/
+/*    }*/
+/*}*/
+
+/*.dato-estadistica {*/
+/*    background-color: #89E2C6;*/
+/*    color: var(--brand-800);*/
+/*    font-size: 1.15rem;*/
+/*    padding-left: 2px;*/
+/*    padding-right: 2px;*/
+/*}*/
+
+/* Contenedor principal de la sección */
+.mm-dashboard {
+    padding-top: 60px;
+}
+
+/* Títulos */
+.mm-form-title {
+    font-family: "Raleway", "Open Sans", Arial, sans-serif;
+    font-weight: 800;
+    color: var(--brand-800, #3B4F61);
+}
+
+.mm-form-sub {
+    color: #445c6d;
+}
+
+/* Grid responsive de tarjetas */
+.mm-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-    margin-top: 24px;
+    gap: 16px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-.titulo-dashboard {
-    margin-top: 1em;
-    margin-left: 0.5em;
-    font-size: 40px;
-}
-
-.mm-card.estadistica{
-    margin-left: 5px;
-    margin-right: 5px;
-    background: var(--card);
-    border-radius: 22px;
-    box-shadow: 2px 2px 5px var(--shadow-md);
+/* Cada tarjeta/estadística: usa el mismo estilo de mm-card del resto del sitio */
+.mm-stat {
+    grid-column: span 12;
+    background: #fff;
+    border: 1px solid var(--muted);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
     padding: clamp(16px, 2.6vw, 22px);
-    display:flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: transform .08s ease, box-shadow .2s ease;
-    font-weight: bolder;
-    .mm-card-header {
-        font-weight: bold;
-        margin: 0;
+}
+
+@media (min-width: 768px) {
+    /* tablet */
+    .mm-stat {
+        grid-column: span 6;
     }
 }
 
-.dato-estadistica {
-    background-color: #89E2C6;
+@media (min-width: 1200px) {
+    /* desktop ancho: 3 por fila */
+    .mm-stat {
+        grid-column: span 4;
+    }
+}
+
+/* Titulares de tarjeta con tipografía del sistema */
+.mm-stat__title {
+    margin: 0 0 8px;
+    font-family: "Raleway", "Open Sans", Arial, sans-serif;
+    font-weight: 700;
     color: var(--brand-800);
-    font-size: 1.15rem;
-    padding-left: 2px;
-    padding-right: 2px;
+}
+
+/* Valor/pildorita suave, consistente con chips/badges brand */
+.mm-chip {
+    display: inline-block;
+    background: #EAF3FA;
+    color: var(--brand-800);
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    line-height: 1.2;
+}
+
+.mm-chip--strong {
+    background: #E1F2EA;
+}
+
+.titulo-dashboard {
+    display: none;
+}
+
+/* Estilos para CANVAS | GRAFIQUITOS */
+.mm-chart-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.mm-chart {
+    display: block;
+    height: 240px;
+}
+
+@media (min-width: 1200px) {
+    .mm-chart {
+        height: 260px;
+    }
 }

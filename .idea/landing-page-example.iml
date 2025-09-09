@@ -16,5 +16,6 @@
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="leaflet" level="application" />
     <orderEntry type="library" name="d4dda767ac" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
 </module>
