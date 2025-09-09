@@ -26,6 +26,30 @@
 
 .mm-header__logo{ height: 42px; display:block; }
 
+:root{ --mm-header-h: 72px; } /* ajustá al alto real */
+
+/* Header fijo con transición */
+.mm-header-2{
+    position: fixed; top:0; left:0; right:0;
+    z-index:100;
+    background:#fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: transform .25s ease, opacity .25s ease;
+    will-change: transform, opacity;
+}
+
+/* Ocultarlo cuando el body tiene .scrolled */
+body.scrolled .mm-header-2{
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Evitar que el contenido quede tapado */
+#main-content{ padding-top: var(--mm-header-h); }
+
+
+
 /* ===== NAV DESKTOP ===== */
 .mm-nav{
     display: flex;

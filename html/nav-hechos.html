@@ -29,30 +29,20 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <link href="../css/mis-estilos/styles-nav-hechos.css" rel="stylesheet">
+    <link href="../css/mis-estilos/styles-layout.css" rel="stylesheet">
+    <link href="../css/mis-estilos/styles-commons.css" rel="stylesheet">
 </head>
 <body>
+    <header class="mm-header-2" role="banner">
+        <div class="mm-header__container text-center py-3">
+            <a href="../index.html" class="mm-header__logo-link">
+                <img src="../components/logo-mm.png" alt="MetaMapa" class="mm-header__logo" style="max-width: 180px;">
+            </a>
+        </div>
+    </header>
+
 <!--    <div class="d-flex justify-content-center flex-column align-items-center vh-100">-->
 <div class="container py-5">
-    <!--
-    <div class="accordion" id="accordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                            Fuentes
-                        </button>
-                    </h2>
-                    <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body">
-                            <ul class="list-criterios">
-                                <li>Fuente Proxy :<p>una url</p></li>
-                                <li>Fuente Dinámica: <p>otra url</p> </li>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    -->
     <!-- Modo de Navegación -->
     <h3 class="sub-title text-center mb-4">Modo de Navegación</h3>
     <div class="d-flex justify-content-center gap-4 mb-4" role="radiogroup" aria-labelledby="titulo-modo">
@@ -134,12 +124,6 @@
     </div>
 </div>
 
-<!-- Mockeo de datos para prueba -->
-<script type="module" src="../js/nav-hechos.js"></script>
-
-
-
-
     <footer class="footer-metamapa mt-auto py-4">
         <div class="container-fluid px-4">
             <div class="footer-content row justify-content-end">
@@ -153,6 +137,27 @@
         </div>
     </footer>
 
+    <!-- Mockeo de datos para prueba -->
+    <script type="module" src="../js/nav-hechos.js"></script>
 
+    <!-- Script para Header -->
+    <script>
+        (function(){
+            const body = document.body;
+            let lastY = window.scrollY;
+            const delta  = 6;   // ignora micro scroll
+            const showAt = 10;  // no ocultar muy arriba
+
+            window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                if (Math.abs(y - lastY) < delta) return;
+                if (y > lastY && y > showAt) body.classList.add('scrolled');   // bajando
+                else                          body.classList.remove('scrolled'); // subiendo / arriba
+                lastY = y;
+            }, { passive:true });
+
+            if (window.scrollY > showAt) body.classList.add('scrolled');
+        })();
+    </script>
 </body>
 </html>
