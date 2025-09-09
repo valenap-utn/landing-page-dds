@@ -13,45 +13,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
-    <link href="../../css/mis-estilos/styles-commons.css"/>
+    <link rel="stylesheet" href="../../css/mis-estilos/styles-commons.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link href="../../css/mis-estilos/estilos-admin/styles-dashboard-estadisticas.css" rel="stylesheet">
 </head>
-<body>
-    <main class="mm-estadisticas-container">
-        <h1>Dashboard</h1>
+<body class="body-metamapa">
+    <h1 class="titulo-dashboard">Dashboard</h1>
+    <main class="mm-estadisticas-container ">
+
         <section class="estadistica mm-card">
             <h2 class="mm-card-header">Provincia con mayor cantidad de hechos de una coleccion</h2>
             <div>
-                <p>Coleccion: <span>Desastres Naturales</span></p>
-                <p>Provincia: <span>Buenos Aires</span></p>
+                <p>Coleccion <span class="dato-estadistica">Desastres Naturales</span></p>
+                <p>Provincia <span class="dato-estadistica">Buenos Aires</span></p>
+                <p>Cantidad de hechos <span class="dato-estadistica">100000</span></p>
             </div>
         </section>
+
         <section class="estadistica mm-card">
             <h2 class="mm-card-header">Categoria con mayor cantidad de hechos</h2>
-            <p>Defensa civil : <span>250000</span></p>
+            <div>
+                <p>Categoria <span class="dato-estadistica">Defensa civil</span></p>
+                <p>Cantidad de hechos <span class="dato-estadistica">250000</span></p>
+            </div>
         </section>
         <section class="estadistica mm-card">
             <h2 class="mm-card-header">Provincia con mayor cantidad de hechos de una categoria</h2>
             <div>
-                <p>Provincia: <span>Neuquen</span> </p>
-                <p>Categoria: <span>Defensa Civil</span></p>
-                <p>Cantidad de hechos: 32423409</p>
+                <p>Provincia <span class="dato-estadistica">Neuquen</span> </p>
+                <p>Categoria <span class="dato-estadistica">Defensa Civil</span></p>
+                <p>Cantidad de hechos <span class="dato-estadistica">324234</span></p>
             </div>
         </section>
         <section class="estadistica mm-card">
             <h2 class="mm-card-header">Hora a la que se dan cierta cantidad de hechos de una categoria</h2>
             <div>
-                <p>Categoria: <span>Defensa civil</span></p>
-                <p>Hora del dia: 19:04</p>
+                <p >Categoria <span class="dato-estadistica">Defensa civil</span></p>
+                <p >Hora del dia <span class="dato-estadistica">19:04</span></p>
             </div>
         </section>
         <section class="estadistica mm-card">
             <h2 class="mm-card-header">Porcentaje de solicitudes con spam</h2>
             <div>
-                <p>Total: 90%</p>
-                <p>Cantidad de hechos total: 1000000</p>
+                <p>Total <span class="dato-estadistica">90%</span></p>
+                <p>Cantidad de hechos total <span class="dato-estadistica">1000000</span></p>
             </div>
         </section>
     </main>

@@ -5,20 +5,34 @@
     margin-top: 24px;
 }
 
+.titulo-dashboard {
+    margin-top: 1em;
+    margin-left: 0.5em;
+    font-size: 40px;
+}
+
 .mm-card.estadistica{
     margin-left: 5px;
     margin-right: 5px;
     background: var(--card);
     border-radius: 22px;
-    box-shadow: var(--shadow-md);
+    box-shadow: 2px 2px 5px var(--shadow-md);
     padding: clamp(16px, 2.6vw, 22px);
     display:flex;
     flex-direction: column;
     gap: 12px;
     transition: transform .08s ease, box-shadow .2s ease;
-
-    .mm-header {
-        font-weight: 800;
+    font-weight: bolder;
+    .mm-card-header {
+        font-weight: bold;
         margin: 0;
     }
+}
+
+.dato-estadistica {
+    background-color: #89E2C6;
+    color: var(--brand-800);
+    font-size: 1.15rem;
+    padding-left: 2px;
+    padding-right: 2px;
 }
