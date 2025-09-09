@@ -1,0 +1,78 @@
+{
+  "solicitudes": [
+    {
+      "id": "SL-0001",
+      "estado": "PENDIENTE",
+      "creado_en": "2025-09-06T14:32:11Z",
+      "creado_por": { "nombre": "Anónimo" },
+      "justificacion": "El contenido expone contenido multimedia cuestionable.",
+      "hecho": {
+        "id": "H-1029",
+        "titulo": "Chivilcoy en alerta por Emanación de gas tóxico",
+        "url": "../../html/hecho-completo.html?id=0"
+      },
+      "adjuntos": [
+        { "tipo": "link", "url": "https://ejemplo.com/denuncia" }
+      ],
+      "decision": null,
+      "metadatos": { "coleccion": "Contaminación", "prioridad": "alta" }
+    },
+    {
+      "id": "SL-0002",
+      "estado": "PENDIENTE",
+      "creado_en": "2025-09-07T09:05:00Z",
+      "creado_por": { "nombre": "Juan P.", "email": "juan@example.com" },
+      "justificacion": "La foto es errónea: corresponde a otro evento.",
+      "hecho": {
+        "id": "H-1002",
+        "titulo": "Humo en zona urbana",
+        "url": "../../html/hecho-completo.html?id=1"
+      },
+      "adjuntos": [],
+      "decision": null,
+      "metadatos": { "coleccion": "Incendios", "prioridad": "media" }
+    },
+    {
+      "id": "SL-0003",
+      "estado": "APROBADA",
+      "creado_en": "2025-08-31T18:22:00Z",
+      "creado_por": { "nombre": "María C." },
+      "justificacion": "Se publicó sin consentimiento de la persona involucrada.",
+      "hecho": {
+        "id": "H-0990",
+        "titulo": "Vertido en canal secundario",
+        "url": "../../html/hecho-completo.html?id=14"
+      },
+      "adjuntos": [],
+      "decision": {
+        "estado": "APROBADA",
+        "moderador": "Lucía P.",
+        "fecha": "2025-09-02T11:10:00Z",
+        "notas": "Se removió el hecho y se notificó al autor."
+      },
+      "metadatos": { "coleccion": "Contaminación" }
+    },
+    {
+      "id": "SL-0004",
+      "estado": "RECHAZADA",
+      "creado_en": "2025-09-01T12:00:00Z",
+      "creado_por": { "nombre": "Anónimo" },
+      "justificacion": "No hay pruebas de que el evento sea verídico.",
+      "hecho": {
+        "id": "H-1010",
+        "titulo": "Aguas turbias en balneario",
+        "url": "../../html/hecho-completo.html?id=18"
+      },
+      "adjuntos": [
+        { "tipo": "imagen", "url": "/media/captura_1010.png" }
+      ],
+      "decision": {
+        "estado": "RECHAZADA",
+        "moderador": "Admin",
+        "fecha": "2025-09-03T16:40:00Z",
+        "notas": "El hecho cuenta con fuentes verificadas; no corresponde eliminación."
+      },
+      "metadatos": { "coleccion": "Calidad de agua", "prioridad": "baja" }
+    }
+  ]
+}

@@ -1,55 +1,352 @@
-h1 {
-    font-size: 3rem;
-    padding-left: 1em;
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Base */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #3B4F61;
+    background-color: var(--bg, #F2F7FA);
 }
 
+:root {
+    --mm-header-h: 72px;
+}
 
-.solicitudes-eliminacion {
+.mm-header-2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+    transition: transform .25s ease, opacity .25s ease;
+}
+
+body.scrolled .mm-header-2 {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#main-content {
+    padding-top: var(--mm-header-h);
+}
+
+/* Títulos */
+.mm-form-title {
+    font-family: "Raleway", "Open Sans", Arial, sans-serif;
+    font-weight: 800;
+    color: var(--brand-800, #3B4F61);
+}
+
+.mm-form-sub {
+    color: #445c6d;
+}
+
+/* Lista de solicitudes */
+.mm-requests {
+    display: grid;
+    gap: 14px;
+}
+
+.mm-req {
+    background: #fff;
+    border: 1px solid var(--muted, #C9DEEC);
+    border-radius: 16px;
+    position: relative;
+    padding: 18px 16px 64px 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+}
+
+.mm-req__header {
+    position: static;
+}
+
+.mm-req__title {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+    color: var(--brand-800, #3B4F61);
+}
+
+.mm-req__meta {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.badge {
+    display: inline-flex;
     align-items: center;
-    .solicitud-eliminacion {
-        border-radius: 10px;
-        background-color: var(--card);
-        padding-left: 1em;
-        width:80%;
-        padding-top: 1em;
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-        h2 {
-            font-size: 2rem;
-            color: var(--brand-800);
-            font-weight: bold;
-        }
-        h3 {
-            font-size: 1rem;
-            color: rgba(0,0,0,0.6);
-            padding-bottom: 1rem;
-        }
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: .8rem;
+    line-height: 1;
+}
+
+.badge-brand {
+    background-color: var(--brand-500, #86A8C2);
+    color: #fff;
+}
+
+.badge-neutral {
+    background: #E7EFF6;
+    color: #2d4454;
+}
+
+/* Cuerpo */
+.mm-req__body {
+    padding-right: 100px;
+}
+
+/* Acciones */
+.mm-req__actions {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    top: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.mm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 700;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.mm-btn:active {
+    transform: translateY(1px);
+}
+
+.mm-btn--round {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+}
+
+/* Aprobar */
+.mm-btn--approve {
+    background: rgba(46, 204, 113, .26);
+    border-color: rgba(46, 204, 113, .42);
+    color: #13844b;
+}
+
+.mm-btn--approve:hover {
+    background: rgba(46, 204, 113, .34);
+    box-shadow: 0 4px 14px rgba(46, 204, 113, .24);
+}
+
+/* Rechazar */
+.mm-btn--reject {
+    background: rgba(231, 76, 60, .26);
+    border-color: rgba(231, 76, 60, .44);
+    color: #a83225;
+}
+
+.mm-btn--reject:hover {
+    background: rgba(231, 76, 60, .34);
+    box-shadow: 0 4px 14px rgba(231, 76, 60, .24);
+}
+
+/* Toolbar */
+.mm-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Segmented control */
+.mm-seg {
+    display: flex;
+    gap: 8px;
+}
+
+.mm-seg__btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: rgba(59, 79, 97, .9);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, border-color .2s, box-shadow .2s, color .2s;
+
+    font-size: medium;
+    color: #86a8c2;
+    border-color: #86a8c2;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+
+.mm-seg__btn:hover {
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+.mm-seg__btn.is-active {
+    background: var(--brand-800);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
+
+.mm-seg__btn:active {
+    transform: translateY(1px);
+}
+
+/* Contador */
+.mm-seg__badge {
+    background: #E7EFF6; /* soft */
+    font-weight: 700;
+    font-size: .78rem;
+    line-height: 1;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
+.mm-seg__btn.is-active .mm-seg__badge {
+    background: rgba(134, 168, 194, .22);
+    color: var(--brand-500);
+}
+
+/* Buscador */
+.mm-search {
+    width: min(320px, 100%);
+}
+
+.mm-search .mm-input {
+    height: 40px;
+}
+
+/* (Fallback por si esta hoja no trae .mm-input de otra parte) */
+.mm-input {
+    border: 1px solid var(--accent, #AFCBE3);
+    background: #fff;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: var(--shadow-sm, 0 1px 6px rgba(0, 0, 0, .08));
+    transition: box-shadow .2s, border-color .2s;
+}
+
+.mm-input:focus {
+    border-color: var(--brand-500, #86A8C2);
+    box-shadow: 0 0 0 3px rgba(134, 168, 194, .25);
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+    .mm-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    /* buscador arriba y ancho completo */
+    .mm-search {
+        order: 1;
+        width: 100%;
+    }
+
+    .mm-search .mm-input {
+        width: 100%;
+    }
+
+    /* filtros en grilla 2x2, ancho completo */
+    .mm-seg {
+        order: 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .mm-seg__btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .mm-seg__badge {
+        font-size: .82rem;
+        padding: 4px 10px;
+    }
+
+    /* tap targets un poco más grandes */
+    .mm-btn--round {
+        width: clamp(36px, 9.5vw, 44px);
+        height: clamp(36px, 9.5vw, 44px);
+    }
+
+    .mm-btn--round i {
+        font-size: .9rem;
+    }
+
+    .mm-req__actions {
+        right: 10px;
+        bottom: 10px;
+        gap: 8px;
+    }
+
+    .mm-req {
+        padding-bottom: 56px;
     }
 }
-.botones-solicitud{
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    justify-content: flex-end;
+
+@media (max-width: 576px) {
+    .mm-toolbar {
+        gap: 8px;
+    }
+
+    .mm-seg {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .mm-search {
+        width: 100%;
+    }
+
+    .mm-req {
+        padding: 16px 14px;
+    }
+
+    .mm-req__header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .mm-req__actions {
+        justify-content: flex-end;
+    }
 }
 
-.boton-solicitud{
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    border: 0 solid #fff;
-    font-size: 1.5rem;
-    color: white;
+@media (max-width: 380px) {
+    .mm-seg {
+        grid-template-columns: 1fr;
+    }
 
+    .mm-btn--round {
+        width: 34px;
+        height: 34px;
+    }
 
+    .mm-btn--round i {
+        font-size: .85rem;
+    }
 }
 
-.boton-solicitud.aceptar{
-    background-color: forestgreen;
-}
-
-.boton-solicitud.rechazar{
-    background-color: red;
-}

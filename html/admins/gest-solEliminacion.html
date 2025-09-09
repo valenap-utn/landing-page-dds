@@ -2,10 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Solicitud de Eliminación</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Solicitud de Eliminación</title>
 
     <link rel="icon" href="../../components/logo-ico.png" >
 
@@ -17,30 +16,145 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../css/mis-estilos/estilos-admin/styles-gest-solEliminacion.css">
     <link rel="stylesheet" href="../../css/mis-estilos/styles-commons.css">
+    <link rel="stylesheet" href="../../css/mis-estilos/styles-layout.css">
+    <link rel="stylesheet" href="../../css/mis-estilos/estilos-admin/styles-gest-solEliminacion.css">
+
 </head>
 <body class="body-metamapa">
-    <main>
-        <h1>Lista de solicitudes de eliminación</h1>
-        <div class="solicitudes-eliminacion">
-            <div class="solicitud-eliminacion">
-                <h2>Solicitud N° 1</h2>
-                <h3>Creado por Anonimo</h3>
-                <p>Justificacion</p>
-                <p>Hecho referenciado: "nombre del hecho"</p>
-                <!--Acá iría info-->
-                <div class="botones-solicitud">
-                    <button class="boton-solicitud aceptar">
-                        <i class="fa-solid fa-check aceptar"></i>
+    <!-- Header -->
+    <header class="mm-header-2" role="banner">
+        <div class="mm-header__container text-center py-3">
+            <a href="../../index.html" class="mm-header__logo-link">
+                <img src="../../components/logo-mm.png" alt="MetaMapa" class="mm-header__logo" style="max-width: 180px;">
+            </a>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container py-5" id="main-content">
+        <section class="mm-card mx-auto" style="max-width: 920px;">
+            <h1 class="mm-form-title mb-2 text-center" style="padding-top: 60px">Solicitudes de eliminación</h1>
+            <p class="mm-form-sub text-center mb-4">Revisá, aprobá o rechazá las solicitudes pendientes</p>
+
+            <!-- Toolbar de filtros -->
+            <div class="mm-toolbar mb-3">
+                <div class="mm-seg" role="tablist" aria-label="Filtrar por estado">
+                    <button class="mm-seg__btn is-active" data-filter="TODAS" role="tab" aria-selected="true">
+                        Todas <span class="mm-seg__badge" id="count-todas">0</span>
                     </button>
-                    <button class="boton-solicitud rechazar">
-                        <i class="fa-solid fa-xmark rechazar"></i>
-                    </button> <!--Este debería ir en rojo y el otro en verde por ejemplo-->
+                    <button class="mm-seg__btn" data-filter="PENDIENTE" role="tab" aria-selected="false">
+                        Pendientes <span class="mm-seg__badge" id="count-pend">0</span>
+                    </button>
+                    <button class="mm-seg__btn" data-filter="APROBADA" role="tab" aria-selected="false">
+                        Aprobadas <span class="mm-seg__badge" id="count-apr">0</span>
+                    </button>
+                    <button class="mm-seg__btn" data-filter="RECHAZADA" role="tab" aria-selected="false">
+                        Rechazadas <span class="mm-seg__badge" id="count-rech">0</span>
+                    </button>
+                </div>
+
+                <div class="mm-search">
+                    <input id="searchBox" class="mm-input" placeholder="Buscar por título o justificación…">
+                </div>
+            </div>
+
+            <!-- Lista de solicitudes -->
+            <ul class="mm-requests list-unstyled m-0">
+                <!-- Ítem -->
+<!--                <li class="mm-req">-->
+<!--                    <div class="mm-req__header">-->
+<!--                        <div>-->
+<!--                            <h3 class="mm-req__title m-0">Solicitud N° 1</h3>-->
+<!--                            <div class="mm-req__meta">-->
+<!--                                <span class="badge badge-brand">Pendiente</span>-->
+<!--                                <span class="badge badge-neutral">Creado por Anónimo</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="mm-req__actions">-->
+<!--                            <button class="mm-btn mm-btn&#45;&#45;round mm-btn&#45;&#45;approve" aria-label="Aprobar solicitud">-->
+<!--                                <i class="fa-solid fa-check"></i>-->
+<!--                            </button>-->
+<!--                            <button class="mm-btn mm-btn&#45;&#45;round mm-btn&#45;&#45;reject" aria-label="Rechazar solicitud">-->
+<!--                                <i class="fa-solid fa-xmark"></i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="mm-req__body">-->
+<!--                        <p class="m-0"><strong>Justificación:</strong> El contenido expone datos personales no consentidos.</p>-->
+<!--                        <p class="m-0"><strong>Hecho referenciado:</strong> <a class="blue-link" href="#">“Derrame en ribera del río”</a></p>-->
+<!--                    </div>-->
+<!--                </li>-->
+
+                <!-- Para más solicitudes de ejemplo duplicar <li class="mm-req"> -->
+            </ul>
+        </section>
+<!--        <div class="solicitudes-eliminacion">-->
+<!--            <div class="solicitud-eliminacion">-->
+<!--                <h2>Solicitud N° 1</h2>-->
+<!--                <h3>Creado por Anonimo</h3>-->
+<!--                <p>Justificacion</p>-->
+<!--                <p>Hecho referenciado: "nombre del hecho"</p>-->
+<!--                &lt;!&ndash;Acá iría info&ndash;&gt;-->
+<!--                <div class="botones-solicitud">-->
+<!--                    <button class="boton-solicitud aceptar">-->
+<!--                        <i class="fa-solid fa-check aceptar"></i>-->
+<!--                    </button>-->
+<!--                    <button class="boton-solicitud rechazar">-->
+<!--                        <i class="fa-solid fa-xmark rechazar"></i>-->
+<!--                    </button> &lt;!&ndash;Este debería ir en rojo y el otro en verde por ejemplo&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-metamapa mt-auto py-4">
+        <div class="container-fluid px-4">
+            <div class="footer-content row justify-content-end">
+                <div class="col-md-4 text-md-end justify-content-center">
+                    <small class="footer-text">&copy; 2025 MetaMapa - Todos los derechos reservados</small>
+                    <br>
+                    <a href="../terminos.html" class="footer-link" aria-label="Ver términos y condiciones">Términos</a> |
+                    <a href="../privacidad.html" class="footer-link" aria-label="Ver política de privacidad">Privacidad</a>
                 </div>
             </div>
         </div>
+    </footer>
 
-    </main>
+    <script type="module" src="../../js/admins/gest-solEliminacion.js"></script>
+
+    <!-- Script para quitar item si se aprueba/rechaza -->
+    <script>
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.mm-btn--approve, .mm-btn--reject');
+            if (!btn) return;
+            const li = btn.closest('.mm-req');
+            li.style.transition = 'opacity .25s, transform .25s';
+            li.style.opacity = '0'; li.style.transform = 'translateY(-4px)';
+            setTimeout(() => li.remove(), 250);
+        });
+    </script>
+
+    <!-- Script para Header -->
+    <script>
+        (function(){
+            const body = document.body;
+            let lastY = window.scrollY;
+            const delta  = 6;   // ignora micro scroll
+            const showAt = 10;  // no ocultar muy arriba
+
+            window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                if (Math.abs(y - lastY) < delta) return;
+                if (y > lastY && y > showAt) body.classList.add('scrolled');   // bajando
+                else                          body.classList.remove('scrolled'); // subiendo / arriba
+                lastY = y;
+            }, { passive:true });
+
+            if (window.scrollY > showAt) body.classList.add('scrolled');
+        })();
+    </script>
 </body>
 </html>
