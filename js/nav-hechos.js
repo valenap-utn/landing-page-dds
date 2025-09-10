@@ -41,21 +41,39 @@ function parseDateSmart(v) {
 
     // ISO yyyy-mm-dd
     if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
-        const d = new Date(s);
-        return isNaN(d) ? null : d;
+        const [y,m,d] = s.split('-').map(Number);
+        const dt = new Date(y, m - 1, d);
+        return isNaN(dt) ? null : dt;
     }
 
     // dd/mm/yyyy o dd-mm-yyyy
     const m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
     if (m) {
         const [_, d, mo, y] = m;
-        const iso = `${y}-${mo.padStart(2,'0')}-${d.padStart(2,'0')}`;
-        const parsed = new Date(iso);
-        return isNaN(parsed) ? null : parsed;
+        const dt = new Date(Number(y), Number(mo) - 1, Number(d));
+        return isNaN(dt) ? null : dt;
     }
 
-    const d = new Date(s);
-    return isNaN(d) ? null : d;
+    const dt = new Date(s);
+    return isNaN(dt) ? null : dt;
+}
+
+// Retorna 'YYYY-MM-DD' usando campos locales (sin shift de TZ)
+function toISOStrLocal(date) {
+    if (!(date instanceof Date) || isNaN(date)) return null;
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
+// Normaliza cualquier valor de fecha a 'YYYY-MM-DD'
+function toISOShortFromAny(v) {
+    if (!v && v !== 0) return null;
+    const s = String(v).trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s; // ya viene iso corto
+    const dt = parseDateSmart(s);
+    return toISOStrLocal(dt);
 }
 
 // Convierte cualquier número a float (o null)
@@ -67,46 +85,67 @@ function toNum(v) {
 
 // ====== NORMALIZACIÓN DE HECHOS ======
 /** Intenta mapear cualquier objeto "hecho" en:
- * { id, titulo, categoria, fecha, lat, long }
+ * {
+ *      id, titulo, descripcion, categoria,
+ *      fechaAcontecimiento (YYYY-MM-DD) | null,
+ *      fechaCreacion (YYYY-MM-DD) | null,
+ *      lat, long
+ * }
  */
-function normalizeHecho(row, inferredMap = null) {
-    const map = inferredMap || inferKeyMap(row);
-
-    const id     = row[map.id] ?? row[map.id] ?? null;
-    const titulo = row[map.titulo] ?? '';
-    const cat    = row[map.categoria] ?? '';
-    const fecha  = row[map.fecha] ?? null;
-    const lat    = row[map.lat] ?? row[map.latitude];
-    const lon    = row[map.long] ?? row[map.longitude];
-
-    return {
-        id:     id != null ? String(id) : '',
-        titulo: String(titulo || '').trim(),
-        categoria: String(cat || '').trim(),
-        fecha: (() => {
-            const dt = parseDateSmart(fecha);
-            return dt ? dt.toISOString().slice(0,10) : null; // ISO corto YYYY-MM-DD
-        })(),
-        lat: toNum(lat),
-        long: toNum(lon)
-    };
-}
 
 // Detecta mapeo de claves a partir de una fila
 function inferKeyMap(row) {
     const key = (cands) => pickKey(row, cands);
-
     return {
         id:       key(['id','codigo','identificador']),
         titulo:   key(['titulo','título','title','nombre']),
+        descripcion: key(['descripcion','descripción','description','detalle','resumen']),
         categoria:key(['categoria','categoría','category','tipo']),
-        fecha:     key([
-            'fecha', 'fecha acontecimiento', 'fechaacontecimiento',
-            'fecha carga', 'fechacarga', 'date',
-            'fecha del hecho', 'fecha_del_hecho', 'fechasuceso', 'fechaevento'
+        // Separadas:
+        fechaAcontecimiento: key([
+            'fecha acontecimiento','fecha_del_hecho','fecha del hecho','fechasuceso',
+            'fechaevento','fecha evento','acontecimiento','f. acontecimiento'
         ]),
+        fechaCreacion: key([
+            'fecha carga','fechacarga','fecha creacion','fecha creación','fecha_de_creacion',
+            'fecha_de_creación','created_at','create_date'
+        ]),
+        // Fallback genérico si sólo hay una 'fecha'
+        fecha:     key(['fecha','date','fecha evento','fecha suceso']),
         lat:      key(['lat','latitud','latitude']),
         long:     key(['long','lon','lng','longitud','longitude'])
+    };
+}
+
+function normalizeHecho(row, inferredMap = null) {
+    const map = inferredMap || inferKeyMap(row);
+
+    const id     = row[map.id] ?? null;
+    const titulo = row[map.titulo] ?? '';
+    const desc   = row[map.descripcion] ?? '';
+    const cat    = row[map.categoria] ?? '';
+
+    // const fecha  = row[map.fecha] ?? null;
+
+    // Fuentes de fechas (ante ausencia, hace fallback a 'fecha')
+    const faconRaw = (map.fechaAcontecimiento && row[map.fechaAcontecimiento]) ?? row[map.fecha];
+    const fcreaRaw = (map.fechaCreacion       && row[map.fechaCreacion])       ?? row[map.fecha];
+
+    const fechaAcontecimiento = toISOShortFromAny(faconRaw);
+    const fechaCreacion       = toISOShortFromAny(fcreaRaw);
+
+    const lat = row[map.lat];
+    const lon = row[map.long];
+
+    return {
+        id:     id != null ? String(id) : '',
+        titulo: String(titulo || '').trim(),
+        descripcion: String(desc || '').trim(),
+        categoria: String(cat || '').trim(),
+        fechaAcontecimiento,
+        fechaCreacion,
+        lat: toNum(lat),
+        long: toNum(lon)
     };
 }
 
@@ -114,24 +153,23 @@ function inferKeyMap(row) {
 function normalizeList(list) {
     if (!Array.isArray(list)) return [];
     const map = list.length ? inferKeyMap(list[0]) : null;
-    return list.map(r => normalizeHecho(r, map))
-        .filter(h => h.lat != null && h.long != null); // solo con coordenadas
+    return list
+        .map(r => normalizeHecho(r, map))
+        .filter(h => h.lat != null && h.long != null);
 }
 
 
 // Pobla dinámicamente el <select id="fCategoria">
 function populateCategoryFilter(hechos) {
-    const sel = document.getElementById('fCategoria');
+    const sel = $('#fCategoria');
     if (!sel) return;
 
-    // guardamos la primera opción (placeholder)
     const first = sel.querySelector('option[value=""]');
     sel.innerHTML = '';
     if (first) sel.appendChild(first);
 
-    const cats = Array.from(new Set(
-        hechos.map(h => h.categoria).filter(Boolean)
-    )).sort((a,b)=>a.localeCompare(b,'es',{sensitivity:'base'}));
+    const cats = Array.from(new Set(hechos.map(h => h.categoria).filter(Boolean)))
+        .sort((a,b)=>a.localeCompare(b,'es',{sensitivity:'base'}));
 
     for (const c of cats) {
         const opt = document.createElement('option');
@@ -149,12 +187,11 @@ async function loadData() {
         const res = await fetch(DATA_URL, { credentials: 'same-origin' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        // Si la API devuelve { data: [...] } o similar, adaptamos:
         const arr = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
         HECHOS = normalizeList(arr);
     } catch (e) {
         console.error('No se pudieron cargar los hechos:', e);
-        HECHOS = []; // fallback vacío
+        HECHOS = [];
     }
 }
 
@@ -167,6 +204,7 @@ function initMap() {
         zoom: FALLBACK_ZOOM,
         scrollWheelZoom: true
     });
+    window.map = map; // para invalidateSize desde otros scripts
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
@@ -176,20 +214,19 @@ function initMap() {
 }
 
 // ====== POP-UP del MAPA ======
-
 function popupHtml(h){
+    const fecha = h.fechaAcontecimiento || h.fechaCreacion || '-';
     return `
     <div class="mm-popup">
-      <strong>${h.titulo}</strong><br/>
+      <strong>${h.titulo || '(sin título)'}</strong><br/>
       <small>Categoría:</small> ${h.categoria || '-'}<br/>
-      <small>Fecha:</small> ${h.fecha || '-'}
+      <small>Fecha:</small> ${fecha}
       <div class="mt-2">
         <a class="mm-link" href="hecho-completo.html?id=${encodeURIComponent(h.id)}">
           Ver más...
         </a>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 function render(list) {
@@ -204,65 +241,64 @@ function render(list) {
             .addTo(markersLayer);
     });
 
-    const info = document.getElementById('resultInfo');
-    info.textContent = `${list.length} resultado${list.length!==1?'s':''}`;
+    const info = $('#resultInfo');
+    if (info) info.textContent = `${list.length} resultado${list.length!==1?'s':''}`;
 
     latlngs.length
         ? map.fitBounds(latlngs, { padding: [20,20] })
-        : map.setView([-38.4,-63.6], 5);
+        : map.setView(FALLBACK_CENTER, FALLBACK_ZOOM);
 }
 
+
 // ====== FILTROS ======
-// function getFilters() {
-//     const cat   = $('#fCategoria')?.value || '';
-//     const d1Str = $('#fDesde')?.value || '';
-//     const d2Str = $('#fHasta')?.value || '';
-//
-//     const d1 = d1Str ? parseDateSmart(d1Str) : null;
-//     const d2 = d2Str ? parseDateSmart(d2Str) : null;
-//
-//     return { cat, d1, d2 };
-// }
+const inRangeISO = (iso, from, to) => {
+    if (!iso) return false;
+    if (from && iso < from) return false;
+    if (to   && iso > to)   return false;
+    return true;
+};
 
 // Obtiene filtros y ajusta “hasta” al fin del día (inclusivo)
 function getFilters() {
-    const cat   = document.getElementById('fCategoria')?.value || '';
-    const d1Str = document.getElementById('fDesde')?.value || '';
-    const d2Str = document.getElementById('fHasta')?.value || '';
+    const cat   = $('#fCategoria')?.value || '';
+    const aD    = $('#fAcontDesde')?.value || '';     // YYYY-MM-DD
+    const aH    = $('#fAcontHasta')?.value || '';
+    const cD    = $('#fCreacionDesde')?.value || '';
+    const cH    = $('#fCreacionHasta')?.value || '';
+    const query = ($('#fTexto')?.value || '').trim().toLowerCase();
 
-    const d1 = d1Str ? parseDateSmart(d1Str) : null;
-    const d2 = d2Str ? parseDateSmart(d2Str) : null;
-
-    if (d1) d1.setHours(0,0,0,0);
-    if (d2) d2.setHours(23,59,59,999); // inclusivo
-
-    return { cat, d1, d2 };
+    return { cat, aD, aH, cD, cH, query };
 }
 
 function applyFilters() {
-    const { cat, d1, d2 } = getFilters();
+    const { cat, aD, aH, cD, cH, query } = getFilters();
 
     const list = HECHOS.filter(h => {
         if (cat && h.categoria !== cat) return false;
 
-        if (d1 || d2) {
-            const fh = h.fecha ? new Date(h.fecha) : null;
-            if (!fh) return false;
-            if (d1 && fh < d1) return false;
-            if (d2 && fh > d2) return false;
+        if (aD || aH) {
+            if (!inRangeISO(h.fechaAcontecimiento, aD || null, aH || null)) return false;
+        }
+        if (cD || cH) {
+            if (!inRangeISO(h.fechaCreacion, cD || null, cH || null)) return false;
         }
 
+        if (query) {
+            const hay = `${h.titulo} ${h.descripcion || ''}`.toLowerCase();
+            if (!hay.includes(query)) return false;
+        }
         return true;
     });
 
     render(list);
+    setTimeout(() => map.invalidateSize(), 200);
 }
 
 function clearFilters() {
-    if ($('#fCategoria')) $('#fCategoria').value = '';
-    if ($('#fDesde'))     $('#fDesde').value = '';
-    if ($('#fHasta'))     $('#fHasta').value = '';
+    const ids = ['#fCategoria','#fAcontDesde','#fAcontHasta','#fCreacionDesde','#fCreacionHasta','#fTexto'];
+    ids.forEach(sel => { const el = $(sel); if (exists(el)) el.value = ''; });
     render(HECHOS);
+    setTimeout(() => map.invalidateSize(), 200);
 }
 
 // ====== INIT ======
@@ -273,15 +309,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     render(HECHOS);
 
     // Botones
-    if ($('#btnAplicar')) $('#btnAplicar').addEventListener('click', applyFilters);
-    if ($('#btnLimpiar')) $('#btnLimpiar').addEventListener('click', clearFilters);
+    $('#btnAplicar')?.addEventListener('click', applyFilters);
+    $('#btnLimpiar')?.addEventListener('click', clearFilters);
 
-    // Enter para aplicar
-    ['#fCategoria','#fDesde','#fHasta'].forEach(sel => {
-        const el = $(sel);
-        if (!exists(el)) return;
-        el.addEventListener('keydown', (e) => {
+    // Enter aplica
+    ['#fCategoria','#fAcontDesde','#fAcontHasta','#fCreacionDesde','#fCreacionHasta','#fTexto']
+        .forEach(sel => $(sel)?.addEventListener('keydown', e => {
             if (e.key === 'Enter') { e.preventDefault(); applyFilters(); }
-        });
+        }));
+
+    // Recalcular mapa al abrir/cerrar “Más filtros”
+    document.querySelector('.mm-adv')?.addEventListener('toggle', () => {
+        setTimeout(() => map.invalidateSize(), 220);
     });
 });

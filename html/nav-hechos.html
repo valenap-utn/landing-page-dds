@@ -28,9 +28,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <link href="../css/mis-estilos/styles-nav-hechos.css" rel="stylesheet">
     <link href="../css/mis-estilos/styles-layout.css" rel="stylesheet">
     <link href="../css/mis-estilos/styles-commons.css" rel="stylesheet">
+    <link href="../css/mis-estilos/styles-nav-hechos.css" rel="stylesheet">
+
 </head>
 <body>
     <header class="mm-header-2" role="banner">
@@ -59,35 +60,91 @@
     <!-- Aplicar Filtros -->
     <h2 class="title-main text-center mb-3">Aplicar Filtros</h2>
 
-    <div class="form-container d-flex justify-content-center flex-wrap control-row mb-3">
-        <div class="form-group">
-            <label for="fCategoria" class="form-label">Categoría</label>
-            <select id="fCategoria" class="form-select chip select-categoria" aria-label="Filtrar por categoría">
-                <option value="">Categoría</option>
-                <option value="EventoSanitario">Evento sanitario</option>
-                <option value="Contaminación">Contaminación</option>
-                <option value="Derrame">Derrame</option>
-            </select>
+    <div class="mm-filters mb-3">
+        <!-- Esenciales -->
+        <div class="mm-filters__row">
+            <div class="form-group col-cat">
+                <label for="fCategoria" class="form-label">Categoría</label>
+                <select id="fCategoria" class="form-select chip select-categoria" aria-label="Filtrar por categoría">
+                    <option value="">Categoría</option>
+                    <option value="EventoSanitario">Evento sanitario</option>
+                    <option value="Contaminación">Contaminación</option>
+                    <option value="Derrame">Derrame</option>
+                </select>
+            </div>
+
+            <div class="form-group col-acon-des">
+                <label for="fAcontDesde" class="form-label">Fecha Del Acontecimiento desde</label>
+                <input id="fAcontDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
+            </div>
+
+            <div class="form-group col-acon-des">
+                <label for="fAcontHasta" class="form-label">Fecha Del Acontecimiento hasta</label>
+                <input id="fAcontHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="fAcontDesde" class="form-label">Fecha Del Acontecimiento desde</label>
-            <input id="fAcontDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
+        <!-- Avanzados plegados -->
+        <details class="mm-adv mb-3">
+            <summary>Más filtros</summary>
+            <div class="mm-adv__body">
+                <div class="mm-adv__grid">
+                    <div class="form-group col-search">
+                        <label for="fTexto" class="form-label">Buscar por texto</label>
+                        <input id="fTexto" type="text" class="form-control chip" placeholder="palabra clave, ej: río, humo…">
+                    </div>
+
+                    <div class="form-group col-crea-des">
+                        <label for="fCreacionDesde" class="form-label">Creación desde</label>
+                        <input id="fCreacionDesde" type="date" class="form-control chip style-ap-filtros">
+                    </div>
+
+                    <div class="form-group col-crea-has">
+                        <label for="fCreacionHasta" class="form-label">Creación hasta</label>
+                        <input id="fCreacionHasta" type="date" class="form-control chip style-ap-filtros">
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- Aplicar || Limpiar filtros -->
+        <div class="mm-filters__actions">
+            <button id="btnAplicar" class="btn btn-ap-filter">Aplicar filtros</button>
+            <button id="btnLimpiar" class="btn btn-clear-filter">Limpiar</button>
         </div>
 
-        <div class="form-group">
-            <label for="fAcontHasta" class="form-label">Fecha Del Acontecimiento hasta</label>
-            <input id="fAcontHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
-        </div>
-        <div class="form-group">
-            <label for="fCreacionDesde" class="form-label">Fecha De Creación desde</label>
-            <input id="fCreacionDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>
-        </div>
+    </div>
 
-        <div class="form-group">
-            <label for="fCreacionHasta" class="form-label">Fecha De Creación hasta</label>
-            <input id="fCreacionHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>
-        </div>
+<!--    <div class="form-container d-flex justify-content-center flex-wrap control-row mb-3">-->
+<!--        <div class="form-group">-->
+<!--            <label for="fCategoria" class="form-label">Categoría</label>-->
+<!--            <select id="fCategoria" class="form-select chip select-categoria" aria-label="Filtrar por categoría">-->
+<!--                <option value="">Categoría</option>-->
+<!--                <option value="EventoSanitario">Evento sanitario</option>-->
+<!--                <option value="Contaminación">Contaminación</option>-->
+<!--                <option value="Derrame">Derrame</option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="fAcontDesde" class="form-label">Fecha Del Acontecimiento desde</label>-->
+<!--            <input id="fAcontDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="fAcontHasta" class="form-label">Fecha Del Acontecimiento hasta</label>-->
+<!--            <input id="fAcontHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="fCreacionDesde" class="form-label">Fecha De Creación desde</label>-->
+<!--            <input id="fCreacionDesde" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha desde" aria-label="Filtrar desde fecha"/>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="fCreacionHasta" class="form-label">Fecha De Creación hasta</label>-->
+<!--            <input id="fCreacionHasta" type="date" class="form-control chip style-ap-filtros" placeholder="Fecha hasta" aria-label="Filtrar hasta fecha"/>-->
+<!--        </div>-->
 
         <!--            <div class="form-group">-->
         <!--                <label for="fLat" class="form-label">Latitud</label>-->
@@ -103,13 +160,13 @@
         <!--                <label for="fId" class="form-label">Id Hecho</label>-->
         <!--                <input id="fId" type="text" class="form-control chip style-ap-filtros" placeholder="Id Hecho" aria-label="Filtrar por identificador de Hecho">-->
         <!--            </div>-->
-    </div>
+<!--    </div>-->
 
     <!-- Aplicar || Limpiar filtros -->
-    <div class="d-flex justify-content-center gap-2 mb-4">
-        <button id="btnAplicar" class="btn btn-ap-filter" aria-label="Aplicar filtros seleccionados al mapa">Aplicar filtros</button>
-        <button id="btnLimpiar" class="btn btn-clear-filter" aria-label="Limpiar todos los filtros">Limpiar</button>
-    </div>
+<!--    <div class="d-flex justify-content-center gap-2 mb-4">-->
+<!--        <button id="btnAplicar" class="btn btn-ap-filter" aria-label="Aplicar filtros seleccionados al mapa">Aplicar filtros</button>-->
+<!--        <button id="btnLimpiar" class="btn btn-clear-filter" aria-label="Limpiar todos los filtros">Limpiar</button>-->
+<!--    </div>-->
 
     <!-- Imple. Mapa -->
     <div class="row justify-content-center">
@@ -159,5 +216,12 @@
             if (window.scrollY > showAt) body.classList.add('scrolled');
         })();
     </script>
+
+    <script>
+        document.querySelector('.mm-adv')?.addEventListener('toggle', e=>{
+            if(e.target.open) e.target.scrollIntoView({block:'nearest', behavior:'smooth'});
+        });
+    </script>
+
 </body>
 </html>

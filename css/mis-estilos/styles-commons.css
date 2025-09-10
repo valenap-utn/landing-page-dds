@@ -30,6 +30,10 @@ body.body-metamapa{
 
 #map { height: 420px; border-radius: 8px; }
 
+/*.leaflet-marker-icon{*/
+/*    color: var(--brand-800);*/
+/*}*/
+
 /* FOOTER */
 .footer-metamapa {
     background: #f8fafc;

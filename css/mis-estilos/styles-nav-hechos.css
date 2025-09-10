@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-body{
+body {
     font-family: 'OpenSans', sans-serif;
     color: #3B4F61;
     background-color: #F2F7FA;
 }
 
 /* Estilos para títulos */
-.title-main{
+.title-main {
     font-weight: bold;
     padding: 0 0 15px 0;
 }
 
-.sub-title{
+.sub-title {
     padding-top: 50px;
     font-weight: bold;
 }
 
 /* Estilos para boxes en ap. filtros */
-.select-categoria{
+.select-categoria {
     /*max-width: 180px;*/
     margin: 2px;
     border-radius: 25px;
@@ -34,7 +34,7 @@ body{
 
 /* Estilos para botones */
 /* Botón: Aplicar filtros */
-.btn-ap-filter{
+.btn-ap-filter {
     font-size: medium;
     color: #F2F7FA;
     background-color: #86a8c2;
@@ -49,7 +49,7 @@ body{
 }
 
 /* Botón: Limpiar filtros */
-.btn-clear-filter{
+.btn-clear-filter {
     font-size: medium;
     color: #86a8c2;
     border-color: #86a8c2;
@@ -58,13 +58,19 @@ body{
     width: 120px;
 }
 
-.btn-clear-filter:hover{
+.btn-clear-filter:hover {
     color: #3B4F61;
     border-color: #3B4F61;
 }
 
 /* Mapita */
-#map { height: 420px; border-radius: 8px; }
+/*#map { height: 420px; border-radius: 8px; }*/
+#map {
+    height: clamp(420px, 62vh, 720px);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    border: 1px solid var(--muted);
+}
 
 /* Estilos para inputs con labels */
 .form-group {
@@ -89,7 +95,197 @@ body{
         flex-direction: column;
         align-items: center;
     }
-    .form-group{
+
+    .form-group {
         width: 75%;
+    }
+}
+
+/* Estilos para filtros (esenciales y no) */
+/* --- Toolbar de filtros simple --- */
+.mm-filters {
+    max-width: 980px;
+    margin-inline: auto;
+}
+
+.mm-filters__row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+    max-width: 980px; /* centra y acota */
+    margin: 0 auto 12px;
+}
+
+/* Cada bloque con el mismo ancho */
+.mm-filters__row .form-group {
+    grid-column: span 4; /* 3 bloques iguales */
+    min-width: 0;
+}
+
+/* Los controles llenan su bloque */
+.mm-filters__row .form-select,
+.mm-filters__row .form-control {
+    width: 100%;
+}
+
+
+/* Botones */
+.mm-filters__actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 980px;
+    margin: 8px auto 14px;
+}
+
+/* === Collapse MetaMapa: details/summary estilado === */
+.mm-adv {
+    border: 1px solid var(--muted);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+/* Cabecera tipo "pill" con icono y chevron */
+.mm-adv summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-weight: 700;
+    color: var(--brand-800);
+    background: #EAF3FA; /* pill suave */
+    transition: background-color .2s ease;
+}
+
+.mm-adv summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Filtro (ícono) al inicio – usa FA que ya cargaste */
+.mm-adv summary::before {
+    content: "\f0b0"; /* fa-filter */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: .6;
+}
+
+/* Chevron a la derecha */
+.mm-adv summary::after {
+    content: "";
+    margin-left: auto;
+    inline-size: 10px;
+    block-size: 10px;
+    border: 2px solid currentColor;
+    border-left: 0;
+    border-top: 0;
+    transform: rotate(45deg); /* flecha ↓ */
+    transition: transform .2s ease;
+    opacity: .8;
+}
+
+.mm-adv[open] summary::after {
+    transform: rotate(-135deg);
+}
+
+/* flecha ↑ */
+
+.mm-adv summary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(134, 168, 194, .25);
+    border-radius: 12px;
+}
+
+/* Cuerpo */
+.mm-adv__body {
+    padding: 14px;
+    background: #fff;
+    border-top: 1px solid var(--muted);
+}
+
+/* Grid interno de filtros avanzados */
+.mm-adv__grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.mm-adv__grid .form-group {
+    grid-column: span 12;
+}
+
+@media (min-width: 576px) {
+    .mm-adv__grid .form-group {
+        grid-column: span 6;
+    }
+}
+@media (min-width: 992px) {
+    .mm-adv__grid .form-group {
+        grid-column: span 4;
+    }
+}
+
+/* Inputs full width dentro del collapse */
+.mm-adv .form-control,
+.mm-adv .form-select{ width: 100%; }
+
+
+
+/* En desktop grande */
+@media (min-width: 1024px) {
+    .mm-filters__row {
+        overflow-x: visible;
+    }
+
+    .mm-filters__row .form-group {
+        flex: 1 1 0; /* se reparten el espacio */
+        /*max-width: 360px;       */
+    }
+}
+
+/* Mobile: 1 columna, botones a ancho completo */
+@media (max-width: 760px) {
+    .mm-filters .col-cat,
+    .mm-filters .col-acon-des,
+    .mm-filters .col-acon-has,
+    .mm-filters .col-search {
+        grid-column: span 12;
+    }
+
+    .mm-filters__row {
+        display: grid !important; /* override del inline-flex anterior */
+        grid-template-columns: 1fr;
+        gap: 12px;
+        overflow: visible; /* sin scroll horizontal */
+        padding-bottom: 0;
+        max-width: 680px; /* opcional: limita y centra */
+        margin: 0 auto 12px;
+    }
+
+    .mm-filters__row .form-group {
+        flex: none !important; /* anula el 78vw anterior */
+        width: 100%;
+        min-width: 0; /* evita desbordes */
+    }
+
+    /* Asegura que los controles llenen el 100% */
+    .mm-filters__row .form-select,
+    .mm-filters__row .form-control {
+        width: 100%;
+    }
+
+    /* Botonera ya estaba full width; reforzamos por si acaso */
+    .mm-filters__actions {
+        max-width: 680px;
+        margin: 8px auto 14px;
+    }
+
+    .mm-filters__actions .btn {
+        width: 100%;
+        max-width: 100%;
     }
 }
