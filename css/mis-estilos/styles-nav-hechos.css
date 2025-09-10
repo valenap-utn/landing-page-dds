@@ -157,7 +157,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    font-weight: 700;
+    /*font-weight: 700;*/
     color: var(--brand-800);
     background: #EAF3FA; /* pill suave */
     transition: background-color .2s ease;
@@ -233,6 +233,70 @@ body {
 .mm-adv .form-control,
 .mm-adv .form-select{ width: 100%; }
 
+/* === Keywords (chips) ==================================== */
+.mm-kw-input{ width:100%; } /* asegura ancho 100% como los otros inputs */
+
+.mm-chips{
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 8px;
+}
+
+.chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #fff;
+    /*border: 1px solid var(--accent);*/
+    color: var(--brand-800);
+    /*font-weight: 600;*/
+    box-shadow: var(--shadow-sm);
+}
+
+span.chip {
+    --chip-bg-1: #EAF3FA;
+    --chip-bg-2: #E3EEF5;
+
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    gap: 8px;
+
+    padding: 6px 10px 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--accent, #AFCBE3);
+    background: linear-gradient(180deg, var(--chip-bg-1), var(--chip-bg-2));
+    color: var(--brand-800, #3B4F61);
+    box-shadow: 0 1px 2px rgba(59,79,97,.12);
+    transition: background-color .2s ease, box-shadow .2s ease, transform .05s ease;
+}
+span.chip:hover{
+    box-shadow: 0 2px 6px rgba(59,79,97,.16);
+}
+span.chip:focus-within{
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(134,168,194,.28);
+}
+
+/* Texto del chip */
+span.chip__label{
+    font-size: .92rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+}
+
+.chip__remove{
+    border: 0; background: transparent;
+    width: 22px; height: 22px; line-height: 1;
+    border-radius: 999px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #456;
+}
+
+.chip__remove:hover{ background: #dbe8f3; }
 
 
 /* En desktop grande */

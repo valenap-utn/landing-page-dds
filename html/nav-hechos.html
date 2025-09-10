@@ -91,7 +91,11 @@
                 <div class="mm-adv__grid">
                     <div class="form-group col-search">
                         <label for="fTexto" class="form-label">Buscar por texto</label>
-                        <input id="fTexto" type="text" class="form-control chip" placeholder="palabra clave, ej: río, humo…">
+
+                        <input id="fTexto" type="text" class="form-control style-ap-filtros mm-kw-input"
+                               placeholder="palabra clave, ej: río, humo…" style="box-shadow: var(--shadow-sm);">
+
+                        <div id="kwChips" class="mm-chips" aria-live="polite"></div>
                     </div>
 
                     <div class="form-group col-crea-des">
