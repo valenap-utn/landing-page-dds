@@ -387,3 +387,155 @@ span.chip__label{
     cursor: pointer;
     margin: 0;
 }
+
+/* Estilos para 'ver mas' y 'sol-eliminacion' en pop-up */
+.mm-popup__actions{
+    display:flex;
+    gap:12px;
+    margin-top:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.mm-link{
+    color:var(--brand-800);
+    text-decoration:underline;
+    font-weight:600;
+    background:none;
+    border:0;
+    padding:0;
+}
+.mm-link:hover{
+    text-decoration:none;
+}
+.mm-link--danger{
+    color:#b84a4a;
+}
+.mm-link--danger:hover{
+    color:#8f3b3b;
+}
+
+/* ====== MetaMapa: estilizado del modal de Solicitud ====== */
+.mm-modal {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.12);
+    overflow: hidden;
+    font-family: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #fff;
+}
+
+.mm-modal .modal-header {
+    border: 0;
+    padding: 18px 22px 0 22px;
+    align-items: center;
+}
+
+.mm-modal .modal-title {
+    font-family: 'Archivo', ui-sans-serif, system-ui;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--brand-800, #3B4F61);
+    /*letter-spacing: .2px;*/
+    margin: 0;
+}
+
+.mm-modal .btn-close {
+    filter: grayscale(100%);
+    opacity: .6;
+    border-radius: 999px;
+    transition: opacity .2s ease;
+}
+.mm-modal .btn-close:hover {
+    border-radius: 999px;
+    opacity: 1;
+}
+
+.mm-modal .modal-body {
+    padding: 5px 22px 12px 22px;
+}
+
+.mm-modal .form-label {
+    font-weight: 600;
+    color: #374151; /* gris 700 */
+    margin-top: 8px;
+}
+
+.mm-modal .form-control {
+    border-radius: 12px;
+    border: 1px solid #dfe3ea;
+    background: #fbfcfe;
+    padding: 12px 14px;
+    line-height: 1.4;
+    font-size: .95rem;
+}
+.mm-modal .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(134,168,194,.25); /* halo brand */
+    border-color: var(--brand-500, #86A8C2); /* brand */
+    background: var(--card);
+}
+.mm-modal .form-control.is-invalid {
+    border-color: #dc2626;
+    background: #fff5f5;
+}
+
+.mm-modal #just-counter {
+    color: #6b7280; /* gris 500 */
+    font-size: .85rem;
+    margin-top: 6px;
+    text-align: right;
+}
+
+.mm-modal .modal-footer {
+    border: 0;
+    padding: 14px 22px 18px;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+
+.mm-modal .btn-primary {
+    color: #F2F7FA;
+    background-color: var(--brand-500);
+    border: 0;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-modal .btn-primary:hover {
+    background: #2f3f50;
+    box-shadow: 0 4px 12px rgba(0,0,0,.18);
+}
+
+.mm-modal .btn-outline-secondary {
+    color: #86a8c2;
+    border-color: #86a8c2;
+    border-radius: 25px;
+    box-shadow: 0 2px 6px rgba(59, 79, 97, 0.25);
+}
+.mm-modal .btn-outline-secondary:hover {
+    background: none;
+    color: #3B4F61;
+    border-color: #3B4F61;
+}
+
+/* Backdrop con leve blur para “pro” */
+.modal-backdrop.show {
+    opacity: .35;
+    backdrop-filter: blur(2px);
+}
+
+/* Tamaño en móvil: que use casi todo el ancho */
+@media (max-width: 576px) {
+    .modal-dialog { margin: 12px; }
+    .mm-modal { border-radius: 12px; }
+    .mm-modal .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .mm-modal .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

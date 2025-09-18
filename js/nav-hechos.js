@@ -265,18 +265,40 @@ function initMap() {
 }
 
 // ====== POP-UP del MAPA ======
+// function popupHtml(h){
+//     const fecha = h.fecha || h.creado || '-';
+//     return `
+//     <div class="mm-popup">
+//       <strong>${h.titulo || '(sin título)'}</strong><br/>
+//       <small>Categoría:</small> ${h.categoria || '-'}<br/>
+//       <small>Fecha:</small> ${fecha}
+//       <div class="mt-2">
+//         <a class="mm-link" href="hecho-completo.html?id=${encodeURIComponent(h.id)}">Ver más...</a>
+//       </div>
+//     </div>`;
+// }
 function popupHtml(h){
     const fecha = h.fecha || h.creado || '-';
+    // Usamos un botón linkeado al modal con data-* para pasar info del hecho
     return `
     <div class="mm-popup">
       <strong>${h.titulo || '(sin título)'}</strong><br/>
       <small>Categoría:</small> ${h.categoria || '-'}<br/>
       <small>Fecha:</small> ${fecha}
-      <div class="mt-2">
-        <a class="mm-link" href="hecho-completo.html?id=${encodeURIComponent(h.id)}">Ver más...</a>
+      <div class="mm-popup__actions">
+        <a class="mm-link" href="hecho-completo.html?id=${encodeURIComponent(h.id)}">
+          <i class="fa-regular fa-eye"></i> Ver más
+        </a>
+        <button type="button"
+                class="mm-link mm-link--danger js-open-solicitud"
+                data-id="${String(h.id || '')}"
+                data-titulo="${(h.titulo || '').replace(/"/g,'&quot;')}">
+          <i class="fa-regular fa-flag"></i> Solicitar eliminación
+        </button>
       </div>
     </div>`;
 }
+
 
 function render(list) {
     markersLayer.clearLayers();
@@ -446,3 +468,112 @@ if (document.getElementById('btnAplicar')) {
         applyFilters();
     });
 }
+
+// ===== Modal "Solicitud de eliminación" =====
+(() => {
+    const MIN = 500;
+    const modalEl   = document.getElementById('modalSolicitud');
+    const txt       = document.getElementById('justificacion');
+    const counter   = document.getElementById('just-counter');
+    const btnEnviar = document.getElementById('btn-enviar');
+
+    if (!modalEl || !txt || !counter || !btnEnviar) return;
+
+    let currentHechoId = null;
+    let currentTitulo  = '';
+
+    // Delegación: clicks dentro del contenedor del mapa (o document)
+    const mapContainer = document.getElementById('map') || document.body;
+    mapContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.js-open-solicitud');
+        if (!btn) return;
+
+        e.preventDefault();
+        currentHechoId = btn.dataset.id || null;
+        currentTitulo  = btn.dataset.titulo || '';
+
+        // Título del modal contextual
+        const titleEl = document.getElementById('modalSolicitudLabel');
+        if (titleEl) titleEl.textContent = `Solicitud de eliminación — ${currentTitulo || 'Hecho'}`;
+
+        // Reset form
+        txt.value = '';
+        counter.textContent = `0 / ${MIN}`;
+        btnEnviar.disabled = true;
+        txt.classList.remove('is-invalid');
+
+        // Abrir modal
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+    });
+
+    // Contador + estado del botón
+    txt.addEventListener('input', () => {
+        const len = txt.value.trim().length;
+        counter.textContent = `${len} / ${MIN}`;
+        btnEnviar.disabled  = (len < MIN);
+        txt.classList.toggle('is-invalid', len < MIN);
+    });
+
+    // Enviar
+    btnEnviar.addEventListener('click', async () => {
+        const justificacion = txt.value.trim();
+        if (justificacion.length < MIN || !currentHechoId) return;
+
+        btnEnviar.disabled = true;
+
+        try {
+            // TODO: Cambiar a tu endpoint real
+            const resp = await fetch('/api/solicitudes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    idHecho: Number(currentHechoId),
+                    justificacion
+                    // + usuario actual si corresponde
+                })
+            });
+
+            if (!resp.ok) {
+                const text = await resp.text();
+                showToast(`Error al enviar: ${text || resp.status}`, 'bg-danger');
+                btnEnviar.disabled = false;
+                return;
+            }
+
+            showToast('Solicitud enviada. Un administrador la revisará.', 'bg-success');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal?.hide();
+
+        } catch (err) {
+            showToast('Error de red. Intentá nuevamente.', 'bg-danger');
+            btnEnviar.disabled = false;
+        }
+    });
+
+    // Toasts básicos
+    function showToast(message, cls = 'bg-dark') {
+        let area = document.getElementById('toastArea');
+        if (!area) {
+            area = document.createElement('div');
+            area.id = 'toastArea';
+            area.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            area.setAttribute('aria-live', 'polite');
+            area.setAttribute('aria-atomic', 'true');
+            document.body.appendChild(area);
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast text-white ${cls}`;
+        toast.setAttribute('role', 'status');
+        toast.innerHTML = `
+      <div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>`;
+        area.appendChild(toast);
+
+        new bootstrap.Toast(toast, { delay: 3500 }).show();
+    }
+})();

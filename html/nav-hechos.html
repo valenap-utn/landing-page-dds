@@ -185,6 +185,28 @@
     </div>
 </div>
 
+    <!-- Modal de Solicitud (igual al de hecho-completo.html) -->
+    <div class="modal fade" id="modalSolicitud" tabindex="-1" aria-labelledby="modalSolicitudLabel" aria-describedby="modalSolicitudDesc" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content mm-modal" role="dialog" aria-modal="true">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSolicitudLabel">Solicitud de eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalSolicitudDesc" class="mb-2">Explicanos por qué creés que este hecho debe eliminarse de MetaMapa.</p>
+                    <label for="justificacion" class="form-label">Justificación</label>
+                    <textarea id="justificacion" class="form-control" rows="6" aria-describedby="just-counter" placeholder="Mínimo 500 caracteres..."></textarea>
+                    <div id="just-counter" class="form-text">0 / 500</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary mm-btn-primary" id="btn-enviar" disabled>Enviar solicitud</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer-metamapa mt-auto py-4">
         <div class="container-fluid px-4">
             <div class="footer-content row justify-content-end">
@@ -197,6 +219,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
 
     <!-- Mockeo de datos para prueba -->
     <script type="module" src="../js/nav-hechos.js"></script>
