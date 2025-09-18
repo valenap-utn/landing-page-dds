@@ -127,3 +127,106 @@ body{
     filter: opacity(.7);
 }
 .mm-input:disabled{ background:#f3f7fb; color:#7d95a7; }
+
+/* Estilos para Progreso */
+.mm-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px;
+}
+
+.mm-steps li {
+    text-align: center;
+    font-weight: 700;
+    color: var(--brand-800);
+    opacity: .55;
+}
+
+.mm-steps li.is-active {
+    opacity: 1;
+}
+
+.mm-steps li span {
+    padding: 2px 6px;
+    border-radius: 999px;
+}
+
+.mm-progress {
+    height: 6px;
+    background: #e7eff6;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.mm-progress__bar {
+    height: 100%;
+    background: var(--brand-500);
+    width: 33%;
+    transition: width .25s ease;
+}
+
+/* Pasos */
+.mm-step {
+    display: none;
+}
+
+.mm-step.is-active {
+    display: block;
+}
+
+/* Utilidad accesible para headings de pasos */
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+.mm-input.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220,53,69,.12);
+}
+.mm-input.is-valid {
+    border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25,135,84,.12);
+}
+
+/* Asterisco para cualquier .mm-field que tenga un control requerido */
+/*.mm-field:has(.mm-input[required], select[required], textarea[required]) .mm-label::after {*/
+/*    content: " *";*/
+/*    color: #dc3545;*/
+/*    margin-left: .25rem;*/
+/*    font-weight: 700;*/
+/*    aria-hidden: true;     */
+/*}*/
+
+.mm-field:has([required]) > .mm-label::after {
+    content: " *";
+    color: #dc3545;
+    margin-left: .25rem;
+    font-weight: 700;
+}
+
+/* Si usás fieldset + legend para grupos (radios/checkbox), cubrilo también */
+fieldset.mm-field:has([required]) > .mm-label::after {
+    content: " *";
+    color: #dc3545;
+    margin-left: .25rem;
+    font-weight: 700;
+}
+
+/* Fallback para navegadores sin :has() */
+.mm-field.is-required > .mm-label::after,
+fieldset.mm-field.is-required > .mm-label::after {
+    content: " *";
+    color: #dc3545;
+    margin-left: .25rem;
+    font-weight: 700;
+}

@@ -278,4 +278,11 @@ input[type="date"].mm-input{ padding-inline: 12px; }
     background:#fff;
 }
 
-
+/* Asterisco para cualquier .mm-field que tenga un control requerido */
+.mm-field:has(.mm-input[required], select[required], textarea[required]) .mm-label::after {
+    content: " *";
+    color: #dc3545;
+    margin-left: .25rem;
+    font-weight: 700;
+    aria-hidden: true;
+}

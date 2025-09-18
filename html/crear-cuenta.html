@@ -36,55 +36,90 @@
             <p class="mm-form-sub">Completá tus datos para empezar a utilizar MetaMapa</p>
 
             <form id="form-usuario" class="mm-form" novalidate>
-                <h5>Elegí tu rol</h5>
-                <div id="seccionDeRoles" class="mm-grid">
-                    <div class="mm-field" style="padding: 10px 10px">
-                        <label for="rolAdministrador" class="mm-label">Administrador
-                            <input id="rolAdministrador" type="radio" name="rolAdministrador" value="administrador" onclick="activarSeccionDatosCrearCuentaAdministrador()" style="margin: 0 0 0 10px; padding: 10px 10px ">
-                        </label>
-                    </div>
-                    <div class="mm-field" style="padding: 10px 10px">
-                        <label for="rolContribuyente" class="mm-label">Contribuyente
-                            <input id="rolContribuyente" type="radio" name="rolAdministrador" value="contribuyente" onclick="activarSeccionDatosCrearCuentaContribuyente()" style="margin: 0 0 0 10px; padding: 10px 10px "/>
-                        </label>
-                    </div>
-                </div>
-                <div id="seccionDatosCrearCuenta" class="mm-grid">
-                    <div class="mm-field">
-                        <label for="nombre" class="mm-label">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" class="mm-input" placeholder="Tu nombre" required aria-label="Ingresar nombre">
-                    </div>
+                <!-- Alertas -->
+                <div id="formAlert" class="alert alert-danger d-none" role="alert"></div>
 
-                    <div class="mm-field">
-                        <label for="apellido" class="mm-label">Apellido</label>
-                        <input id="apellido" name="apellido" type="text" class="mm-input" placeholder="Tu apellido"  aria-label="Ingresar apellido">
-                    </div>
-
-                    <div class="mm-field">
-                        <label for="fechaDeNacimiento" class="mm-label">Fecha de nacimiento</label>
-                        <input id="fechaDeNacimiento" name="fechaDeNacimiento" type="date" class="mm-input"  placeholder="Ejemplo: 19/11/2024">
-                    </div>
-
-<!--                    <div class="mm-field">-->
-<!--                        <label for="rolId" class="mm-label">Rol</label>-->
-<!--                        <select id="rolId" name="rolId" class="mm-input"  aria-label="Seleccionar rol">-->
-<!--                            <option value="" disabled selected>Seleccioná un rol…</option>-->
-<!--                            <option value="1">USUARIO</option>-->
-<!--                            <option value="2">ADMIN</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                <!-- Progreso -->
+                <ol class="mm-steps" role="list" aria-label="Progreso">
+                    <li class="is-active" data-step="1"><span>Rol</span></li>
+                    <li data-step="2"><span>Datos personales</span></li>
+                </ol>
+                <div class="mm-progress" aria-hidden="true">
+                    <div class="mm-progress__bar" id="progressBar" style="width: 50%"></div>
                 </div>
 
-                <div class="mm-actions">
-                    <a href="./iniciar-sesion.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>  Volver</a>
-                    <button type="submit" class="mm-btn mm-btn-primary">Crear cuenta</button>
-                </div>
+                <!-- PASO 1: Elegir rol -->
+                <section class="mm-step is-active" data-step="1" aria-labelledby="step1-title">
+                    <h2 id="step1-title" class="visually-hidden">Elegí tu rol</h2>
+
+                    <div id="seccionDeRoles" class="mm-grid">
+                        <div class="mm-field" style="padding: 10px 10px">
+                            <label for="rolAdministrador" class="mm-label">Administrador
+                                <input id="rolAdministrador" type="radio" name="rol" value="administrador" style="margin: 0 0 0 10px; padding: 10px 10px ">
+                            </label>
+                        </div>
+                        <div class="mm-field" style="padding: 10px 10px">
+                            <label for="rolContribuyente" class="mm-label">Contribuyente
+                                <input id="rolContribuyente" type="radio" name="rol" value="contribuyente" style="margin: 0 0 0 10px; padding: 10px 10px "/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mm-actions mt-3">
+                        <a href="iniciar-sesion.html" class="mm-btn mm-btn-ghost">
+                            <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                        </a>
+                        <button type="button" id="btnNext1" class="mm-btn mm-btn-primary" disabled>
+                            <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- PASO 2: Completar con Datos Personales -->
+                <section class="mm-step" data-step="2" aria-labelledby="seccionDatosCrearCuenta">
+                    <h2 id="seccionDatosCrearCuenta" class="visually-hidden">Completá con tus datos personales</h2>
+
+                    <div class="mm-grid">
+                        <div class="mm-field mm-col-span-all">
+                            <label for="email" class="mm-label">Email</label>
+                            <input id="email" name="email" type="email" class="mm-input" placeholder="tu@correo.com" required>
+                        </div>
+
+                        <div class="mm-field mm-col-span-all">
+                            <label for="password" class="mm-label">Contraseña</label>
+                            <input id="password" name="password" type="password" class="mm-input" minlength="8" required>
+                        </div>
+
+                        <div class="mm-field mm-col-span-all">
+                            <label for="nombre" class="mm-label">Nombre<span class="visually-hidden">(obligatorio)</span></label>
+                            <input id="nombre" name="nombre" type="text" class="mm-input" placeholder="Tu nombre" required aria-label="Ingresar nombre">
+                        </div>
+
+                        <div class="mm-field">
+                            <label for="apellido" class="mm-label">Apellido</label>
+                            <input id="apellido" name="apellido" type="text" class="mm-input" placeholder="Tu apellido" required aria-label="Ingresar apellido">
+                        </div>
+
+                        <div class="mm-field">
+                            <label for="fechaDeNacimiento" class="mm-label">Fecha de nacimiento</label>
+                            <input id="fechaDeNacimiento" name="fechaDeNacimiento" type="date" class="mm-input" placeholder="Ejemplo: 19/11/2024" required>
+                        </div>
+                    </div>
+
+                    <div class="mm-actions">
+<!--                        <a href="./iniciar-sesion.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>  Volver</a>-->
+                        <button type="button" id="btnPrev2" class="mm-btn mm-btn-ghost">
+                            <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                        </button>
+                        <button type="submit" class="mm-btn mm-btn-primary">Crear cuenta</button>
+                    </div>
+                </section>
             </form>
         </div>
     </section>
 
-    <script src="../js/crear-cuenta.js">
-    </script>
+    <script src="../js/commons.js"></script>
+    <script src="../js/crear-cuenta.js"></script>
 
 </body>
 </html>

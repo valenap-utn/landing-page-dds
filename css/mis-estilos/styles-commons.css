@@ -71,3 +71,12 @@ body.body-metamapa{
 .footer-metamapa .footer-text {
     color: #7c90a0;
 }
+
+/* Asterisco para cualquier .mm-field que tenga un control requerido */
+.mm-field:has(.mm-input[required], select[required], textarea[required]) .mm-label::after {
+    content: " *";
+    color: #dc3545;         /* rojo Bootstrap */
+    margin-left: .25rem;
+    font-weight: 700;
+    aria-hidden: true;      /* decorativo */
+}
