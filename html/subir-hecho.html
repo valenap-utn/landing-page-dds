@@ -109,9 +109,13 @@
                         <div class="mm-field" style="grid-column: 1 / -1;">
                             <label for="descripcion" class="mm-label">Descripción</label>
                             <textarea id="descripcion" name="descripcion" class="mm-input mm-input--textarea"
-                                      minlength="500" required
-                                      placeholder="Contá brevemente qué ocurrió… (min. 500 caracteres)"></textarea>
-                            <div id="descCounter" class="form-text">0 / 500</div>
+                                      minlength="500" required data-min-guest="500" data-min-auth="0"
+                                      placeholder="Contá brevemente qué ocurrió…"></textarea>
+<!--                            <div id="descCounter" class="form-text">0 / 500</div>-->
+                            <div class="d-flex justify-content-between mt-1">
+                                <small id="descReq" class="text-muted"></small>
+                                <small id="descCounter" class="text-muted"></small>
+                            </div>
                         </div>
                     </div>
 
@@ -154,6 +158,7 @@
         </div>
     </section>
 
+    <script src="../js/commons.js"></script>
     <script src="../js/subir-hecho.js"></script>
 </body>
 </html>

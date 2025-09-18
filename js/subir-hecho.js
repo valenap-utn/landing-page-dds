@@ -16,6 +16,7 @@ function gotoStep(n) {
     current = Math.max(1, Math.min(TOTAL_STEPS, n));
     steps.forEach(s => s.classList.toggle('is-active', Number(s.dataset.step) === current));
     setProgress(current);
+    if (current === 2) applyDescRules();
     const h = document.querySelector(`.mm-step[data-step="${current}"] h2`);
     h?.focus?.();
     if (current === 1) setTimeout(() => map.invalidateSize(), 200);
@@ -63,10 +64,38 @@ const btnNext2 = document.getElementById('btnNext2');
 
 btnPrev2?.addEventListener('click', () => gotoStep(1));
 
+// --- Reglas de descripción según sesión ---
+const desc = document.getElementById('descripcion');
+const counter = document.getElementById('descCounter');
+
+function applyDescRules(){
+    const auth   = (window.MM && MM.getAuth) ? MM.getAuth() : { loggedIn:false, role:'VISUALIZADOR' };
+    const isAnon = !auth.loggedIn || auth.role === 'VISUALIZADOR';
+
+    // Siempre requerida; el mínimo depende del rol
+    desc.required = true;
+    if (isAnon) {
+        desc.setAttribute('minlength', '500');
+    } else {
+        desc.removeAttribute('minlength'); // logueado: sin mínimo
+    }
+    // Refresca el contador con el formato correcto
+    const len = (desc.value || '').trim().length;
+    counter.textContent = isAnon ? `${len} / 500` : `${len}`;
+}
+
+// Contador dinámico (respeta si hay mínimo o no)
+desc?.addEventListener('input', () => {
+    const auth   = (window.MM && MM.getAuth) ? MM.getAuth() : { loggedIn:false, role:'VISUALIZADOR' };
+    const isAnon = !auth.loggedIn || auth.role === 'VISUALIZADOR';
+    const len = (desc.value || '').trim().length;
+    counter.textContent = isAnon ? `${len} \/ 500` : `${len}`;
+});
+
 btnNext2?.addEventListener('click', () => {
-    // valida SOLO campos del paso 2
     const scope = document.querySelector('.mm-step[data-step="2"]');
     const inputs = [...scope.querySelectorAll('input, select, textarea')];
+
     let ok = true;
     inputs.forEach(el => {
         if (!el.checkValidity()) {
@@ -75,13 +104,6 @@ btnNext2?.addEventListener('click', () => {
         }
     });
     if (ok) gotoStep(3);
-});
-
-// Contador descripción
-const desc = document.getElementById('descripcion');
-const counter = document.getElementById('descCounter');
-desc?.addEventListener('input', () => {
-    counter.textContent = `${(desc.value || '').trim().length} / 500`;
 });
 
 // ===== Paso 3: multimedia opcional =====

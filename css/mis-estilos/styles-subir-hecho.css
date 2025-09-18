@@ -500,6 +500,12 @@ body {
     overflow: hidden;
 }
 
+/* Estilo de error para min. caracteres */
+.mm-input.is-invalid{
+    border-color:#dc2626;
+    box-shadow: 0 0 0 3px rgba(220,38,38,.18);
+}
+
 
 /* Tamaño en móvil: que use casi todo el ancho */
 @media (max-width: 576px) {

@@ -99,6 +99,7 @@
         </div>
     </div>
 
+    <script src="../js/commons.js"></script>
     <!-- Script mockeado para probar -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -125,15 +126,26 @@
                 const user = mockUsers.find(u => u.email === email.value.trim() && u.password === pass.value);
                 if (!user) { alert('Email o contraseña inválidos'); return; }
 
-                const payload = { email: email.value.trim(), role: user.role, time: Date.now() };
-                const storage = remember.checked ? localStorage : sessionStorage;
-                storage.setItem('mm_auth', JSON.stringify(payload));
+                MM.setAuth(
+                    {
+                        loggedIn:true,
+                        userId: user.id,
+                        email: user.email,
+                        role: user.role
+                    },
+                    remember.checked ? 'local' : 'session'
+                );
 
-                if (user.role === 'administrador') {
+                if (user.role === 'ADMIN') {
                     window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'main-gral.html';
                 }
+            });
+
+            // Si eligen "Ingresar más tarde", dejamos explícitamente anónimo
+            document.querySelector('.btn-sin-login')?.addEventListener('click', () => {
+                MM.clearAuth();
             });
         });
     </script>
