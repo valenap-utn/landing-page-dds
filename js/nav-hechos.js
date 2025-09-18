@@ -308,16 +308,6 @@ const inRangeISO = (iso, from, to) => {
 };
 
 // Obtiene filtros y ajusta “hasta” al fin del día (inclusivo)
-// function getFilters() {
-//     const cat   = $('#fCategoria')?.value || '';
-//     const aD    = $('#fAcontDesde')?.value || '';     // YYYY-MM-DD
-//     const aH    = $('#fAcontHasta')?.value || '';
-//     const cD    = $('#fCreacionDesde')?.value || '';
-//     const cH    = $('#fCreacionHasta')?.value || '';
-//     const query = ($('#fTexto')?.value || '').trim().toLowerCase();
-//
-//     return { cat, aD, aH, cD, cH, query };
-// }
 function getFilters() {
     const cat    = document.getElementById('fCategoria')?.value || '';
 
@@ -339,30 +329,6 @@ function getFilters() {
     return { cat, d1, d2, cd1, cd2, keywords: KEYWORDS.slice() };
 }
 
-
-// function applyFilters() {
-//     const { cat, aD, aH, cD, cH, query } = getFilters();
-//
-//     const list = HECHOS.filter(h => {
-//         if (cat && h.categoria !== cat) return false;
-//
-//         if (aD || aH) {
-//             if (!inRangeISO(h.fechaAcontecimiento, aD || null, aH || null)) return false;
-//         }
-//         if (cD || cH) {
-//             if (!inRangeISO(h.fechaCreacion, cD || null, cH || null)) return false;
-//         }
-//
-//         if (query) {
-//             const hay = `${h.titulo} ${h.descripcion || ''}`.toLowerCase();
-//             if (!hay.includes(query)) return false;
-//         }
-//         return true;
-//     });
-//
-//     render(list);
-//     setTimeout(() => map.invalidateSize(), 200);
-// }
 function applyFilters() {
     const { cat, d1, d2, cd1, cd2, keywords } = getFilters();
 
