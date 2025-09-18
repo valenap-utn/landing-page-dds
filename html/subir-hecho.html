@@ -39,85 +39,121 @@
             <p class="mm-form-sub">Cargá la información del hecho para que quede disponible en MetaMapa</p>
 
             <form id="form-hecho" class="mm-form" novalidate>
-                <div class="mm-grid">
-                    <!-- Título -->
-                    <div class="mm-field" style="grid-column: 1 / -1;">
-                        <label for="titulo" class="mm-label">Título</label>
-                        <input id="titulo" name="titulo" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
-                    </div>
-
-                    <!-- Categoría -->
-                    <div class="mm-field">
-                        <label for="categoria" class="mm-label">Categoría</label>
-                        <select id="categoria" name="categoria" class="mm-input" required>
-                            <option value="" disabled selected>Seleccioná una categoría…</option>
-                            <option value="EVENTO_SANITARIO">Evento sanitario</option>
-                            <option value="CONTAMINACION">Contaminación</option>
-                            <option value="DERRAME">Derrame</option>
-                            <!-- agregá más si aplica -->
-                        </select>
-                    </div>
-
-                    <!-- Fecha acontecimiento -->
-                    <div class="mm-field">
-                        <label for="fechaAcontecimiento" class="mm-label">Fecha del acontecimiento</label>
-                        <input id="fechaAcontecimiento" name="fechaAcontecimiento" type="date" class="mm-input" required>
-                    </div>
-
-<!--                    &lt;!&ndash; Origen &ndash;&gt;-->
-<!--                    <div class="mm-field">-->
-<!--                        <label for="origen" class="mm-label">Origen</label>-->
-<!--                        <select id="origen" name="origen" class="mm-input" required>-->
-<!--                            <option value="" disabled selected>Seleccioná el origen…</option>-->
-<!--                            <option value="USUARIO">Usuario</option>-->
-<!--                            <option value="ADMIN">Administrador</option>-->
-<!--                            <option value="IMPORTADO">Importado</option>-->
-<!--                            <option value="API">API</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-
-                    <!-- Ubicación (Lat/Long) -->
-                    <div class="mm-field" style="grid-column: 1 / -1;">
-                        <div id="map" aria-label="Mapa interactivo para seleccionar la ubicación del hecho"></div>
-                    </div>
-                    <!--
-                    <div class="mm-field">
-                        <label for="lat" class="mm-label">Latitud</label>
-                        <input id="lat" name="lat" type="number" step="any" class="mm-input" placeholder="-34.6037" required>
-                    </div>
-                    <div class="mm-field">
-                        <label for="lng" class="mm-label">Longitud</label>
-                        <input id="lng" name="lng" type="number" step="any" class="mm-input" placeholder="-58.3816" required>
-                    </div>
-                    -->
-                    <!-- Descripción -->
-                    <div class="mm-field" style="grid-column: 1 / -1;">
-                        <label for="descripcion" class="mm-label">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" class="mm-input mm-input--textarea" placeholder="Contá brevemente qué ocurrió… (min. 500 caracteres)" minlength="500" required></textarea>
-                    </div>
+                <!-- Progreso -->
+                <ol class="mm-steps" role="list" aria-label="Progreso">
+                    <li class="is-active" data-step="1"><span>Ubicación</span></li>
+                    <li data-step="2"><span>Datos</span></li>
+                    <li data-step="3"><span>Multimedia</span></li>
+                </ol>
+                <div class="mm-progress" aria-hidden="true">
+                    <div class="mm-progress__bar" id="progressBar" style="width: 33%"></div>
                 </div>
 
-                <div class="mm-actions">
-                    <a href="main-gral.html" class="mm-btn mm-btn-ghost"><span class="arrow"><i class="fa-solid fa-arrow-left"></i></span> Volver</a>
-                    <button type="submit" class="mm-btn mm-btn-primary">Subir hecho</button>
-                </div>
+                <!-- PASO 1: Ubicación -->
+                <section class="mm-step is-active" data-step="1" aria-labelledby="step1-title">
+                    <h2 id="step1-title" class="visually-hidden">Elegí la ubicación</h2>
+                    <p class="mm-help mb-2">Hacé click en el mapa para marcar dónde ocurrió el hecho</p>
+
+                    <div id="map" aria-label="Mapa interactivo para seleccionar la ubicación del hecho"></div>
+
+                    <!-- guardamos coordenadas y mostramos un preview -->
+                    <input id="lat" name="lat" type="hidden" required>
+                    <input id="lng" name="lng" type="hidden" required>
+
+                    <div id="locPreview" class="mm-pill mt-2" hidden>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="locText">Latitud: — , Longitud: —</span>
+                        <button type="button" class="mm-pill__edit" id="btnReubicar" aria-label="Volver a elegir ubicación">Reubicar</button>
+                    </div>
+
+                    <div class="mm-actions mt-3">
+                        <a href="main-gral.html" class="mm-btn mm-btn-ghost">
+                            <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                        </a>
+                        <button type="button" id="btnNext1" class="mm-btn mm-btn-primary" disabled>
+                            <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- PASO 2: Datos -->
+                <section class="mm-step" data-step="2" aria-labelledby="step2-title">
+                    <h2 id="step2-title" class="visually-hidden">Completá los datos del hecho</h2>
+
+                    <div class="mm-grid">
+                        <!-- Título -->
+                        <div class="mm-field mm-col-span-all">
+                            <label for="titulo" class="mm-label">Título</label>
+                            <input id="titulo" name="titulo" type="text" class="mm-input" placeholder="Ej: Derrame en ribera del río" required>
+                        </div>
+
+                        <!-- Categoría -->
+                        <div class="mm-field">
+                            <label for="categoria" class="mm-label">Categoría</label>
+                            <select id="categoria" name="categoria" class="mm-input" required>
+                                <option value="" disabled selected>Seleccioná una categoría…</option>
+                                <option value="EVENTO_SANITARIO">Evento sanitario</option>
+                                <option value="CONTAMINACION">Contaminación</option>
+                                <option value="DERRAME">Derrame</option>
+                                <!-- agregá más si aplica -->
+                            </select>
+                        </div>
+
+                        <!-- Fecha acontecimiento -->
+                        <div class="mm-field">
+                            <label for="fechaAcontecimiento" class="mm-label">Fecha del acontecimiento</label>
+                            <input id="fechaAcontecimiento" name="fechaAcontecimiento" type="date" class="mm-input" required>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mm-field" style="grid-column: 1 / -1;">
+                            <label for="descripcion" class="mm-label">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="mm-input mm-input--textarea"
+                                      minlength="500" required
+                                      placeholder="Contá brevemente qué ocurrió… (min. 500 caracteres)"></textarea>
+                            <div id="descCounter" class="form-text">0 / 500</div>
+                        </div>
+                    </div>
+
+                    <div class="mm-actions">
+                        <button type="button" id="btnPrev2" class="mm-btn mm-btn-ghost">
+                            <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                        </button>
+                        <button type="button" id="btnNext2" class="mm-btn mm-btn-primary">
+                            <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                        </button>
+                    </div>
+
+                </section>
+
+                <!-- PASO 3 (opcional) -->
+                <section class="mm-step" data-step="3" aria-labelledby="step3-title">
+                    <h2 id="step3-title" class="visually-hidden">Adjuntar multimedia</h2>
+
+                    <div class="mm-field mm-col-span-all">
+                        <label class="mm-label">Fotos o videos</label>
+
+                        <div id="dropzone" class="mm-dropzone" tabindex="0" aria-label="Arrastrá y soltá archivos o hacé click para seleccionarlos">
+                            <i class="fa-regular fa-images"></i>
+                            <p class="m-0">Arrastrá y soltá aquí, o <strong>hace click</strong> para seleccionar</p>
+                            <small>Se aceptan imagenes y videos. Podes añadir varios.</small>
+                            <input id="mediaInput" type="file" accept="image/*, video/*" multiple hidden>
+                        </div>
+
+                        <div id="mediaPreview" class="mm-media-grid" aria-live="polite"></div>
+                    </div>
+
+                    <div class="mm-actions">
+                        <button type="button" id="btnPrev3" class="mm-btn mm-btn-ghost">
+                            <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                        </button>
+                        <button type="submit" class="mm-btn mm-btn-primary">Enviar</button>
+                    </div>
+                </section>
             </form>
         </div>
     </section>
 
-    <script>
-        const map = L.map('map', { center: [-38.4, -63.6], zoom: 5, scrollWheelZoom: true });
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-        const markersLayer = L.layerGroup().addTo(map);
-        var latitudLongitud = null
-        function onMapClick(event) {
-            markersLayer.clearLayers();
-            latitudLongitud = event.latlng
-            L.marker(event.latlng)
-                .addTo(markersLayer)
-        }
-
-        map.on('click', onMapClick);
-    </script>
+    <script src="../js/subir-hecho.js"></script>
 </body>
 </html>
