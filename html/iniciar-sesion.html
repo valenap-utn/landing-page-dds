@@ -126,17 +126,17 @@
                 const user = mockUsers.find(u => u.email === email.value.trim() && u.password === pass.value);
                 if (!user) { alert('Email o contraseña inválidos'); return; }
 
-                MM.setAuth(
+                const auth = MM.setAuth(
                     {
                         loggedIn:true,
-                        userId: user.id,
+                        userId: user.id ?? null,
                         email: user.email,
                         role: user.role
                     },
                     remember.checked ? 'local' : 'session'
                 );
 
-                if (user.role === 'ADMIN') {
+                if (auth.role === 'ADMIN') {
                     window.location.href = 'admin.html';
                 } else {
                     window.location.href = 'main-gral.html';
